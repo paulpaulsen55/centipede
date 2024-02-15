@@ -1,10 +1,13 @@
 #include <SFML/Graphics.hpp>
 
+#include "Player.h"
+
 using namespace sf;
 
-int main()
-{
-    auto window = RenderWindow{ { 1920u, 1080u }, "CMake SFML Project" };
+int main() {
+    unsigned int windowWidth = 800;
+    unsigned int windowHeight = 600;
+    auto window = RenderWindow{ { windowWidth, windowHeight }, "Centipede" };
     window.setFramerateLimit(144);
 
     // font test
@@ -12,31 +15,38 @@ int main()
     Font font;
     font.loadFromFile("assets/arial.ttf");
     text.setFont(font);
-    text.setString("Hello, World!");
-    text.setCharacterSize(100);
+    text.setString("Wer das liest ist doof!");
+    text.setCharacterSize(64);
 
-    // triangle
-    VertexArray triangle(Triangles, 3);
-    triangle[0].position = Vector2f(110.f, 310);
-    triangle[1].position = Vector2f(600.f, 310);
-    triangle[2].position = Vector2f(200.f, 600);
-    triangle[0].color = Color::Red;
-    triangle[1].color = Color::Green;
-    triangle[2].color = Color::Blue;
+    Player player(100.f, 100.f);
 
-    while (window.isOpen())
-    {
-        for (auto event = Event{}; window.pollEvent(event);)
-        {
-            if (event.type == Event::Closed)
-            {
+    while (window.isOpen()) {
+        for (auto event = Event{}; window.pollEvent(event);) {
+            if (event.type == Event::Closed) {
                 window.close();
             }
         }
+        if (Keyboard::isKeyPressed(Keyboard::Key::Left)) {
+            player.moveLeft();
+        }
+        if (Keyboard::isKeyPressed(Keyboard::Key::Right)) {
+            player.moveRight();
+        }
+        if (Keyboard::isKeyPressed(Keyboard::Key::Up)) {
+            player.moveUp();
+        }
+        if (Keyboard::isKeyPressed(Keyboard::Key::Down)) {
+            player.moveDown();
+        }
+
+        // updating
+        player.update(windowWidth, windowHeight);
 
         window.clear();
+        // drawing
         window.draw(text);
-        window.draw(triangle);
+        window.draw(player.getShape());
+
         window.display();
     }
 }
