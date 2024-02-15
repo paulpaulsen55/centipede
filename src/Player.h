@@ -6,6 +6,7 @@
 
 using namespace sf;
 
+
 class Player {
 private:
     Vector2f position;
