@@ -39,11 +39,26 @@ int main() {
             player.moveDown();
         }
 
-        // updating
-        player.update(windowWidth, windowHeight);
+        // player wall collision
+        RectangleShape playerShape = player.getShape();
+        if (player.getPosition().left < 0) {
+            player.setX(0);
+        }
+        if (player.getPosition().left > static_cast<float>(windowWidth) - playerShape.getSize().x) {
+            player.setX(static_cast<float>(windowWidth) - playerShape.getSize().x);
+        }
+        if (player.getPosition().top < 0) {
+            player.setY(0);
+        }
+        if (player.getPosition().top > static_cast<float>(windowHeight) - playerShape.getSize().y) {
+            player.setY(static_cast<float>(windowHeight) - playerShape.getSize().y);
+        }
 
-        window.clear();
+        // updating
+        player.update();
+
         // drawing
+        window.clear();
         window.draw(text);
         window.draw(player.getShape());
 

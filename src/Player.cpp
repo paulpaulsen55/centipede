@@ -12,6 +12,14 @@ FloatRect Player::getPosition() {
     return playerShape.getGlobalBounds();
 }
 
+void Player::setX(float x) {
+    position.x = x;
+}
+
+void Player::setY(float y) {
+    position.y = y;
+}
+
 RectangleShape Player::getShape() {
     return playerShape;
 }
@@ -32,18 +40,6 @@ void Player::moveDown() {
     position.y += playerSpeed;
 }
 
-void Player::update(const unsigned int windowWidth, const unsigned int windowHeight) {
-    if (position.x < 0) {
-        position.x = 0;
-    }
-    if (position.x > static_cast<float>(windowWidth) - playerShape.getSize().x) {
-        position.x = static_cast<float>(windowWidth) - playerShape.getSize().x;
-    }
-    if (position.y < 0) {
-        position.y = 0;
-    }
-    if (position.y > static_cast<float>(windowHeight) - playerShape.getSize().y) {
-        position.y = static_cast<float>(windowHeight) - playerShape.getSize().y;
-    }
+void Player::update() {
     playerShape.setPosition(position);
 }

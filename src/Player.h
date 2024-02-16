@@ -22,6 +22,10 @@ public:
 
     RectangleShape getShape();
 
+    void setX(float x);
+
+    void setY(float y);
+
     void moveLeft();
 
     void moveRight();
@@ -30,7 +34,7 @@ public:
 
     void moveDown();
 
-    void update(unsigned int windowWidth, unsigned int windowHeight);
+    void update();
 };
 
 

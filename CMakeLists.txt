@@ -15,6 +15,8 @@ add_executable(CMakeSFMLProject src/main.cpp
         src/Player.h
         src/Projectile.cpp
         src/Projectile.h
+        src/ProjectileController.cpp
+        src/ProjectileController.h
 )
 file(COPY assets DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 target_link_libraries(CMakeSFMLProject PRIVATE sfml-graphics)
