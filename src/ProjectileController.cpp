@@ -1,10 +1,11 @@
 #include "ProjectileController.h"
 
+
 ProjectileController::ProjectileController() {
 }
 
 void ProjectileController::shootProjectile(float startX, float startY) {
-    Projectile newProjectile(startX, startY);
+    const Projectile newProjectile(startX, startY);
     projectiles.push_back(newProjectile);
 }
 
@@ -13,7 +14,13 @@ std::list<Projectile> ProjectileController::getProjectiles() {
 }
 
 void ProjectileController::updateProjectiles() {
-    for (auto &projectile : projectiles) {
-        projectile.update();
+    auto it = projectiles.begin();
+    while (it != projectiles.end()) {
+        if (it->getPosition().top < 0) {
+            it = projectiles.erase(it);
+        } else {
+            it->update();
+            ++it;
+        }
     }
 }

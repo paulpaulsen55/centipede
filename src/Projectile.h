@@ -10,7 +10,7 @@ class Projectile {
 
 private:
     RectangleShape projectileShape;
-    float projectileSpeed = 1.5f;
+    float projectileSpeed = 5.0f;
 
 public:
     Vector2f position;

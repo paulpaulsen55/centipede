@@ -1,6 +1,8 @@
+#include <iostream>
 #include <SFML/Graphics.hpp>
 
 #include "Player.h"
+#include "ProjectileController.h"
 
 using namespace sf;
 
@@ -19,6 +21,10 @@ int main() {
     text.setCharacterSize(64);
 
     Player player(100.f, 100.f);
+    ProjectileController projectileController;
+
+    Clock deltaClock;
+    float dt;
 
     while (window.isOpen()) {
         for (auto event = Event{}; window.pollEvent(event);) {
@@ -38,6 +44,12 @@ int main() {
         if (Keyboard::isKeyPressed(Keyboard::Key::Down)) {
             player.moveDown();
         }
+        if (Keyboard::isKeyPressed(Keyboard::Key::Space)) {
+            if (deltaClock.getElapsedTime().asSeconds() > 0.5f) {
+                projectileController.shootProjectile(player.getPosition().left, player.getPosition().top);
+                deltaClock.restart();
+            }
+        }
 
         // player wall collision
         RectangleShape playerShape = player.getShape();
@@ -56,11 +68,15 @@ int main() {
 
         // updating
         player.update();
+        projectileController.updateProjectiles();
 
         // drawing
         window.clear();
         window.draw(text);
         window.draw(player.getShape());
+        for (auto projectile : projectileController.getProjectiles()) {
+            window.draw(projectile.getShape());
+        }
 
         window.display();
     }
