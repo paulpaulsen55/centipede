@@ -9,16 +9,8 @@ using namespace sf;
 int main() {
     unsigned int windowWidth = 800;
     unsigned int windowHeight = 600;
-    auto window = RenderWindow{ { windowWidth, windowHeight }, "Centipede" };
+    auto window = RenderWindow{ { windowWidth, windowHeight }, "Centipede"};
     window.setFramerateLimit(144);
-
-    // font test
-    Text text;
-    Font font;
-    font.loadFromFile("assets/arial.ttf");
-    text.setFont(font);
-    text.setString("Wer das liest ist doof!");
-    text.setCharacterSize(64);
 
     Player player(100.f, 100.f);
     ProjectileController projectileController;
@@ -72,7 +64,6 @@ int main() {
 
         // drawing
         window.clear();
-        window.draw(text);
         window.draw(player.getShape());
         for (auto projectile : projectileController.getProjectiles()) {
             window.draw(projectile.getShape());
