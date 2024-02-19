@@ -1,6 +1,8 @@
 #include "Player.h"
 
-Player::Player(float startX, float startY) {
+#include "SFML/Graphics/RenderTarget.hpp"
+
+Player::Player(const float startX, const float startY) {
     position.x = startX;
     position.y = startY;
 
@@ -8,15 +10,15 @@ Player::Player(float startX, float startY) {
     playerShape.setPosition(position);
 }
 
-FloatRect Player::getPosition() {
+FloatRect Player::getPosition() const {
     return playerShape.getGlobalBounds();
 }
 
-void Player::setX(float x) {
+void Player::setX(const float x) {
     position.x = x;
 }
 
-void Player::setY(float y) {
+void Player::setY(const float y) {
     position.y = y;
 }
 
@@ -42,4 +44,8 @@ void Player::moveDown() {
 
 void Player::update() {
     playerShape.setPosition(position);
+}
+
+void Player::draw(RenderTarget &target, RenderStates states) const {
+    target.draw(playerShape, states);
 }

@@ -7,18 +7,18 @@
 using namespace sf;
 
 
-class Player {
+class Player: public Drawable {
 private:
     Vector2f position;
-
     RectangleShape playerShape;
-
     float playerSpeed = 1.5f;
+
+    void draw(RenderTarget& target, RenderStates states) const override;
 
 public:
     Player(float startX, float startY);
 
-    FloatRect getPosition();
+    FloatRect getPosition() const;
 
     RectangleShape getShape();
 
