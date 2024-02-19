@@ -12,7 +12,7 @@ class GameOverScene: public Scene{
 public:
     GameOverScene(int x, int y);
 
-    void handleInput(RenderWindow &window, SceneManager &sceneManager) override;
+    void handleInput(Event event, RenderWindow &window, SceneManager &sceneManager) override;
 
     void update(float dt) override;
 

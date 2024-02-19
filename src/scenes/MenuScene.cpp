@@ -35,14 +35,16 @@ MenuScene::MenuScene(const int x, const int y) : x(x), y(y){
     exitText.setPosition(350, 520);
 }
 
-void MenuScene::handleInput(RenderWindow &window, SceneManager &sceneManager) {
-    if (Mouse::isButtonPressed(Mouse::Left)) {
-        const Vector2i mousePosition = Mouse::getPosition(window);
-        if (startButton.getGlobalBounds().contains(mousePosition.x, mousePosition.y)) {
-            sceneManager.pushScene(std::make_unique<GameOverScene>(800,600));
-        }
-        if (exitButton.getGlobalBounds().contains(mousePosition.x, mousePosition.y)) {
-            window.close();
+void MenuScene::handleInput(const Event event, RenderWindow &window, SceneManager &sceneManager) {
+    if (event.type == Event::MouseButtonReleased) {
+        if (event.mouseButton.button == Mouse::Left) {
+            const Vector2i mousePosition = Mouse::getPosition(window);
+            if (startButton.getGlobalBounds().contains(mousePosition.x, mousePosition.y)) {
+                sceneManager.pushScene(std::make_unique<GameOverScene>(800,600));
+            }
+            if (exitButton.getGlobalBounds().contains(mousePosition.x, mousePosition.y)) {
+                window.close();
+            }
         }
     }
 }

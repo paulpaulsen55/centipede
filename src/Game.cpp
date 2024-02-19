@@ -42,7 +42,7 @@ void Game::processEvent() const {
             window->close();
         }
     }
-    sceneManager->getCurrentScene()->handleInput(*window, *sceneManager);
+    sceneManager->getCurrentScene()->handleInput(event, *window, *sceneManager);
     /*if (Keyboard::isKeyPressed(Keyboard::Key::Left)) {
         player.moveLeft();
     }

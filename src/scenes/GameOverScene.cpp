@@ -24,11 +24,14 @@ GameOverScene::GameOverScene(int x, int y) : x(x), y(y) {
     restartText.setPosition(350, 320);
 }
 
-void GameOverScene::handleInput(RenderWindow &window, SceneManager &sceneManager) {
-    if (Mouse::isButtonPressed(Mouse::Left)) {
-        const Vector2i mousePosition = Mouse::getPosition(window);
-        if (restartButton.getGlobalBounds().contains(mousePosition.x, mousePosition.y)) {
-            sceneManager.pushScene(std::make_unique<MenuScene>(800,600));
+void GameOverScene::handleInput(Event event, RenderWindow &window, SceneManager &sceneManager) {
+    if (event.type == Event::MouseButtonReleased) {
+        if (event.mouseButton.button == Mouse::Left) {
+            const Vector2i mousePosition = Mouse::getPosition(window);
+            if (restartButton.getGlobalBounds().contains(mousePosition.x, mousePosition.y)) {
+                sceneManager.popScene();
+                sceneManager.pushScene(std::make_unique<MenuScene>(800, 600));
+            }
         }
     }
 }

@@ -2,9 +2,10 @@
 #define SCENE_H
 #include "SFML/Graphics/Drawable.hpp"
 #include "SFML/Graphics/RenderWindow.hpp"
+#include "SFML/Window/Event.hpp"
 
-class SceneManager;
 using namespace sf;
+class SceneManager;
 
 
 
@@ -12,7 +13,7 @@ class Scene: public Drawable{
 public:
     ~Scene() override = default;
 
-    virtual void handleInput(RenderWindow& window, SceneManager &sceneManager) {};
+    virtual void handleInput(Event event, RenderWindow& window, SceneManager &sceneManager) {};
 
     virtual void update(float dt) {};
 
