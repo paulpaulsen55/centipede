@@ -4,10 +4,10 @@ GameState::State GameState::getState() const {
     return state;
 }
 
-void GameState::setState(const GameState::State newState) {
+void GameState::setState(const State newState) {
     state = newState;
 }
 
-bool GameState::operator==(State state) const {
+bool GameState::operator==(const State state) const {
     return this->state == state;
 }

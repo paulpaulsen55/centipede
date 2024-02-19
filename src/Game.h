@@ -3,7 +3,7 @@
 #include "GameState.h"
 #include "Player.h"
 #include "ProjectileController.h"
-#include "World.h"
+#include "scenes/SceneManager.h"
 #include "SFML/Graphics/RenderWindow.hpp"
 #include "SFML/Window/Event.hpp"
 
@@ -14,7 +14,7 @@ using namespace sf;
 class Game {
 private:
     RenderWindow *window;
-    World world;
+    SceneManager sceneManager;
     GameState gameState;
     Event event{};
     Clock clock;
@@ -25,7 +25,7 @@ private:
 
     float gridSize{};
 
-    void processEvent();
+    void processEvent() const;
 
     void reset();
 

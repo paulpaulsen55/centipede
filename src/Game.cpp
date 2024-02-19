@@ -1,56 +1,53 @@
 #include "Game.h"
 
+#include "scenes/MenuScene.h"
+
 using namespace sf;
 
 Game::Game(const int x, const int y):
-    world(x, y),
-    player(0, 0)
+    player(x / 2,  y - 20)
 {
 
     window = new RenderWindow({800u, 600u}, "Centipede");
     window->setFramerateLimit(144);
 
+    sceneManager.pushScene(std::make_unique<MenuScene>());
+
     gameState.setState(GameState::State::MENU);
 }
 
 void Game::update(Time dt) {
+    if (player.getPosition().left < 0) {
+        player.setX(0);
+    }
+    if (player.getPosition().left > window->getSize().x - player.getShape().getSize().x) {
+        player.setX(window->getSize().x  - player.getShape().getSize().x);
+    }
     player.update();
 }
 
 void Game::render() const {
     this->window->clear(Color::Black);
-    if (gameState == GameState::State::RUNNING) {
-        this->window->draw(world);
-    } else if (gameState == GameState::State::PAUSED) {
-        // Draw pause screen
-    } else if (gameState == GameState::State::MENU) {
-        // Draw menu screen
-    } else if (gameState == GameState::State::GAME_OVER) {
-        // Draw game over screen
-    }
+
+    this->window->draw(*sceneManager.getCurrentScene());
     this->window->draw(player);
     this->window->display();
 }
 
-void Game::processEvent() {
+void Game::processEvent() const {
     Event event{};
     while (window->pollEvent(event)) {
         if (event.type == Event::Closed) {
             window->close();
         }
     }
-    if (Keyboard::isKeyPressed(Keyboard::Key::Left)) {
+    sceneManager.getCurrentScene()->handleInput(*window);
+    /*if (Keyboard::isKeyPressed(Keyboard::Key::Left)) {
         player.moveLeft();
     }
     if (Keyboard::isKeyPressed(Keyboard::Key::Right)) {
         player.moveRight();
-    }
-    if (Keyboard::isKeyPressed(Keyboard::Key::Up)) {
-        player.moveUp();
-    }
-    if (Keyboard::isKeyPressed(Keyboard::Key::Down)) {
-        player.moveDown();
-    }
+    }*/
 }
 
 void Game::run() {

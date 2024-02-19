@@ -11,7 +11,7 @@ class Player: public Drawable {
 private:
     Vector2f position;
     RectangleShape playerShape;
-    float playerSpeed = 1.5f;
+    float playerSpeed = 2.5f;
 
     void draw(RenderTarget& target, RenderStates states) const override;
 
@@ -29,10 +29,6 @@ public:
     void moveLeft();
 
     void moveRight();
-
-    void moveUp();
-
-    void moveDown();
 
     void update();
 };
