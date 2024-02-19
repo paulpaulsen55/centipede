@@ -17,7 +17,7 @@ public:
 
     Projectile(float startX, float startY);
 
-    FloatRect getPosition();
+    FloatRect getPosition() const;
 
     RectangleShape getShape();
 

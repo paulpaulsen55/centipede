@@ -4,7 +4,7 @@
 ProjectileController::ProjectileController() {
 }
 
-void ProjectileController::shootProjectile(float startX, float startY) {
+void ProjectileController::shootProjectile(const float startX, const float startY) {
     const Projectile newProjectile(startX, startY);
     projectiles.push_back(newProjectile);
 }

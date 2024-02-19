@@ -8,7 +8,7 @@ Projectile::Projectile(float startX, float startY) {
     projectileShape.setPosition(position);
 }
 
-FloatRect Projectile::getPosition() {
+FloatRect Projectile::getPosition() const {
     return projectileShape.getGlobalBounds();
 }
 

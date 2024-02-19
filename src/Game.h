@@ -1,6 +1,5 @@
 #ifndef GAME_H
 #define GAME_H
-#include "GameState.h"
 #include "Player.h"
 #include "ProjectileController.h"
 #include "scenes/SceneManager.h"
@@ -15,13 +14,10 @@ class Game {
 private:
     RenderWindow *window;
     SceneManager *sceneManager;
-    GameState gameState;
     Event event{};
     Clock clock;
     float dt{};
     Time minFrameTime = seconds(1.f / 30.f);
-    Player player;
-    ProjectileController projectileController;
 
     float gridSize{};
 
@@ -29,7 +25,7 @@ private:
 
     void reset();
 
-    void update(Time dt);
+    void update(Time dt) const;
 
     void render() const;
 
@@ -37,7 +33,5 @@ public:
     Game(int x = 800, int y = 600);
 
     void run();
-
-    void initLevel();
 };
 #endif //GAME_H

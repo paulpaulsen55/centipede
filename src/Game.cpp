@@ -4,34 +4,21 @@
 
 using namespace sf;
 
-Game::Game(const int x, const int y):
-    player(x / 2,  y - 20)
-{
-
+Game::Game(const int x, const int y) {
     window = new RenderWindow({800u, 600u}, "Centipede");
     window->setFramerateLimit(144);
 
     sceneManager = new SceneManager();
     sceneManager->pushScene(std::make_unique<MenuScene>(800, 600));
-
-    gameState.setState(GameState::State::MENU);
 }
 
-void Game::update(Time dt) {
-    if (player.getPosition().left < 0) {
-        player.setX(0);
-    }
-    if (player.getPosition().left > window->getSize().x - player.getShape().getSize().x) {
-        player.setX(window->getSize().x  - player.getShape().getSize().x);
-    }
-    player.update();
+void Game::update(const Time dt) const {
+    sceneManager->getCurrentScene()->update(dt.asSeconds());
 }
 
 void Game::render() const {
     this->window->clear(Color::Black);
-
     this->window->draw(*sceneManager->getCurrentScene());
-    this->window->draw(player);
     this->window->display();
 }
 
@@ -43,12 +30,7 @@ void Game::processEvent() const {
         }
     }
     sceneManager->getCurrentScene()->handleInput(event, *window, *sceneManager);
-    /*if (Keyboard::isKeyPressed(Keyboard::Key::Left)) {
-        player.moveLeft();
-    }
-    if (Keyboard::isKeyPressed(Keyboard::Key::Right)) {
-        player.moveRight();
-    }*/
+
 }
 
 void Game::run() {
@@ -63,7 +45,6 @@ void Game::run() {
         }
 
         this->update(lastUpdateTime);
-
         this->render();
     }
 }
