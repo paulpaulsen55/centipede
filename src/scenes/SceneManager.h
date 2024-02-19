@@ -1,6 +1,7 @@
 #ifndef SCENEMANAGER_H
 #define SCENEMANAGER_H
 #include <memory>
+#include <stack>
 
 #include "Scene.h"
 
@@ -14,10 +15,10 @@ public:
 
     void changeScene(std::unique_ptr<Scene> scene);
 
-    Scene* getCurrentScene() const;
+    [[nodiscard]] Scene* getCurrentScene() const;
 
 private:
-    std::vector<std::unique_ptr<Scene>> scenes;
+    std::stack<std::unique_ptr<Scene>> scenes;
 };
 
 

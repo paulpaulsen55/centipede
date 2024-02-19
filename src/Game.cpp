@@ -11,7 +11,8 @@ Game::Game(const int x, const int y):
     window = new RenderWindow({800u, 600u}, "Centipede");
     window->setFramerateLimit(144);
 
-    sceneManager.pushScene(std::make_unique<MenuScene>());
+    sceneManager = new SceneManager();
+    sceneManager->pushScene(std::make_unique<MenuScene>(800, 600));
 
     gameState.setState(GameState::State::MENU);
 }
@@ -29,7 +30,7 @@ void Game::update(Time dt) {
 void Game::render() const {
     this->window->clear(Color::Black);
 
-    this->window->draw(*sceneManager.getCurrentScene());
+    this->window->draw(*sceneManager->getCurrentScene());
     this->window->draw(player);
     this->window->display();
 }
@@ -41,7 +42,7 @@ void Game::processEvent() const {
             window->close();
         }
     }
-    sceneManager.getCurrentScene()->handleInput(*window);
+    sceneManager->getCurrentScene()->handleInput(*window, *sceneManager);
     /*if (Keyboard::isKeyPressed(Keyboard::Key::Left)) {
         player.moveLeft();
     }

@@ -14,7 +14,7 @@ using namespace sf;
 class Game {
 private:
     RenderWindow *window;
-    SceneManager sceneManager;
+    SceneManager *sceneManager;
     GameState gameState;
     Event event{};
     Clock clock;

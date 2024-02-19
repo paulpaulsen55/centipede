@@ -10,14 +10,16 @@ using namespace sf;
 
 class MenuScene: public Scene{
 public:
-    MenuScene();
+    MenuScene(int x, int y);
 
-    void handleInput(RenderWindow& window) override;
+    void handleInput(RenderWindow& window, SceneManager &sceneManager) override;
 
     void update(float dt) override;
 
     void draw(RenderTarget& target, RenderStates states) const override;
 private:
+    int x;
+    int y;
     Text title;
 
     RectangleShape startButton;

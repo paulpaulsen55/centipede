@@ -28,6 +28,8 @@ add_executable(Centipede src/main.cpp
         src/scenes/SceneManager.h
         src/scenes/MenuScene.cpp
         src/scenes/MenuScene.h
+        src/scenes/GameOverScene.cpp
+        src/scenes/GameOverScene.h
 )
 file(COPY assets DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 target_link_libraries(Centipede PRIVATE sfml-graphics)

@@ -1,6 +1,11 @@
 #include "MenuScene.h"
+#include <memory>
 
-MenuScene::MenuScene() {
+#include "GameOverScene.h"
+#include "SceneManager.h"
+#include "SFML/Window/Mouse.hpp"
+
+MenuScene::MenuScene(const int x, const int y) : x(x), y(y){
     font.loadFromFile("assets/BitPotion.ttf");
 
     title.setFont(font);
@@ -30,7 +35,16 @@ MenuScene::MenuScene() {
     exitText.setPosition(350, 520);
 }
 
-void MenuScene::handleInput(RenderWindow &window) {
+void MenuScene::handleInput(RenderWindow &window, SceneManager &sceneManager) {
+    if (Mouse::isButtonPressed(Mouse::Left)) {
+        const Vector2i mousePosition = Mouse::getPosition(window);
+        if (startButton.getGlobalBounds().contains(mousePosition.x, mousePosition.y)) {
+            sceneManager.pushScene(std::make_unique<GameOverScene>(800,600));
+        }
+        if (exitButton.getGlobalBounds().contains(mousePosition.x, mousePosition.y)) {
+            window.close();
+        }
+    }
 }
 
 void MenuScene::update(float dt) {
