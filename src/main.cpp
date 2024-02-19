@@ -1,18 +1,17 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
+#include "Game.h"
 #include "Player.h"
 #include "ProjectileController.h"
 
 using namespace sf;
 
 int main() {
-    unsigned int windowWidth = 800;
-    unsigned int windowHeight = 600;
-    auto window = RenderWindow{ { windowWidth, windowHeight }, "Centipede"};
-    window.setFramerateLimit(144);
+    Game game(800, 600);
+    game.run();
 
-    Player player(100.f, 100.f);
+    /*Player player(100.f, 100.f);
     ProjectileController projectileController;
 
     Clock deltaClock;
@@ -70,5 +69,5 @@ int main() {
         }
 
         window.display();
-    }
+    }*/
 }
