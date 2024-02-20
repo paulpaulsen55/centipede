@@ -6,7 +6,7 @@ Player::Player(const float startX, const float startY) {
     position.x = startX;
     position.y = startY;
 
-    playerShape.setSize(Vector2f(50, 20));
+    playerShape.setSize(Vector2f(30, 20));
     playerShape.setPosition(position);
 }
 

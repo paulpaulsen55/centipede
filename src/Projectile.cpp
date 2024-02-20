@@ -4,7 +4,7 @@ Projectile::Projectile(float startX, float startY) {
     position.x = startX;
     position.y = startY;
 
-    projectileShape.setSize(Vector2f(10, 10));
+    projectileShape.setSize(Vector2f(6, 10));
     projectileShape.setPosition(position);
 }
 

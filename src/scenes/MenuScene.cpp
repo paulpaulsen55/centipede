@@ -41,7 +41,7 @@ void MenuScene::handleInput(const Event event, RenderWindow &window, SceneManage
         if (event.mouseButton.button == Mouse::Left) {
             const Vector2i mousePosition = Mouse::getPosition(window);
             if (startButton.getGlobalBounds().contains(mousePosition.x, mousePosition.y)) {
-                sceneManager.pushScene(std::make_unique<GameScene>(800,600));
+                sceneManager.pushScene(std::make_unique<GameScene>(800,800));
             }
             if (exitButton.getGlobalBounds().contains(mousePosition.x, mousePosition.y)) {
                 window.close();
@@ -51,6 +51,7 @@ void MenuScene::handleInput(const Event event, RenderWindow &window, SceneManage
 }
 
 void MenuScene::update(float dt) {
+    Scene::update(dt);
 }
 
 void MenuScene::draw(RenderTarget& target, RenderStates states) const {

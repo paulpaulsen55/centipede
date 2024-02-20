@@ -25,6 +25,7 @@ private:
     int y;
     Player player;
     ProjectileController projectileController;
+    float shootingDt{};
     //float gridSize{};
 };
 

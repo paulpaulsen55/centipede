@@ -5,11 +5,11 @@
 using namespace sf;
 
 Game::Game(const int x, const int y) {
-    window = new RenderWindow({800u, 600u}, "Centipede");
+    window = new RenderWindow({800u, 800u}, "Centipede");
     window->setFramerateLimit(144);
 
     sceneManager = new SceneManager();
-    sceneManager->pushScene(std::make_unique<MenuScene>(800, 600));
+    sceneManager->pushScene(std::make_unique<MenuScene>(800, 800));
 }
 
 void Game::update(const Time dt) const {
@@ -43,7 +43,6 @@ void Game::run() {
             lastUpdateTime -= minFrameTime;
             this->update(minFrameTime);
         }
-
         this->update(lastUpdateTime);
         this->render();
     }

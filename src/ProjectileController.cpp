@@ -1,4 +1,5 @@
 #include "ProjectileController.h"
+#include "SFML/Graphics/RenderTarget.hpp"
 
 
 ProjectileController::ProjectileController() {
@@ -22,5 +23,11 @@ void ProjectileController::updateProjectiles() {
             it->update();
             ++it;
         }
+    }
+}
+
+void ProjectileController::draw(RenderTarget &target, RenderStates states) const {
+    for (auto projectile : projectiles) {
+        target.draw(projectile.getShape());
     }
 }

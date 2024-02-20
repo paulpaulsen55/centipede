@@ -16,20 +16,36 @@ void GameScene::handleInput(Event event, RenderWindow &window, SceneManager &sce
         player.moveRight();
     }
     if (Keyboard::isKeyPressed(Keyboard::Key::P)) {
-        sceneManager.pushScene(std::make_unique<MenuScene>(800, 600));
+        sceneManager.pushScene(std::make_unique<MenuScene>(800, 800));
     }
 }
 
 void GameScene::update(const float dt) {
+    this->shootingDt += dt;
+
+    // player movement collision with window bounds
     if (player.getPosition().left < 0) {
         player.setX(0);
     }
     if (player.getPosition().left > static_cast<float>(x) - player.getShape().getSize().x) {
         player.setX(static_cast<float>(x) - player.getShape().getSize().x);
     }
+
+    // Shooting a projectile every 0.5 seconds maximum
+    if (Keyboard::isKeyPressed(Keyboard::Key::Space)) {
+        if (this->shootingDt > 0.5f) {
+            projectileController.shootProjectile(
+                player.getPosition().left + player.getShape().getSize().x / 2,
+                player.getPosition().top);
+            this->shootingDt = 0;
+        }
+    }
+
     player.update();
+    projectileController.updateProjectiles();
 }
 
 void GameScene::draw(RenderTarget &target, const RenderStates states) const {
     target.draw(player);
+    target.draw(projectileController);
 }
