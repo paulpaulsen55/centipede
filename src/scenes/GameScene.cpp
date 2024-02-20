@@ -1,6 +1,7 @@
 #include "GameScene.h"
-
 #include "MenuScene.h"
+
+// Grid: 32x24
 
 GameScene::GameScene(const int x, const int y):
     x(x),
