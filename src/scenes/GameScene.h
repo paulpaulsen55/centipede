@@ -1,6 +1,7 @@
 #ifndef GAMESCENE_H
 #define GAMESCENE_H
 #include "SceneManager.h"
+#include "../Grid.h"
 #include "SFML/Graphics/RenderTarget.hpp"
 #include "SFML/Graphics/RenderWindow.hpp"
 #include "../Player.h"
@@ -26,7 +27,7 @@ private:
     Player player;
     ProjectileController projectileController;
     float shootingDt{};
-    //float gridSize{};
+    Grid grid;
 };
 
 

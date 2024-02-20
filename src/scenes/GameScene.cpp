@@ -6,7 +6,8 @@
 GameScene::GameScene(const int x, const int y):
     x(x),
     y(y),
-    player(x / 2, y - 20) {
+    player(x / 2, y - 20),
+    grid(32,24) {
 }
 
 void GameScene::handleInput(Event event, RenderWindow &window, SceneManager &sceneManager) {

@@ -30,6 +30,10 @@ add_executable(Centipede src/main.cpp
         src/scenes/GameOverScene.h
         src/scenes/GameScene.cpp
         src/scenes/GameScene.h
+        src/Grid.cpp
+        src/Grid.h
+        src/entities/Entity.cpp
+        src/entities/Entity.h
 )
 file(COPY assets DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 target_link_libraries(Centipede PRIVATE sfml-graphics)
