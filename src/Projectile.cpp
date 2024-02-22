@@ -1,9 +1,6 @@
 #include "Projectile.h"
 
-Projectile::Projectile(float startX, float startY) {
-    position.x = startX;
-    position.y = startY;
-
+Projectile::Projectile(float startX, float startY): position(startX, startY) {
     projectileShape.setSize(Vector2f(6, 10));
     projectileShape.setPosition(position);
 }

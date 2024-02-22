@@ -7,11 +7,6 @@ using namespace sf;
 
 
 class Projectile {
-
-private:
-    RectangleShape projectileShape;
-    float projectileSpeed = 5.0f;
-
 public:
     Vector2f position;
 
@@ -22,6 +17,10 @@ public:
     RectangleShape getShape();
 
     void update();
+
+private:
+    RectangleShape projectileShape;
+    float projectileSpeed = 5.0f;
 };
 
 
