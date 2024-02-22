@@ -4,11 +4,9 @@
 
 using namespace sf;
 
-Entity::Entity(const int x, const int y, const Texture &texture, const float speed):
-    x(x),
+Entity::Entity(const int x, const int y, const Texture &texture, const float speed): x(x),
     y(y),
-    speed(speed)
-{
+    speed(speed) {
     sprite.setTexture(texture);
 }
 

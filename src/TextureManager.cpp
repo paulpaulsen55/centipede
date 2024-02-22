@@ -13,7 +13,7 @@ void TextureManager::loadTexture(const std::string &name, const std::string &fil
     this->textures[name] = texture;
 }
 
-Texture & TextureManager::getTexture(const std::string &name) {
+Texture &TextureManager::getTexture(const std::string &name) {
     const auto texture = this->textures.find(name);
     if (texture == this->textures.end()) {
         throw std::runtime_error("TextureManager::getTexture - Texture " + name + " not found.");

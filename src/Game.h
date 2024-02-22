@@ -9,7 +9,6 @@
 using namespace sf;
 
 
-
 class Game {
 private:
     RenderWindow *window;

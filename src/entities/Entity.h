@@ -1,13 +1,15 @@
 #ifndef ENTITY_H
 #define ENTITY_H
-#include <string>
 
 #include "SFML/Graphics/Sprite.hpp"
 
 using namespace sf;
 
-
-class Entity: public Drawable{
+/**
+ * The Entity class is an abstract class that represents an entity on the grid in the game.
+ * It is responsible for handling the position and drawing of the entity.
+ */
+class Entity : public Drawable {
 public:
     Entity(int x, int y, const Texture &texture, float speed);
 

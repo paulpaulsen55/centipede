@@ -27,7 +27,8 @@ GameOverScene::GameOverScene(const int x, const int y) : x(x), y(y) {
 void GameOverScene::handleInput(const Event event, RenderWindow &window, SceneManager &sceneManager) {
     if (event.type == Event::MouseButtonReleased) {
         if (event.mouseButton.button == Mouse::Left) {
-            if (const Vector2i mousePosition = Mouse::getPosition(window); restartButton.getGlobalBounds().contains(mousePosition.x, mousePosition.y)) {
+            if (const Vector2i mousePosition = Mouse::getPosition(window); restartButton.getGlobalBounds().contains(
+                mousePosition.x, mousePosition.y)) {
                 sceneManager.popScene();
                 sceneManager.pushScene(std::make_unique<MenuScene>(800, 800));
             }

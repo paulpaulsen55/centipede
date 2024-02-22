@@ -27,7 +27,7 @@ void ProjectileController::updateProjectiles() {
 }
 
 void ProjectileController::draw(RenderTarget &target, RenderStates states) const {
-    for (auto projectile : projectiles) {
+    for (auto projectile: projectiles) {
         target.draw(projectile.getShape());
     }
 }

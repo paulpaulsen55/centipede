@@ -3,12 +3,11 @@
 
 // Grid: 32x24
 
-GameScene::GameScene(const int x, const int y):
-    x(x),
-    y(y),
-    player(x / 2, y - 20),
-    grid(32,24)
-{}
+GameScene::GameScene(const int x, const int y): x(x),
+                                                y(y),
+                                                player(x / 2, y - 20),
+                                                grid(32, 24) {
+}
 
 void GameScene::handleInput(Event event, RenderWindow &window, SceneManager &sceneManager) {
     if (Keyboard::isKeyPressed(Keyboard::Key::Left)) {
@@ -45,6 +44,7 @@ void GameScene::update(const float dt) {
 
     player.update();
     projectileController.updateProjectiles();
+    grid.update(dt);
 }
 
 void GameScene::draw(RenderTarget &target, const RenderStates states) const {

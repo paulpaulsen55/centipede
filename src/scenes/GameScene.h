@@ -9,8 +9,11 @@
 
 using namespace sf;
 
-
-class GameScene: public Scene{
+/**
+ * The GameScene class is responsible for handling the game loop of the game.
+ * It is responsible for handling input, updating and drawing the game scene.
+ */
+class GameScene final : public Scene {
 public:
     GameScene(int x, int y);
 

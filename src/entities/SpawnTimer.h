@@ -1,10 +1,14 @@
 #ifndef SPAWNTIMER_H
 #define SPAWNTIMER_H
 
-
+/**
+ * The SpawnTimer class is responsible for handling the spawning of enemies.
+ * It is responsible for keeping track of the time and determining when to spawn an enemy.
+ */
 class SpawnTimer {
 public:
-    explicit SpawnTimer(const float interval): interval(interval), time(0) {};
+    explicit SpawnTimer(const float interval): interval(interval), time(0) {
+    };
 
     void update(const float dt) {
         time += dt;

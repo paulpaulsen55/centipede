@@ -5,7 +5,10 @@
 
 using namespace sf;
 
-
+/**
+ * The Projectile class represents one projectile that the player can shoot.
+ * It provides methods for updating the projectile and ensuring that it moves in the correct direction.
+ */
 class Projectile {
 public:
     Vector2f position;
@@ -22,7 +25,6 @@ private:
     RectangleShape projectileShape;
     float projectileSpeed = 5.0f;
 };
-
 
 
 #endif //PROJECTILE_H

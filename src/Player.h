@@ -7,13 +7,13 @@
 using namespace sf;
 
 
-class Player: public Drawable {
+class Player final : public Drawable {
 private:
     Vector2f position;
     RectangleShape playerShape;
     float playerSpeed = 2.5f;
 
-    void draw(RenderTarget& target, RenderStates states) const override;
+    void draw(RenderTarget &target, RenderStates states) const override;
 
 public:
     Player(float startX, float startY);
@@ -32,7 +32,6 @@ public:
 
     void update();
 };
-
 
 
 #endif //PLAYER_H

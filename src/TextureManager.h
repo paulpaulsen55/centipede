@@ -7,16 +7,19 @@
 
 using namespace sf;
 
-
+/**
+ * The TextureManager class is responsible for managing textures of Sprites.
+ * It provides methods for loading, retrieving textures and ensures that textures dont get unloaded.
+ * This allows for a centralized way of managing all textures used in the application.
+ */
 class TextureManager {
 public:
-    void loadTexture(const std::string& name, const std::string& filename);
+    void loadTexture(const std::string &name, const std::string &filename);
 
-    Texture &getTexture(const std::string& name);
+    Texture &getTexture(const std::string &name);
 
 private:
     std::map<std::string, Texture> textures;
-
 };
 
 

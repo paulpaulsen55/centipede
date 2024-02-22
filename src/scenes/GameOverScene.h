@@ -6,9 +6,11 @@
 
 using namespace sf;
 
-
-
-class GameOverScene: public Scene{
+/**
+ * The GameOverScene class is responsible for handling the game over screen of the game.
+ * It is responsible for handling input, updating and drawing the game over screen.
+ */
+class GameOverScene final : public Scene {
 public:
     GameOverScene(int x, int y);
 
@@ -29,7 +31,6 @@ private:
 
     Font font;
 };
-
 
 
 #endif //GAMEOVERSCENE_H

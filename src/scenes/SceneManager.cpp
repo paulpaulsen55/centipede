@@ -15,7 +15,7 @@ void SceneManager::changeScene(std::unique_ptr<Scene> scene) {
     pushScene(std::move(scene));
 }
 
-Scene * SceneManager::getCurrentScene() const {
+Scene *SceneManager::getCurrentScene() const {
     if (!scenes.empty()) {
         return scenes.top().get();
     }

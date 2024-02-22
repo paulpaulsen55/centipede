@@ -7,13 +7,13 @@
 /**
 * This class represents a grid of entities in a sparse matrix.
 */
-class Grid: public Drawable{
+class Grid final : public Drawable {
 public:
     Grid(int width, int height);
 
-    ~Grid();
+    ~Grid() override;
 
-    void update() const;
+    void update(float dt) const;
 
     void placeEntity(int x, int y, Entity *e) const;
 
@@ -32,7 +32,6 @@ private:
 
     void draw(RenderTarget &target, RenderStates states) const override;
 };
-
 
 
 #endif //GRID_H

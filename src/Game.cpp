@@ -30,7 +30,6 @@ void Game::processEvent() const {
         }
     }
     sceneManager->getCurrentScene()->handleInput(event, *window, *sceneManager);
-
 }
 
 void Game::run() {
