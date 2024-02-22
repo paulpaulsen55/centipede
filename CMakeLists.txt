@@ -34,8 +34,13 @@ add_executable(Centipede src/main.cpp
         src/Grid.h
         src/entities/Entity.cpp
         src/entities/Entity.h
+        src/entities/FlyEntity.cpp
+        src/entities/FlyEntity.h
+        src/entities/SpawnTimer.h
+        src/TextureManager.cpp
+        src/TextureManager.h
 )
-file(COPY assets DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+file(COPY src/assets DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 target_link_libraries(Centipede PRIVATE sfml-graphics)
 target_compile_features(Centipede PRIVATE cxx_std_17)
 

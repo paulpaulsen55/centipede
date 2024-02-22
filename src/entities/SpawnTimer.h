@@ -2,10 +2,9 @@
 #define SPAWNTIMER_H
 
 
-
 class SpawnTimer {
 public:
-    SpawnTimer(const float interval): interval(interval), time(0) {};
+    explicit SpawnTimer(const float interval): interval(interval), time(0) {};
 
     void update(const float dt) {
         time += dt;
@@ -23,7 +22,6 @@ private:
     float interval;
     float time;
 };
-
 
 
 #endif //SPAWNTIMER_H

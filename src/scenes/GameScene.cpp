@@ -7,8 +7,8 @@ GameScene::GameScene(const int x, const int y):
     x(x),
     y(y),
     player(x / 2, y - 20),
-    grid(32,24) {
-}
+    grid(32,24)
+{}
 
 void GameScene::handleInput(Event event, RenderWindow &window, SceneManager &sceneManager) {
     if (Keyboard::isKeyPressed(Keyboard::Key::Left)) {
@@ -35,7 +35,7 @@ void GameScene::update(const float dt) {
 
     // Shooting a projectile every 0.5 seconds maximum
     if (Keyboard::isKeyPressed(Keyboard::Key::Space)) {
-        if (this->shootingDt > 0.5f) {
+        if (this->shootingDt > 0.25f) {
             projectileController.shootProjectile(
                 player.getPosition().left + player.getShape().getSize().x / 2,
                 player.getPosition().top);
@@ -48,6 +48,7 @@ void GameScene::update(const float dt) {
 }
 
 void GameScene::draw(RenderTarget &target, const RenderStates states) const {
+    target.draw(grid);
     target.draw(player);
     target.draw(projectileController);
 }

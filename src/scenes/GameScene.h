@@ -10,7 +10,6 @@
 using namespace sf;
 
 
-
 class GameScene: public Scene{
 public:
     GameScene(int x, int y);
@@ -29,7 +28,6 @@ private:
     float shootingDt{};
     Grid grid;
 };
-
 
 
 #endif //GAMESCENE_H
