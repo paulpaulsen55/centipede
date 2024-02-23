@@ -6,13 +6,13 @@
 #include "SceneManager.h"
 #include "SFML/Window/Mouse.hpp"
 
-MenuScene::MenuScene(const int x, const int y) : x(x), y(y) {
-    font.loadFromFile("assets/BitPotion.ttf");
+MenuScene::MenuScene(const int x, const int y, TextureManager *textureManager) : Scene(textureManager), x(x), y(y) {
+    font.loadFromFile("assets/baloo2.ttf");
 
     title.setFont(font);
     title.setString("Centipede");
     title.setCharacterSize(100);
-    title.setFillColor(Color::White);
+    title.setFillColor(Color::Black);
     title.setPosition(x / 2 - (title.getGlobalBounds().width / 2), 50);
 
     startButton.setSize(Vector2f(200, 100));
@@ -41,7 +41,7 @@ void MenuScene::handleInput(const Event event, RenderWindow &window, SceneManage
         if (event.mouseButton.button == Mouse::Left) {
             const Vector2i mousePosition = Mouse::getPosition(window);
             if (startButton.getGlobalBounds().contains(mousePosition.x, mousePosition.y)) {
-                sceneManager.pushScene(std::make_unique<GameScene>(800, 800));
+                sceneManager.pushScene(std::make_unique<GameScene>(800, 800, textureManager));
             }
             if (exitButton.getGlobalBounds().contains(mousePosition.x, mousePosition.y)) {
                 window.close();

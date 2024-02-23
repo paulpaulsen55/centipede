@@ -27,3 +27,7 @@ Scene *SceneManager::getCurrentScene() const {
 void SceneManager::addScene(std::unique_ptr<Scene> scene) {
     pushScene(std::move(scene));
 }
+
+TextureManager * SceneManager::getTextureManager() {
+    return &textureManager;
+}

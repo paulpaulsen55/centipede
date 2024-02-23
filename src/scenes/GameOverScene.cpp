@@ -4,13 +4,13 @@
 #include "SceneManager.h"
 #include "SFML/Window/Mouse.hpp"
 
-GameOverScene::GameOverScene(const int x, const int y) : x(x), y(y) {
-    font.loadFromFile("assets/BitPotion.ttf");
+GameOverScene::GameOverScene(const int x, const int y, TextureManager *textureManager) : Scene(textureManager), x(x),
+    y(y) {
+    font.loadFromFile("assets/baloo2.ttf");
 
     gameOverText.setFont(font);
     gameOverText.setString("Game Over");
     gameOverText.setCharacterSize(100);
-    gameOverText.setFillColor(Color::White);
     gameOverText.setPosition(200, 50);
 
     restartButton.setSize(Vector2f(200, 100));
@@ -30,7 +30,7 @@ void GameOverScene::handleInput(const Event event, RenderWindow &window, SceneMa
             if (const Vector2i mousePosition = Mouse::getPosition(window); restartButton.getGlobalBounds().contains(
                 mousePosition.x, mousePosition.y)) {
                 sceneManager.popScene();
-                sceneManager.pushScene(std::make_unique<MenuScene>(800, 800));
+                sceneManager.pushScene(std::make_unique<MenuScene>(800, 800, textureManager));
             }
         }
     }

@@ -15,7 +15,7 @@ using namespace sf;
  */
 class GameScene final : public Scene {
 public:
-    GameScene(int x, int y);
+    GameScene(int x, int y, TextureManager *textureManager);
 
     void handleInput(Event event, RenderWindow &window, SceneManager &sceneManager) override;
 

@@ -6,7 +6,7 @@
 
 class Grid final : public Drawable {
 public:
-    Grid(int width, int height);
+    Grid(TextureManager *textureManager);
 
     ~Grid() override;
 
@@ -26,12 +26,12 @@ private:
     int width;
     int height;
     Entity ***grid;
-    TextureManager textureManager;
+    TextureManager *textureManager;
 
 
     void draw(RenderTarget &target, RenderStates states) const override;
 
-    void generateMushrooms();
+    void generateMushrooms() const;
 };
 
 

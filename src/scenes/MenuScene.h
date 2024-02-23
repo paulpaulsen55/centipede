@@ -12,7 +12,7 @@ using namespace sf;
  */
 class MenuScene final : public Scene {
 public:
-    MenuScene(int x, int y);
+    MenuScene(int x, int y, TextureManager *textureManager);
 
     void handleInput(Event event, RenderWindow &window, SceneManager &sceneManager) override;
 

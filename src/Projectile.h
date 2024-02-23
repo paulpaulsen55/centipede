@@ -25,7 +25,7 @@ public:
 
 private:
     RectangleShape projectileShape;
-    float projectileSpeed = 5.0f;
+    float projectileSpeed;
 };
 
 

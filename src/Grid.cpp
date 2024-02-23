@@ -2,12 +2,13 @@
 
 #include <random>
 
+#include "Constants.h"
 #include "entities/FlyEntity.h"
 #include "entities/MushroomEntity.h"
 #include "SFML/Graphics/RectangleShape.hpp"
 #include "SFML/Graphics/RenderTarget.hpp"
 
-Grid::Grid(const int width, const int height) : width(width), height(height) {
+Grid::Grid(TextureManager *textureManager): width(GRID_COLS), height(GRID_ROWS), textureManager(textureManager) {
     grid = new Entity **[width];
     for (int i = 0; i < width; ++i) {
         grid[i] = new Entity *[height];
@@ -16,8 +17,8 @@ Grid::Grid(const int width, const int height) : width(width), height(height) {
         }
     }
 
-    textureManager.loadTexture("fly", "assets/fly.png");
-    textureManager.loadTexture("mushroom", "assets/mushroom.png");
+    textureManager->loadTexture("fly", "assets/fly.png");
+    textureManager->loadTexture("mushroom", "assets/mushroom.png");
 
     this->generateMushrooms();
 }
@@ -82,6 +83,7 @@ void Grid::update(float dt) const {
 }
 
 void Grid::damageEntity(const int gridX, const int gridY) const {
+    printf("damaging entity at %d, %d\n", gridX, gridY);
     if (gridX >= 0 && gridX < width && gridY >= 0 && gridY < height) {
         if (grid[gridX][gridY] != nullptr) {
             grid[gridX][gridY]->damage();
@@ -90,7 +92,6 @@ void Grid::damageEntity(const int gridX, const int gridY) const {
 }
 
 void Grid::draw(RenderTarget &target, RenderStates states) const {
-
     float cellWidth = 800 / static_cast<float>(width);
     float cellHeight = 600 / static_cast<float>(height);
 
@@ -116,14 +117,14 @@ void Grid::draw(RenderTarget &target, RenderStates states) const {
     }
 }
 
-void Grid::generateMushrooms() {
-    printf("generating mushrooms\n");
+void Grid::generateMushrooms() const {
     for (int i = 0; i < width; ++i) {
-        for (int j = 0; j < height; ++j) {
+        printf("%d", width);
+        for (int j = 0; j < height - 3; ++j) {
             std::random_device rd;
             std::mt19937 gen(rd());
-            if (std::uniform_int_distribution<int> dist(1, 100); dist(gen) <= 8)
-                placeEntity(i, j, new MushroomEntity(i, j, textureManager.getTexture("mushroom")));
+            if (std::uniform_int_distribution<int> dist(1, 100); dist(gen) <= MUSHROOM_SPAWNCHANCE)
+                placeEntity(i, j, new MushroomEntity(i, j, textureManager->getTexture("mushroom")));
         }
     }
 }

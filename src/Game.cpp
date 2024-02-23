@@ -9,7 +9,7 @@ Game::Game(const int x, const int y) {
     window->setFramerateLimit(144);
 
     sceneManager = new SceneManager();
-    sceneManager->pushScene(std::make_unique<MenuScene>(800, 800));
+    sceneManager->pushScene(std::make_unique<MenuScene>(800, 800, sceneManager->getTextureManager()));
 }
 
 void Game::update(const Time dt) const {
@@ -17,7 +17,7 @@ void Game::update(const Time dt) const {
 }
 
 void Game::render() const {
-    this->window->clear(Color::Black);
+    this->window->clear(Color::White);
     this->window->draw(*sceneManager->getCurrentScene());
     this->window->display();
 }

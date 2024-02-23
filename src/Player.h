@@ -2,25 +2,21 @@
 #define PLAYER_H
 #include "SFML/Graphics/Rect.hpp"
 #include "SFML/Graphics/RectangleShape.hpp"
+#include "SFML/Graphics/Sprite.hpp"
 #include "SFML/System/Vector2.hpp"
 
 using namespace sf;
 
 
 class Player final : public Drawable {
-private:
-    Vector2f position;
-    RectangleShape playerShape;
-    float playerSpeed = 2.5f;
-
-    void draw(RenderTarget &target, RenderStates states) const override;
-
 public:
     Player(float startX, float startY);
 
     FloatRect getPosition() const;
 
-    RectangleShape getShape();
+    FloatRect getShape() const;
+
+    void setTexture(const Texture &texture);
 
     void setX(float x);
 
@@ -35,6 +31,13 @@ public:
     void moveDown();
 
     void update();
+
+private:
+    Vector2f position;
+    Sprite sprite;
+    float playerSpeed;
+
+    void draw(RenderTarget &target, RenderStates states) const override;
 };
 
 

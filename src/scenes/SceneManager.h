@@ -4,6 +4,7 @@
 #include <stack>
 
 #include "Scene.h"
+#include "../TextureManager.h"
 
 /**
  * The SceneManager class is responsible for managing the scenes in the game.
@@ -22,8 +23,11 @@ public:
 
     [[nodiscard]] Scene *getCurrentScene() const;
 
+    TextureManager *getTextureManager();
+
 private:
     std::stack<std::unique_ptr<Scene> > scenes;
+    TextureManager textureManager;
 };
 
 

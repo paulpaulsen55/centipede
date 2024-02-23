@@ -1,12 +1,13 @@
 #include "GameScene.h"
 #include "MenuScene.h"
+#include "../Constants.h"
 
-// Grid: 32x24
-
-GameScene::GameScene(const int x, const int y): x(x),
-                                                y(y),
-                                                player(x / 2, y - 120),
-                                                grid(32, 24) {
+GameScene::GameScene(const int x, const int y, TextureManager *textureManager): Scene(textureManager),
+    x(x),
+    y(y),
+    player(x / 2, y - 120), grid(textureManager) {
+    textureManager->loadTexture("player", "assets/player.png");
+    player.setTexture(textureManager->getTexture("player"));
 }
 
 void GameScene::handleInput(Event event, RenderWindow &window, SceneManager &sceneManager) {
@@ -23,7 +24,7 @@ void GameScene::handleInput(Event event, RenderWindow &window, SceneManager &sce
         player.moveDown();
     }
     if (Keyboard::isKeyPressed(Keyboard::Key::B)) {
-        sceneManager.pushScene(std::make_unique<MenuScene>(800, 800));
+        sceneManager.pushScene(std::make_unique<MenuScene>(800, 800, textureManager));
     }
 }
 
@@ -44,20 +45,19 @@ void GameScene::update(const float dt) {
         player.setY(static_cast<float>(y) - 100 - player.getShape().getSize().y);
     }
 
-    // Shooting a projectile every 0.5 seconds maximum
+    // Shooting a projectile every PROJECTILE_COOLDOWN seconds maximum
     if (Keyboard::isKeyPressed(Keyboard::Key::Space)) {
-        if (this->shootingDt > 0.25f) {
-            projectileController.shootProjectile(
-                player.getPosition().left + player.getShape().getSize().x / 2,
-                player.getPosition().top);
+        if (this->shootingDt > PROJECTILE_COOLDOWN) {
+            projectileController.shootProjectile(player.getPosition().left, player.getPosition().top);
             this->shootingDt = 0;
         }
     }
+
     // check if a entity is hit by a projectile
     const auto projectiles = projectileController.getProjectiles();
-    for (const auto& projectile: projectiles) {
-        const int gridX = projectile.getPosition().left / (800 / 32 + 1);
-        const int gridY = projectile.getPosition().top / (600 / 24 + 1);
+    for (const auto &projectile: projectiles) {
+        const int gridX = projectile.getPosition().left / (GRID_WIDTH / GRID_COLS);
+        const int gridY = projectile.getPosition().top / (GRID_HEIGHT / GRID_ROWS);
         if (grid.isOccupied(gridX, gridY)) {
             grid.damageEntity(gridX, gridY);
             projectileController.removeProjectile(projectile);

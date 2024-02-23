@@ -1,6 +1,8 @@
 #include "Projectile.h"
 
-Projectile::Projectile(float startX, float startY): position(startX, startY) {
+#include "Constants.h"
+
+Projectile::Projectile(const float startX, const float startY): position(startX, startY), projectileSpeed(PROJECTILE_SPEED) {
     projectileShape.setSize(Vector2f(6, 10));
     projectileShape.setPosition(position);
 }
