@@ -11,7 +11,9 @@ void SceneManager::popScene() {
 }
 
 void SceneManager::changeScene(std::unique_ptr<Scene> scene) {
-    popScene();
+    while (!scenes.empty()) {
+        scenes.pop();
+    }
     pushScene(std::move(scene));
 }
 
@@ -20,4 +22,8 @@ Scene *SceneManager::getCurrentScene() const {
         return scenes.top().get();
     }
     return nullptr;
+}
+
+void SceneManager::addScene(std::unique_ptr<Scene> scene) {
+    pushScene(std::move(scene));
 }

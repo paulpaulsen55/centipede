@@ -15,11 +15,11 @@ public:
 
     void update(float dt) const;
 
-    void placeEntity(int x, int y, Entity *e) const;
+    void placeEntity(int gridX, int gridY, Entity *e) const;
 
     void removeEntity(int x, int y) const;
 
-    Entity *getEntity(int x, int y) const;
+    Entity *getEntity(int gridX, int gridY) const;
 
     bool isOccupied(int x, int y) const;
 

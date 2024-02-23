@@ -18,6 +18,8 @@ public:
 
     void changeScene(std::unique_ptr<Scene> scene);
 
+    void addScene(std::unique_ptr<Scene> scene);
+
     [[nodiscard]] Scene *getCurrentScene() const;
 
 private:
