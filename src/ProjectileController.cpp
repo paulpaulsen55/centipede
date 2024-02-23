@@ -31,3 +31,7 @@ void ProjectileController::draw(RenderTarget &target, RenderStates states) const
         target.draw(projectile.getShape());
     }
 }
+
+void ProjectileController::removeProjectile(const Projectile &projectile) {
+    projectiles.remove(projectile);
+}

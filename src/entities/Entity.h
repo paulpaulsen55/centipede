@@ -17,11 +17,18 @@ public:
 
     virtual void handleCollision(Entity *other) = 0;
 
+    void setPosition(int x, int y);
+
+    bool isAlive() const;
+
+    void damage();
+
 protected:
     int x;
     int y;
     float speed;
     Sprite sprite;
+    int lives = 1;
 
 private:
     void draw(RenderTarget &target, RenderStates states) const override;

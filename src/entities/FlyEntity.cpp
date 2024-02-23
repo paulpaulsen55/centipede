@@ -2,9 +2,9 @@
 
 #include "../TextureManager.h"
 
-FlyEntity::FlyEntity(const int x, const int y, TextureManager &textureManager): Entity(
-    x, y, textureManager.getTexture("fly"), 10) {
-    sprite.setPosition(x, y);
+FlyEntity::FlyEntity(const int x, const int y, const Texture &texture): Entity(
+    x, y, texture, 10) {
+    this->lives = 2;
 }
 
 void FlyEntity::move() {

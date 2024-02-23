@@ -21,6 +21,8 @@ public:
 
     void update();
 
+    bool operator==(const Projectile &other) const;
+
 private:
     RectangleShape projectileShape;
     float projectileSpeed = 5.0f;

@@ -18,6 +18,8 @@ public:
 
     void updateProjectiles();
 
+    void removeProjectile(const Projectile &projectile);
+
 private:
     void draw(RenderTarget &target, RenderStates states) const override;
 

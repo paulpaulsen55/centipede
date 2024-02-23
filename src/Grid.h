@@ -4,9 +4,6 @@
 #include "entities/Entity.h"
 
 
-/**
-* This class represents a grid of entities in a sparse matrix.
-*/
 class Grid final : public Drawable {
 public:
     Grid(int width, int height);
@@ -21,7 +18,9 @@ public:
 
     Entity *getEntity(int gridX, int gridY) const;
 
-    bool isOccupied(int x, int y) const;
+    void damageEntity(int gridX, int gridY) const;
+
+    bool isOccupied(int gridX, int gridY) const;
 
 private:
     int width;
@@ -31,6 +30,8 @@ private:
 
 
     void draw(RenderTarget &target, RenderStates states) const override;
+
+    void generateMushrooms();
 };
 
 

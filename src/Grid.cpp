@@ -1,8 +1,9 @@
 #include "Grid.h"
 
-#include <typeinfo>
+#include <random>
 
 #include "entities/FlyEntity.h"
+#include "entities/MushroomEntity.h"
 #include "SFML/Graphics/RectangleShape.hpp"
 #include "SFML/Graphics/RenderTarget.hpp"
 
@@ -16,8 +17,9 @@ Grid::Grid(const int width, const int height) : width(width), height(height) {
     }
 
     textureManager.loadTexture("fly", "assets/fly.png");
+    textureManager.loadTexture("mushroom", "assets/mushroom.png");
 
-    this->placeEntity(0, 0, new FlyEntity(1, 2, textureManager));
+    this->generateMushrooms();
 }
 
 Grid::~Grid() {
@@ -39,6 +41,7 @@ Grid::~Grid() {
 void Grid::placeEntity(const int gridX, const int gridY, Entity *e) const {
     if (gridX >= 0 && gridX < width && gridY >= 0 && gridY < height) {
         grid[gridX][gridY] = e;
+        e->setPosition(gridX * 800 / width + 1, gridY * 600 / height + 1);
     }
 }
 
@@ -49,8 +52,8 @@ Entity *Grid::getEntity(const int gridX, const int gridY) const {
     return nullptr;
 }
 
-bool Grid::isOccupied(const int x, const int y) const {
-    return getEntity(x, y) != nullptr;
+bool Grid::isOccupied(const int gridX, const int gridY) const {
+    return getEntity(gridX, gridY) != nullptr;
 }
 
 void Grid::removeEntity(const int x, const int y) const {
@@ -66,6 +69,22 @@ void Grid::update(float dt) const {
             if (grid[i][j] != nullptr) {
                 grid[i][j]->move();
             }
+        }
+    }
+    // if a entity has no more lives, remove it from the grid
+    for (int i = 0; i < width; ++i) {
+        for (int j = 0; j < height; ++j) {
+            if (grid[i][j] != nullptr && !grid[i][j]->isAlive()) {
+                removeEntity(i, j);
+            }
+        }
+    }
+}
+
+void Grid::damageEntity(const int gridX, const int gridY) const {
+    if (gridX >= 0 && gridX < width && gridY >= 0 && gridY < height) {
+        if (grid[gridX][gridY] != nullptr) {
+            grid[gridX][gridY]->damage();
         }
     }
 }
@@ -93,6 +112,18 @@ void Grid::draw(RenderTarget &target, RenderStates states) const {
             if (grid[i][j] != nullptr) {
                 target.draw(*grid[i][j]);
             }
+        }
+    }
+}
+
+void Grid::generateMushrooms() {
+    printf("generating mushrooms\n");
+    for (int i = 0; i < width; ++i) {
+        for (int j = 0; j < height; ++j) {
+            std::random_device rd;
+            std::mt19937 gen(rd());
+            if (std::uniform_int_distribution<int> dist(1, 100); dist(gen) <= 8)
+                placeEntity(i, j, new MushroomEntity(i, j, textureManager.getTexture("mushroom")));
         }
     }
 }

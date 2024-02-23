@@ -17,3 +17,7 @@ void Projectile::update() {
     position.y -= projectileSpeed;
     projectileShape.setPosition(position);
 }
+
+bool Projectile::operator==(const Projectile &other) const {
+    return position == other.position;
+}

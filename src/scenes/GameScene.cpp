@@ -53,6 +53,16 @@ void GameScene::update(const float dt) {
             this->shootingDt = 0;
         }
     }
+    // check if a entity is hit by a projectile
+    const auto projectiles = projectileController.getProjectiles();
+    for (const auto& projectile: projectiles) {
+        const int gridX = projectile.getPosition().left / (800 / 32 + 1);
+        const int gridY = projectile.getPosition().top / (600 / 24 + 1);
+        if (grid.isOccupied(gridX, gridY)) {
+            grid.damageEntity(gridX, gridY);
+            projectileController.removeProjectile(projectile);
+        }
+    }
 
     player.update();
     projectileController.updateProjectiles();
