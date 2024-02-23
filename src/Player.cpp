@@ -34,6 +34,14 @@ void Player::moveRight() {
     position.x += playerSpeed;
 }
 
+void Player::moveUp() {
+    position.y -= playerSpeed;
+}
+
+void Player::moveDown() {
+    position.y += playerSpeed;
+}
+
 void Player::update() {
     playerShape.setPosition(position);
 }

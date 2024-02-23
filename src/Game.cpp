@@ -5,7 +5,7 @@
 using namespace sf;
 
 Game::Game(const int x, const int y) {
-    window = new RenderWindow({800u, 800u}, "Centipede");
+    window = new RenderWindow({800u, 800u}, "Centipede", Style::Titlebar | Style::Close);
     window->setFramerateLimit(144);
 
     sceneManager = new SceneManager();

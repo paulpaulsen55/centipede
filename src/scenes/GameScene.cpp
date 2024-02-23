@@ -5,7 +5,7 @@
 
 GameScene::GameScene(const int x, const int y): x(x),
                                                 y(y),
-                                                player(x / 2, y - 20),
+                                                player(x / 2, y - 120),
                                                 grid(32, 24) {
 }
 
@@ -16,7 +16,13 @@ void GameScene::handleInput(Event event, RenderWindow &window, SceneManager &sce
     if (Keyboard::isKeyPressed(Keyboard::Key::Right)) {
         player.moveRight();
     }
-    if (Keyboard::isKeyPressed(Keyboard::Key::P)) {
+    if (Keyboard::isKeyPressed(Keyboard::Key::Up)) {
+        player.moveUp();
+    }
+    if (Keyboard::isKeyPressed(Keyboard::Key::Down)) {
+        player.moveDown();
+    }
+    if (Keyboard::isKeyPressed(Keyboard::Key::B)) {
         sceneManager.pushScene(std::make_unique<MenuScene>(800, 800));
     }
 }
@@ -30,6 +36,12 @@ void GameScene::update(const float dt) {
     }
     if (player.getPosition().left > static_cast<float>(x) - player.getShape().getSize().x) {
         player.setX(static_cast<float>(x) - player.getShape().getSize().x);
+    }
+    if (player.getPosition().top < 0) {
+        player.setY(0);
+    }
+    if (player.getPosition().top > static_cast<float>(y) - 100 - player.getShape().getSize().y) {
+        player.setY(static_cast<float>(y) - 100 - player.getShape().getSize().y);
     }
 
     // Shooting a projectile every 0.5 seconds maximum
