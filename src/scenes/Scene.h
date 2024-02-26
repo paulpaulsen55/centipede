@@ -13,11 +13,15 @@ class SceneManager;
  */
 class Scene : public Drawable {
 public:
-    virtual void handleInput(Event event, RenderWindow &window, SceneManager &sceneManager) = 0;
+    virtual void handleInput(Event event, RenderWindow &window) = 0;
 
     virtual void update(float dt) = 0;
 
     void draw(RenderTarget &target, RenderStates states) const override = 0;
+
+protected:
+    int x = 800;
+    int y = 800;
 };
 
 

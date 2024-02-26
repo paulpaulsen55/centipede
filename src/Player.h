@@ -30,6 +30,11 @@ public:
 
     void update();
 
+    void damage();
+
+protected:
+    int lives = 3;
+
 private:
     Vector2f position;
     Sprite sprite;

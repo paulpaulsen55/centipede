@@ -12,6 +12,8 @@ class ProjectileController final : public Drawable {
 public:
     ProjectileController();
 
+    ~ProjectileController() override = default;
+
     void shootProjectile(float startX, float startY);
 
     std::list<Projectile> getProjectiles();

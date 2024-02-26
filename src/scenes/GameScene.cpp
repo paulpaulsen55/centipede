@@ -3,11 +3,10 @@
 #include "../Constants.h"
 #include "SFML/Window/Event.hpp"
 
-GameScene::GameScene(const int x, const int y): x(x), y(y),
-                                                player(x / 2, y - 120) {
+GameScene::GameScene(): player(x / 2, y - 120) {
 }
 
-void GameScene::handleInput(Event event, RenderWindow &window, SceneManager &sceneManager) {
+void GameScene::handleInput(Event event, RenderWindow &window) {
     if (Keyboard::isKeyPressed(Keyboard::Key::Left)) {
         player.moveLeft();
     }
@@ -21,7 +20,7 @@ void GameScene::handleInput(Event event, RenderWindow &window, SceneManager &sce
         player.moveDown();
     }
     if (Keyboard::isKeyPressed(Keyboard::Key::B)) {
-        sceneManager.pushScene(std::make_unique<MenuScene>(800, 800));
+        SceneManager::getInstance().changeScene(std::make_unique<MenuScene>());
     }
 }
 

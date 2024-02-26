@@ -15,17 +15,15 @@ using namespace sf;
  */
 class GameScene final : public Scene {
 public:
-    GameScene(int x, int y);
+    GameScene();
 
-    void handleInput(Event event, RenderWindow &window, SceneManager &sceneManager) override;
+    void handleInput(Event event, RenderWindow &window) override;
 
     void update(float dt) override;
 
     void draw(RenderTarget &target, RenderStates states) const override;
 
 private:
-    int x;
-    int y;
     Player player;
     ProjectileController projectileController;
     float shootingDt{};

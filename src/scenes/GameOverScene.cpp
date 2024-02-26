@@ -6,8 +6,7 @@
 #include "SFML/Window/Event.hpp"
 #include "SFML/Window/Mouse.hpp"
 
-GameOverScene::GameOverScene(const int x, const int y) : x(x),
-    y(y) {
+GameOverScene::GameOverScene() {
     font.loadFromFile(FONT);
 
     gameOverText.setFont(font);
@@ -26,13 +25,12 @@ GameOverScene::GameOverScene(const int x, const int y) : x(x),
     restartText.setPosition(350, 320);
 }
 
-void GameOverScene::handleInput(const Event event, RenderWindow &window, SceneManager &sceneManager) {
+void GameOverScene::handleInput(const Event event, RenderWindow &window) {
     if (event.type == Event::MouseButtonReleased) {
         if (event.mouseButton.button == Mouse::Left) {
             if (const Vector2i mousePosition = Mouse::getPosition(window); restartButton.getGlobalBounds().contains(
                 mousePosition.x, mousePosition.y)) {
-                sceneManager.popScene();
-                sceneManager.pushScene(std::make_unique<MenuScene>(800, 800));
+                SceneManager::getInstance().changeScene(std::make_unique<MenuScene>());
             }
         }
     }

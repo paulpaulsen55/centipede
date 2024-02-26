@@ -12,18 +12,15 @@ using namespace sf;
  */
 class GameOverScene final : public Scene {
 public:
-    GameOverScene(int x, int y);
+    GameOverScene();
 
-    void handleInput(Event event, RenderWindow &window, SceneManager &sceneManager) override;
+    void handleInput(Event event, RenderWindow &window) override;
 
     void update(float dt) override;
 
     void draw(RenderTarget &target, RenderStates states) const override;
 
 private:
-    int x;
-    int y;
-
     Text gameOverText;
 
     RectangleShape restartButton;

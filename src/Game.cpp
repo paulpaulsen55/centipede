@@ -8,8 +8,8 @@ Game::Game() {
     window = new RenderWindow({800u, 800u}, "Centipede", Style::Titlebar | Style::Close);
     window->setFramerateLimit(144);
 
-    sceneManager = new SceneManager();
-    sceneManager->pushScene(std::make_unique<MenuScene>(800, 800));
+    sceneManager = &SceneManager::getInstance();
+    sceneManager->pushScene(std::make_unique<MenuScene>());
 }
 
 void Game::update(const Time dt) const {
@@ -29,7 +29,7 @@ void Game::processEvent() const {
             window->close();
         }
     }
-    sceneManager->getCurrentScene()->handleInput(event, *window, *sceneManager);
+    sceneManager->getCurrentScene()->handleInput(event, *window);
 }
 
 void Game::run() {

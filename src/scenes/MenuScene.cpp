@@ -8,7 +8,7 @@
 #include "SFML/Window/Event.hpp"
 #include "SFML/Window/Mouse.hpp"
 
-MenuScene::MenuScene(const int x, const int y) : x(x), y(y) {
+MenuScene::MenuScene() {
     font.loadFromFile(FONT);
 
     title.setFont(font);
@@ -38,12 +38,12 @@ MenuScene::MenuScene(const int x, const int y) : x(x), y(y) {
     exitText.setPosition(x / 2 - (exitText.getGlobalBounds().width / 2), 500);
 }
 
-void MenuScene::handleInput(const Event event, RenderWindow &window, SceneManager &sceneManager) {
+void MenuScene::handleInput(const Event event, RenderWindow &window) {
     if (event.type == Event::MouseButtonReleased) {
         if (event.mouseButton.button == Mouse::Left) {
             const Vector2i mousePosition = Mouse::getPosition(window);
             if (startButton.getGlobalBounds().contains(mousePosition.x, mousePosition.y)) {
-                sceneManager.pushScene(std::make_unique<GameScene>(800, 800));
+                SceneManager::getInstance().changeScene(std::make_unique<GameScene>());
             }
             if (exitButton.getGlobalBounds().contains(mousePosition.x, mousePosition.y)) {
                 window.close();

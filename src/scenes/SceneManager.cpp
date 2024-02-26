@@ -1,5 +1,10 @@
 #include "SceneManager.h"
 
+SceneManager &SceneManager::getInstance() {
+    static SceneManager instance;
+    return instance;
+}
+
 void SceneManager::pushScene(std::unique_ptr<Scene> scene) {
     scenes.push(std::move(scene));
 }
@@ -22,8 +27,4 @@ Scene *SceneManager::getCurrentScene() const {
         return scenes.top().get();
     }
     return nullptr;
-}
-
-void SceneManager::addScene(std::unique_ptr<Scene> scene) {
-    pushScene(std::move(scene));
 }
