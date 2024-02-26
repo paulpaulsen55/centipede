@@ -3,12 +3,13 @@
 #include <random>
 
 #include "Constants.h"
+#include "UtilityFunctions.h"
 #include "entities/FlyEntity.h"
 #include "entities/MushroomEntity.h"
 #include "SFML/Graphics/RectangleShape.hpp"
 #include "SFML/Graphics/RenderTarget.hpp"
 
-Grid::Grid(): width(GRID_COLS), height(GRID_ROWS) {
+Grid::Grid() {
     grid = new Entity **[width];
     for (int i = 0; i < width; ++i) {
         grid[i] = new Entity *[height];
@@ -30,6 +31,11 @@ Grid::~Grid() {
     delete[] grid;
 }
 
+Grid &Grid::getInstance() {
+    static Grid instance;
+    return instance;
+}
+
 /**
  * Places an entity on the grid at the given points.
  * @param gridX The x position of the entity in the grid, e.g. 10.
@@ -37,21 +43,28 @@ Grid::~Grid() {
  * @param e The entity to place.
  */
 void Grid::placeEntity(const int gridX, const int gridY, Entity *e) const {
-    if (gridX >= 0 && gridX < width && gridY >= 0 && gridY < height) {
+    if (gridX >= 0 && gridX < width && gridY >= 0 && gridY < height && grid[gridX][gridY] == nullptr) {
+        printf("Placing entity at %d %d\n", gridX, gridY);
         grid[gridX][gridY] = e;
-        e->setPosition(gridX * 800 / width + 1, gridY * 600 / height + 1);
+        e->setGridPosition(gridX, gridY);
+        e->setPosition(gridX * GRID_WIDTH / width + 1, gridY * GRID_HEIGHT / height + 1);
     }
 }
 
-Entity *Grid::getEntity(const int gridX, const int gridY) const {
-    if (gridX >= 0 && gridX < width && gridY >= 0 && gridY < height) {
-        return grid[gridX][gridY];
+void Grid::moveEntity(Entity *e, const int newGridX, const int newGridY) const {
+    if (newGridX >= 0 && newGridX < width && newGridY >= 0 && newGridY < height) {
+        grid[e->getGridX()][e->getGridY()] = nullptr;
+        grid[newGridX][newGridY] = e;
+        e->setGridPosition(newGridX, newGridY);
+        e->setPosition(newGridX * GRID_WIDTH / width + 1, newGridY * GRID_HEIGHT / height + 1);
     }
-    return nullptr;
 }
 
 bool Grid::isOccupied(const int gridX, const int gridY) const {
-    return getEntity(gridX, gridY) != nullptr;
+    if (gridX < 0 || gridX >= width || gridY < 0 || gridY >= height) {
+        return true;
+    }
+    return grid[gridX][gridY] != nullptr;
 }
 
 void Grid::removeEntity(const int x, const int y) const {
@@ -61,11 +74,15 @@ void Grid::removeEntity(const int x, const int y) const {
     }
 }
 
-void Grid::update(float dt) const {
+void Grid::update(const float dt) {
+    // update the spawn timers
+    flyTimer.update(dt);
+
+    // move all entities
     for (int i = 0; i < width; ++i) {
         for (int j = 0; j < height; ++j) {
             if (grid[i][j] != nullptr) {
-                grid[i][j]->move();
+                grid[i][j]->move(dt);
             }
         }
     }
@@ -77,10 +94,13 @@ void Grid::update(float dt) const {
             }
         }
     }
+
+    if (flyTimer.shouldSpawn()) {
+        spawnFly();
+    }
 }
 
 void Grid::damageEntity(const int gridX, const int gridY) const {
-    printf("damaging entity at %d, %d\n", gridX, gridY);
     if (gridX >= 0 && gridX < width && gridY >= 0 && gridY < height) {
         if (grid[gridX][gridY] != nullptr) {
             grid[gridX][gridY]->damage();
@@ -94,16 +114,16 @@ void Grid::draw(RenderTarget &target, RenderStates states) const {
 
     // Draw grid lines
     for (int i = 0; i <= width; ++i) {
-        sf::RectangleShape line(sf::Vector2f(1, target.getSize().y));
+        RectangleShape line(Vector2f(1, target.getSize().y));
         line.setPosition(i * cellWidth, 0);
-        line.setFillColor(sf::Color::Black);
+        line.setFillColor(Color::Black);
         target.draw(line, states);
     }
 
     for (int i = 0; i <= height; ++i) {
-        sf::RectangleShape line(sf::Vector2f(target.getSize().x, 1));
+        RectangleShape line(Vector2f(target.getSize().x, 1));
         line.setPosition(0, i * cellHeight);
-        line.setFillColor(sf::Color::Black);
+        line.setFillColor(Color::Black);
         target.draw(line, states);
     }
 
@@ -119,10 +139,17 @@ void Grid::draw(RenderTarget &target, RenderStates states) const {
 void Grid::generateMushrooms() const {
     for (int i = 0; i < width; ++i) {
         for (int j = 0; j < height - 3; ++j) {
-            std::random_device rd;
-            std::mt19937 gen(rd());
-            if (std::uniform_int_distribution<int> dist(1, 100); dist(gen) <= MUSHROOM_SPAWNCHANCE)
-                placeEntity(i, j, new MushroomEntity(i, j));
+            if (generateRandomNumber(0, 100) <= MUSHROOM_SPAWNCHANCE)
+                placeEntity(i, j, new MushroomEntity());
         }
     }
+}
+
+void Grid::spawnFly() {
+    int x;
+    do {
+        x = generateRandomNumber(0, width - 1);
+    } while (isOccupied(x, 0));
+    placeEntity(x, 0, new FlyEntity());
+    flyTimer.reset();
 }

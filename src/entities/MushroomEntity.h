@@ -4,11 +4,13 @@
 #include "SFML/Graphics/Text.hpp"
 
 
-class MushroomEntity : public Entity {
+class MushroomEntity final : public Entity {
 public:
-    MushroomEntity(int x, int y);
+    MushroomEntity();
 
-    void move() override;
+    // The mushroom does not move
+    void move(float dt) override {
+    };
 
     void handleCollision(Entity *other) override;
 

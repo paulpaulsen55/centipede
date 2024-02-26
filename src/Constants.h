@@ -2,6 +2,9 @@
 #define CONSTANTS_H
 #include <string>
 
+#include "SFML/Graphics/Color.hpp"
+
+using namespace sf;
 // UI constants
 const std::string FONT = "assets/baloo2.ttf";
 const Color blue700 = Color(3, 105, 161);

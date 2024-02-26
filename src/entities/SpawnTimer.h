@@ -22,6 +22,10 @@ public:
         return false;
     }
 
+    void reset() {
+        time = 0;
+    }
+
 private:
     float interval;
     float time;

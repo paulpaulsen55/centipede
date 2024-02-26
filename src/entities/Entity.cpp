@@ -5,18 +5,10 @@
 
 using namespace sf;
 
-Entity::Entity(const int x, const int y, const std::string &texture, const float speed):
-    x(x),
-    y(y),
-    speed(speed)
-{
+Entity::Entity(const std::string &texture) {
     sprite.setPosition(static_cast<float>(x), static_cast<float>(y));
     TextureManager::getInstance().loadTexture(texture);
     sprite.setTexture(TextureManager::getInstance().getTexture(texture));
-}
-
-void Entity::draw(RenderTarget &target, RenderStates states) const {
-    target.draw(sprite);
 }
 
 void Entity::setPosition(const int x, const int y) {
@@ -25,10 +17,27 @@ void Entity::setPosition(const int x, const int y) {
     sprite.setPosition(x, y);
 }
 
+void Entity::setGridPosition(const int gridX, const int gridY) {
+    this->gridX = gridX;
+    this->gridY = gridY;
+}
+
 bool Entity::isAlive() const {
     return lives > 0;
 }
 
 void Entity::damage() {
     --lives;
+}
+
+void Entity::draw(RenderTarget &target, RenderStates states) const {
+    target.draw(sprite);
+}
+
+int Entity::getGridX() const {
+    return gridX;
+}
+
+int Entity::getGridY() const {
+    return gridY;
 }

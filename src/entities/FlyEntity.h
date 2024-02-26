@@ -3,11 +3,11 @@
 #include "Entity.h"
 
 
-class FlyEntity : public Entity {
+class FlyEntity final : public Entity {
 public:
-    FlyEntity(int x, int y);
+    FlyEntity();
 
-    void move() override;
+    void move(float dt) override;
 
     void handleCollision(Entity *other) override;
 };

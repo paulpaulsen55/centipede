@@ -2,14 +2,11 @@
 
 #include "../TextureManager.h"
 
-MushroomEntity::MushroomEntity(const int x, const int y): Entity(x, y, "assets/mushroom3.png", 0) {
+MushroomEntity::MushroomEntity(): Entity("assets/mushroom3.png") {
     this->lives = 3;
-    // load other texture variants
+    // also load other texture variants
     TextureManager::getInstance().loadTexture("assets/mushroom2.png");
     TextureManager::getInstance().loadTexture("assets/mushroom1.png");
-}
-
-void MushroomEntity::move() {
 }
 
 void MushroomEntity::handleCollision(Entity *other) {
