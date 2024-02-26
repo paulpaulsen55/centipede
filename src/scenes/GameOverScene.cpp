@@ -2,11 +2,12 @@
 #include <memory>
 #include "MenuScene.h"
 #include "SceneManager.h"
+#include "../Constants.h"
 #include "SFML/Window/Mouse.hpp"
 
 GameOverScene::GameOverScene(const int x, const int y, TextureManager *textureManager) : Scene(textureManager), x(x),
     y(y) {
-    font.loadFromFile("assets/baloo2.ttf");
+    font.loadFromFile(FONT);
 
     gameOverText.setFont(font);
     gameOverText.setString("Game Over");

@@ -4,10 +4,11 @@
 #include <memory>
 #include "GameScene.h"
 #include "SceneManager.h"
+#include "../Constants.h"
 #include "SFML/Window/Mouse.hpp"
 
 MenuScene::MenuScene(const int x, const int y, TextureManager *textureManager) : Scene(textureManager), x(x), y(y) {
-    font.loadFromFile("assets/baloo2.ttf");
+    font.loadFromFile(FONT);
 
     title.setFont(font);
     title.setString("Centipede");

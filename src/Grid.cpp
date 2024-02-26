@@ -99,12 +99,14 @@ void Grid::draw(RenderTarget &target, RenderStates states) const {
     for (int i = 0; i <= width; ++i) {
         sf::RectangleShape line(sf::Vector2f(1, target.getSize().y));
         line.setPosition(i * cellWidth, 0);
+        line.setFillColor(sf::Color::Black);
         target.draw(line, states);
     }
 
     for (int i = 0; i <= height; ++i) {
         sf::RectangleShape line(sf::Vector2f(target.getSize().x, 1));
         line.setPosition(0, i * cellHeight);
+        line.setFillColor(sf::Color::Black);
         target.draw(line, states);
     }
 
@@ -119,7 +121,6 @@ void Grid::draw(RenderTarget &target, RenderStates states) const {
 
 void Grid::generateMushrooms() const {
     for (int i = 0; i < width; ++i) {
-        printf("%d", width);
         for (int j = 0; j < height - 3; ++j) {
             std::random_device rd;
             std::mt19937 gen(rd());

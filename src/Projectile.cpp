@@ -5,6 +5,7 @@
 Projectile::Projectile(const float startX, const float startY): position(startX, startY), projectileSpeed(PROJECTILE_SPEED) {
     projectileShape.setSize(Vector2f(6, 10));
     projectileShape.setPosition(position);
+    projectileShape.setFillColor(Color::Black);
 }
 
 FloatRect Projectile::getPosition() const {
