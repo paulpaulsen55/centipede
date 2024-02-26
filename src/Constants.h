@@ -4,6 +4,8 @@
 
 // UI constants
 const std::string FONT = "assets/baloo2.ttf";
+const Color blue700 = Color(3, 105, 161);
+const Color slate800 = Color(30, 41, 59);
 
 // Player constants
 constexpr float PLAYER_SPEED = 2.5f;

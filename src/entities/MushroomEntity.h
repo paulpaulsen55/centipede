@@ -11,6 +11,8 @@ public:
     void move() override;
 
     void handleCollision(Entity *other) override;
+
+    void damage() override;
 };
 
 

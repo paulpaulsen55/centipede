@@ -23,7 +23,7 @@ public:
 
     bool isAlive() const;
 
-    void damage();
+    virtual void damage();
 
 protected:
     int x;

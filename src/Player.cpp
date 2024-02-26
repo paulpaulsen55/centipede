@@ -17,7 +17,7 @@ FloatRect Player::getPosition() const {
 }
 
 void Player::damage() {
-    lives -= 1;
+    --lives;
 }
 
 void Player::setX(const float x) {
