@@ -5,7 +5,7 @@
 
 class FlyEntity : public Entity {
 public:
-    FlyEntity(int x, int y, const Texture &texture);
+    FlyEntity(int x, int y);
 
     void move() override;
 

@@ -3,7 +3,6 @@
 #include "../TextureManager.h"
 #include "SFML/Graphics/Drawable.hpp"
 #include "SFML/Graphics/RenderWindow.hpp"
-#include "SFML/Window/Event.hpp"
 
 using namespace sf;
 class SceneManager;
@@ -14,23 +13,11 @@ class SceneManager;
  */
 class Scene : public Drawable {
 public:
-    TextureManager *textureManager;
+    virtual void handleInput(Event event, RenderWindow &window, SceneManager &sceneManager) = 0;
 
-    explicit Scene(TextureManager *textureManager) : textureManager(textureManager) {
-    };
+    virtual void update(float dt) = 0;
 
-    ~Scene() override = default;
-
-    virtual void handleInput(Event event, RenderWindow &window, SceneManager &sceneManager) {
-    };
-
-    virtual void update(float dt) {
-    };
-
-    void draw(RenderTarget &target, RenderStates states) const override {
-    };
-
-private:
+    void draw(RenderTarget &target, RenderStates states) const override = 0;
 };
 
 

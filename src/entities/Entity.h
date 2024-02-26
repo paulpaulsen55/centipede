@@ -1,6 +1,8 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
+#include <string>
+
 #include "SFML/Graphics/Sprite.hpp"
 
 using namespace sf;
@@ -11,7 +13,7 @@ using namespace sf;
  */
 class Entity : public Drawable {
 public:
-    Entity(int x, int y, const Texture &texture, float speed);
+    Entity(int x, int y, const std::string &texture, float speed);
 
     virtual void move() = 0;
 

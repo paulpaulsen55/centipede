@@ -1,16 +1,18 @@
 #include "Entity.h"
 
 #include "SFML/Graphics/RenderTarget.hpp"
+#include "../TextureManager.h"
 
 using namespace sf;
 
-Entity::Entity(const int x, const int y, const Texture &texture, const float speed):
+Entity::Entity(const int x, const int y, const std::string &texture, const float speed):
     x(x),
     y(y),
     speed(speed)
 {
     sprite.setPosition(static_cast<float>(x), static_cast<float>(y));
-    sprite.setTexture(texture);
+    TextureManager::getInstance().loadTexture(texture);
+    sprite.setTexture(TextureManager::getInstance().getTexture(texture));
 }
 
 void Entity::draw(RenderTarget &target, RenderStates states) const {

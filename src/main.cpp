@@ -3,6 +3,6 @@
 using namespace sf;
 
 int main() {
-    Game game(800, 800);
+    Game game;
     game.run();
 }

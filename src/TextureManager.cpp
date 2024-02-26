@@ -4,19 +4,24 @@
 
 using namespace sf;
 
-void TextureManager::loadTexture(const std::string &name, const std::string &filename) {
-    Texture texture;
-    if (!texture.loadFromFile(filename)) {
-        throw std::runtime_error("Error loading texture: " + filename + ".");
-    }
-
-    this->textures[name] = texture;
+TextureManager &TextureManager::getInstance() {
+    static TextureManager instance;
+    return instance;
 }
 
-Texture &TextureManager::getTexture(const std::string &name) {
-    const auto texture = this->textures.find(name);
+void TextureManager::loadTexture(const std::string &path) {
+    Texture texture;
+    if (!texture.loadFromFile(path)) {
+        throw std::runtime_error("Error loading texture: " + path + ".");
+    }
+
+    this->textures[path] = texture;
+}
+
+Texture &TextureManager::getTexture(const std::string &path) {
+    const auto texture = this->textures.find(path);
     if (texture == this->textures.end()) {
-        throw std::runtime_error("TextureManager::getTexture - Texture " + name + " not found.");
+        throw std::runtime_error("TextureManager::getTexture - Texture " + path + " not found.");
     }
 
     return texture->second;

@@ -8,7 +8,7 @@
 #include "SFML/Graphics/RectangleShape.hpp"
 #include "SFML/Graphics/RenderTarget.hpp"
 
-Grid::Grid(TextureManager *textureManager): width(GRID_COLS), height(GRID_ROWS), textureManager(textureManager) {
+Grid::Grid(): width(GRID_COLS), height(GRID_ROWS) {
     grid = new Entity **[width];
     for (int i = 0; i < width; ++i) {
         grid[i] = new Entity *[height];
@@ -16,9 +16,6 @@ Grid::Grid(TextureManager *textureManager): width(GRID_COLS), height(GRID_ROWS),
             grid[i][j] = nullptr;
         }
     }
-
-    textureManager->loadTexture("fly", "assets/fly.png");
-    textureManager->loadTexture("mushroom", "assets/mushroom.png");
 
     this->generateMushrooms();
 }
@@ -125,7 +122,7 @@ void Grid::generateMushrooms() const {
             std::random_device rd;
             std::mt19937 gen(rd());
             if (std::uniform_int_distribution<int> dist(1, 100); dist(gen) <= MUSHROOM_SPAWNCHANCE)
-                placeEntity(i, j, new MushroomEntity(i, j, textureManager->getTexture("mushroom")));
+                placeEntity(i, j, new MushroomEntity(i, j));
         }
     }
 }

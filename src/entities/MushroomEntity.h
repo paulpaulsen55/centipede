@@ -6,7 +6,7 @@
 
 class MushroomEntity : public Entity {
 public:
-    MushroomEntity(int x, int y, const Texture &texture);
+    MushroomEntity(int x, int y);
 
     void move() override;
 

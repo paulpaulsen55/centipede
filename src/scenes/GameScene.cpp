@@ -1,13 +1,10 @@
 #include "GameScene.h"
 #include "MenuScene.h"
 #include "../Constants.h"
+#include "SFML/Window/Event.hpp"
 
-GameScene::GameScene(const int x, const int y, TextureManager *textureManager): Scene(textureManager),
-    x(x),
-    y(y),
-    player(x / 2, y - 120), grid(textureManager) {
-    textureManager->loadTexture("player", "assets/player.png");
-    player.setTexture(textureManager->getTexture("player"));
+GameScene::GameScene(const int x, const int y): x(x), y(y),
+                                                player(x / 2, y - 120) {
 }
 
 void GameScene::handleInput(Event event, RenderWindow &window, SceneManager &sceneManager) {
@@ -24,7 +21,7 @@ void GameScene::handleInput(Event event, RenderWindow &window, SceneManager &sce
         player.moveDown();
     }
     if (Keyboard::isKeyPressed(Keyboard::Key::B)) {
-        sceneManager.pushScene(std::make_unique<MenuScene>(800, 800, textureManager));
+        sceneManager.pushScene(std::make_unique<MenuScene>(800, 800));
     }
 }
 
@@ -41,8 +38,8 @@ void GameScene::update(const float dt) {
     if (player.getPosition().top < 0) {
         player.setY(0);
     }
-    if (player.getPosition().top > static_cast<float>(y) - 100 - player.getShape().getSize().y) {
-        player.setY(static_cast<float>(y) - 100 - player.getShape().getSize().y);
+    if (player.getPosition().top > static_cast<float>(y) - 200 - player.getShape().getSize().y) {
+        player.setY(static_cast<float>(y) - 200 - player.getShape().getSize().y);
     }
 
     // Shooting a projectile every PROJECTILE_COOLDOWN seconds maximum

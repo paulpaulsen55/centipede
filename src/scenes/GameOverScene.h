@@ -12,7 +12,7 @@ using namespace sf;
  */
 class GameOverScene final : public Scene {
 public:
-    GameOverScene(int x, int y, TextureManager *textureManager);
+    GameOverScene(int x, int y);
 
     void handleInput(Event event, RenderWindow &window, SceneManager &sceneManager) override;
 

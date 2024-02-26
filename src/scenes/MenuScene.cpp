@@ -5,9 +5,10 @@
 #include "GameScene.h"
 #include "SceneManager.h"
 #include "../Constants.h"
+#include "SFML/Window/Event.hpp"
 #include "SFML/Window/Mouse.hpp"
 
-MenuScene::MenuScene(const int x, const int y, TextureManager *textureManager) : Scene(textureManager), x(x), y(y) {
+MenuScene::MenuScene(const int x, const int y) : x(x), y(y) {
     font.loadFromFile(FONT);
 
     title.setFont(font);
@@ -42,7 +43,7 @@ void MenuScene::handleInput(const Event event, RenderWindow &window, SceneManage
         if (event.mouseButton.button == Mouse::Left) {
             const Vector2i mousePosition = Mouse::getPosition(window);
             if (startButton.getGlobalBounds().contains(mousePosition.x, mousePosition.y)) {
-                sceneManager.pushScene(std::make_unique<GameScene>(800, 800, textureManager));
+                sceneManager.pushScene(std::make_unique<GameScene>(800, 800));
             }
             if (exitButton.getGlobalBounds().contains(mousePosition.x, mousePosition.y)) {
                 window.close();
@@ -52,7 +53,6 @@ void MenuScene::handleInput(const Event event, RenderWindow &window, SceneManage
 }
 
 void MenuScene::update(float dt) {
-    Scene::update(dt);
 }
 
 void MenuScene::draw(RenderTarget &target, RenderStates states) const {

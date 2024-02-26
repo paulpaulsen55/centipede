@@ -23,11 +23,8 @@ public:
 
     [[nodiscard]] Scene *getCurrentScene() const;
 
-    TextureManager *getTextureManager();
-
 private:
     std::stack<std::unique_ptr<Scene> > scenes;
-    TextureManager textureManager;
 };
 
 

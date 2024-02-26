@@ -2,8 +2,7 @@
 
 #include "../TextureManager.h"
 
-FlyEntity::FlyEntity(const int x, const int y, const Texture &texture): Entity(
-    x, y, texture, 10) {
+FlyEntity::FlyEntity(const int x, const int y): Entity(x, y, "assets/fly.png", 10) {
     this->lives = 2;
 }
 

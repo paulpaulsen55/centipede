@@ -16,8 +16,6 @@ public:
 
     FloatRect getShape() const;
 
-    void setTexture(const Texture &texture);
-
     void setX(float x);
 
     void setY(float y);

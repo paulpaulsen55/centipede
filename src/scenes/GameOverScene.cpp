@@ -3,9 +3,10 @@
 #include "MenuScene.h"
 #include "SceneManager.h"
 #include "../Constants.h"
+#include "SFML/Window/Event.hpp"
 #include "SFML/Window/Mouse.hpp"
 
-GameOverScene::GameOverScene(const int x, const int y, TextureManager *textureManager) : Scene(textureManager), x(x),
+GameOverScene::GameOverScene(const int x, const int y) : x(x),
     y(y) {
     font.loadFromFile(FONT);
 
@@ -31,14 +32,13 @@ void GameOverScene::handleInput(const Event event, RenderWindow &window, SceneMa
             if (const Vector2i mousePosition = Mouse::getPosition(window); restartButton.getGlobalBounds().contains(
                 mousePosition.x, mousePosition.y)) {
                 sceneManager.popScene();
-                sceneManager.pushScene(std::make_unique<MenuScene>(800, 800, textureManager));
+                sceneManager.pushScene(std::make_unique<MenuScene>(800, 800));
             }
         }
     }
 }
 
 void GameOverScene::update(float dt) {
-    Scene::update(dt);
 }
 
 void GameOverScene::draw(RenderTarget &target, RenderStates states) const {

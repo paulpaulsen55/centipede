@@ -1,12 +1,15 @@
 #include "Player.h"
 
 #include "Constants.h"
+#include "TextureManager.h"
 #include "SFML/Graphics/RenderTarget.hpp"
-#include "SFML/Graphics/Texture.hpp"
 
 Player::Player(const float startX, const float startY): playerSpeed(PLAYER_SPEED) {
     position.x = startX;
     position.y = startY;
+
+    TextureManager::getInstance().loadTexture("assets/player.png");
+    sprite.setTexture(TextureManager::getInstance().getTexture("assets/player.png"));
 }
 
 FloatRect Player::getPosition() const {
@@ -24,10 +27,6 @@ void Player::setY(const float y) {
 FloatRect Player::getShape() const {
     return sprite.getLocalBounds();
 
-}
-
-void Player::setTexture(const Texture &texture) {
-    this->sprite.setTexture(texture);
 }
 
 void Player::moveLeft() {

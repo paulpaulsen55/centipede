@@ -4,12 +4,12 @@
 
 using namespace sf;
 
-Game::Game(const int x, const int y) {
+Game::Game() {
     window = new RenderWindow({800u, 800u}, "Centipede", Style::Titlebar | Style::Close);
     window->setFramerateLimit(144);
 
     sceneManager = new SceneManager();
-    sceneManager->pushScene(std::make_unique<MenuScene>(800, 800, sceneManager->getTextureManager()));
+    sceneManager->pushScene(std::make_unique<MenuScene>(800, 800));
 }
 
 void Game::update(const Time dt) const {

@@ -10,6 +10,11 @@ using namespace sf;
 
 
 class Game {
+public:
+    Game();
+
+    void run();
+
 private:
     RenderWindow *window;
     SceneManager *sceneManager;
@@ -27,10 +32,5 @@ private:
     void update(Time dt) const;
 
     void render() const;
-
-public:
-    Game(int x = 800, int y = 600);
-
-    void run();
 };
 #endif //GAME_H
