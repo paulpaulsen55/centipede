@@ -18,8 +18,6 @@ Grid::Grid() {
         grid.push_back(std::move(row));
     }
     //generateMushrooms();
-    placeEntity(0, 0, std::make_unique<FlyEntity>());
-    printf("C%d 0\n", grid[0][0] == nullptr);
 }
 
 Grid &Grid::getInstance() {
@@ -30,22 +28,17 @@ Grid &Grid::getInstance() {
 void Grid::placeEntity(const int gridX, const int gridY, std::unique_ptr<Entity> e) {
     if (gridX >= 0 && gridX < width && gridY >= 0 && gridY < height && grid[gridX][gridY] == nullptr) {
         grid[gridX][gridY] = std::move(e);
-        grid[gridX][gridY]->setPosition(gridX, gridY);
+        grid[gridX][gridY]->setGridPosition(gridX, gridY);
     }
 }
 
 void Grid::moveEntity(const int gridX, const int gridY, const int newGridX, const int newGridY) {
-    if (gridX >= 0 && gridX < width && gridY >= 0 && gridY < height &&
-        newGridX >= 0 && newGridX < width && newGridY >= 0 && newGridY < height) {
-        printf("M%d %d %d %d %d %d\n", gridX, gridY, newGridX, newGridY, grid[gridX][gridY] == nullptr, grid[newGridX][newGridY] == nullptr);
+    if (newGridX >= 0 && newGridX < width && newGridY >= 0 && newGridY < height) {
+        //printf("M%d %d %d %d %d %d\n", gridX, gridY, newGridX, newGridY, grid[gridX][gridY] == nullptr, grid[newGridX][newGridY] == nullptr);
         if (grid[gridX][gridY] != nullptr) {
-            debugPrint();
-            // Transfer ownership to the new grid cell
+            //debugPrint();
             grid[newGridX][newGridY] = std::move(grid[gridX][gridY]);
-            grid[newGridX][newGridY]->setPosition(newGridX, newGridY);
-            // Reset the old grid cell
             grid[gridX][gridY] = nullptr;
-            debugPrint();
         }
     }
 }
