@@ -10,25 +10,16 @@
 #include "SFML/Graphics/RenderTarget.hpp"
 
 Grid::Grid() {
-    grid = new Entity **[width];
     for (int i = 0; i < width; ++i) {
-        grid[i] = new Entity *[height];
+        std::vector<std::unique_ptr<Entity> > row;
         for (int j = 0; j < height; ++j) {
-            grid[i][j] = nullptr;
+            row.push_back(nullptr);
         }
+        grid.push_back(std::move(row));
     }
-
-    this->generateMushrooms();
-}
-
-Grid::~Grid() {
-    for (int i = 0; i < width; ++i) {
-        for (int j = 0; j < height; ++j) {
-            delete grid[i][j];
-        }
-        delete[] grid[i];
-    }
-    delete[] grid;
+    //generateMushrooms();
+    placeEntity(0, 0, std::make_unique<FlyEntity>());
+    printf("C%d 0\n", grid[0][0] == nullptr);
 }
 
 Grid &Grid::getInstance() {
@@ -36,27 +27,26 @@ Grid &Grid::getInstance() {
     return instance;
 }
 
-/**
- * Places an entity on the grid at the given points.
- * @param gridX The x position of the entity in the grid, e.g. 10.
- * @param gridY The y position of the entity in the grid, e.g. 10.
- * @param e The entity to place.
- */
-void Grid::placeEntity(const int gridX, const int gridY, Entity *e) const {
+void Grid::placeEntity(const int gridX, const int gridY, std::unique_ptr<Entity> e) {
     if (gridX >= 0 && gridX < width && gridY >= 0 && gridY < height && grid[gridX][gridY] == nullptr) {
-        printf("Placing entity at %d %d\n", gridX, gridY);
-        grid[gridX][gridY] = e;
-        e->setGridPosition(gridX, gridY);
-        e->setPosition(gridX * GRID_WIDTH / width + 1, gridY * GRID_HEIGHT / height + 1);
+        grid[gridX][gridY] = std::move(e);
+        grid[gridX][gridY]->setPosition(gridX, gridY);
     }
 }
 
-void Grid::moveEntity(Entity *e, const int newGridX, const int newGridY) const {
-    if (newGridX >= 0 && newGridX < width && newGridY >= 0 && newGridY < height) {
-        grid[e->getGridX()][e->getGridY()] = nullptr;
-        grid[newGridX][newGridY] = e;
-        e->setGridPosition(newGridX, newGridY);
-        e->setPosition(newGridX * GRID_WIDTH / width + 1, newGridY * GRID_HEIGHT / height + 1);
+void Grid::moveEntity(const int gridX, const int gridY, const int newGridX, const int newGridY) {
+    if (gridX >= 0 && gridX < width && gridY >= 0 && gridY < height &&
+        newGridX >= 0 && newGridX < width && newGridY >= 0 && newGridY < height) {
+        printf("M%d %d %d %d %d %d\n", gridX, gridY, newGridX, newGridY, grid[gridX][gridY] == nullptr, grid[newGridX][newGridY] == nullptr);
+        if (grid[gridX][gridY] != nullptr) {
+            debugPrint();
+            // Transfer ownership to the new grid cell
+            grid[newGridX][newGridY] = std::move(grid[gridX][gridY]);
+            grid[newGridX][newGridY]->setPosition(newGridX, newGridY);
+            // Reset the old grid cell
+            grid[gridX][gridY] = nullptr;
+            debugPrint();
+        }
     }
 }
 
@@ -67,9 +57,8 @@ bool Grid::isOccupied(const int gridX, const int gridY) const {
     return grid[gridX][gridY] != nullptr;
 }
 
-void Grid::removeEntity(const int x, const int y) const {
+void Grid::removeEntity(const int x, const int y) {
     if (x >= 0 && x < width && y >= 0 && y < height) {
-        delete grid[x][y];
         grid[x][y] = nullptr;
     }
 }
@@ -136,11 +125,11 @@ void Grid::draw(RenderTarget &target, RenderStates states) const {
     }
 }
 
-void Grid::generateMushrooms() const {
+void Grid::generateMushrooms() {
     for (int i = 0; i < width; ++i) {
         for (int j = 0; j < height - 3; ++j) {
             if (generateRandomNumber(0, 100) <= MUSHROOM_SPAWNCHANCE)
-                placeEntity(i, j, new MushroomEntity());
+                placeEntity(i, j, std::make_unique<MushroomEntity>());
         }
     }
 }
@@ -150,6 +139,20 @@ void Grid::spawnFly() {
     do {
         x = generateRandomNumber(0, width - 1);
     } while (isOccupied(x, 0));
-    placeEntity(x, 0, new FlyEntity());
+    placeEntity(x, 0, std::make_unique<FlyEntity>());
     flyTimer.reset();
+}
+
+void Grid::debugPrint() const {
+    for (int j = 0; j < 4; ++j) {
+        for (int i = 0; i < width; ++i) {
+            if (grid[i][j] == nullptr) {
+                printf("n");
+            } else {
+                printf("E");
+            }
+        }
+        printf("\n");
+    }
+    printf("\n");
 }

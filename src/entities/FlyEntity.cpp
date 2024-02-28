@@ -14,14 +14,13 @@ void FlyEntity::move(const float dt) {
     if (moveDt > speed) {
         moveDt = 0;
 
-        Grid::getInstance().moveEntity(this, getGridX(), getGridY() + 1);
+        Grid::getInstance().moveEntity(gridX, gridY, gridX, gridY + 1);
 
         if (getGridY() == GRID_ROWS - 1) {
             lives = 0;
         }
         if (generateRandomNumber(0, 100) < 20) {
-            printf("%d %d\n", gridX, gridY);
-            Grid::getInstance().placeEntity(gridX, gridY-1, new MushroomEntity());
+            Grid::getInstance().placeEntity(getGridX(), getGridY(), std::make_unique<MushroomEntity>());
         }
     }
 }

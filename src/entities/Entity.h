@@ -19,9 +19,7 @@ public:
 
     virtual void handleCollision(Entity *other) = 0;
 
-    void setPosition(int x, int y);
-
-    void setGridPosition(int gridX, int gridY);
+    void setPosition(int gridX, int gridY);
 
     bool isAlive() const;
 

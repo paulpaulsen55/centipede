@@ -1,5 +1,6 @@
 #include "Entity.h"
 
+#include "../Constants.h"
 #include "SFML/Graphics/RenderTarget.hpp"
 #include "../TextureManager.h"
 
@@ -11,15 +12,12 @@ Entity::Entity(const std::string &texture) {
     sprite.setTexture(TextureManager::getInstance().getTexture(texture));
 }
 
-void Entity::setPosition(const int x, const int y) {
-    this->x = x;
-    this->y = y;
-    sprite.setPosition(x, y);
-}
-
-void Entity::setGridPosition(const int gridX, const int gridY) {
+void Entity::setPosition(const int gridX, const int gridY) {
+    this->x = gridX * GRID_WIDTH / (GRID_COLS - 1) + 1;
+    this->y = gridY * GRID_HEIGHT / (GRID_ROWS - 1) + 1;
     this->gridX = gridX;
     this->gridY = gridY;
+    sprite.setPosition(x, y);
 }
 
 bool Entity::isAlive() const {
