@@ -12,8 +12,6 @@ class Grid final : public Drawable {
 public:
     Grid();
 
-    static Grid &getInstance();
-
     void update(float dt);
 
     void placeEntity(int gridX, int gridY, std::unique_ptr<Entity> e);

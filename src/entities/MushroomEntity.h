@@ -12,6 +12,10 @@ public:
     void move(float dt) override {
     };
 
+    // The mushroom does not move
+    void updateGridPosition(int newGridX, int newGridY) override {
+    };
+
     void handleCollision(Entity *other) override;
 
     void damage() override;

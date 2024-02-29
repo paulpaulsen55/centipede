@@ -25,6 +25,17 @@ void GameScene::handleInput(Event event, RenderWindow &window) {
 }
 
 void GameScene::update(const float dt) {
+    // check if a entity is hit by a projectile
+    const auto projectiles = projectileController.getProjectiles();
+    for (const auto &projectile: projectiles) {
+        const int gridY = projectile.getPosition().top / (GRID_HEIGHT / GRID_ROWS) - 1;
+        const int gridX = (GRID_COLS - 1) * (projectile.getPosition().left - 1) / x;
+        if (grid.isOccupied(gridX, gridY)) {
+            grid.damageEntity(gridX, gridY);
+            projectileController.removeProjectile(projectile);
+        }
+    }
+
     this->shootingDt += dt;
 
     // player movement collision with window bounds
@@ -46,17 +57,6 @@ void GameScene::update(const float dt) {
         if (this->shootingDt > PROJECTILE_COOLDOWN) {
             projectileController.shootProjectile(player.getPosition().left, player.getPosition().top);
             this->shootingDt = 0;
-        }
-    }
-
-    // check if a entity is hit by a projectile
-    const auto projectiles = projectileController.getProjectiles();
-    for (const auto &projectile: projectiles) {
-        const int gridX = projectile.getPosition().left / (GRID_WIDTH / GRID_COLS);
-        const int gridY = projectile.getPosition().top / (GRID_HEIGHT / GRID_ROWS);
-        if (grid.isOccupied(gridX, gridY)) {
-            grid.damageEntity(gridX, gridY);
-            projectileController.removeProjectile(projectile);
         }
     }
 

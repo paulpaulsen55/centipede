@@ -17,12 +17,7 @@ Grid::Grid() {
         }
         grid.push_back(std::move(row));
     }
-    //generateMushrooms();
-}
-
-Grid &Grid::getInstance() {
-    static Grid instance;
-    return instance;
+    generateMushrooms();
 }
 
 void Grid::placeEntity(const int gridX, const int gridY, std::unique_ptr<Entity> e) {
@@ -34,9 +29,7 @@ void Grid::placeEntity(const int gridX, const int gridY, std::unique_ptr<Entity>
 
 void Grid::moveEntity(const int gridX, const int gridY, const int newGridX, const int newGridY) {
     if (newGridX >= 0 && newGridX < width && newGridY >= 0 && newGridY < height) {
-        //printf("M%d %d %d %d %d %d\n", gridX, gridY, newGridX, newGridY, grid[gridX][gridY] == nullptr, grid[newGridX][newGridY] == nullptr);
         if (grid[gridX][gridY] != nullptr) {
-            //debugPrint();
             grid[newGridX][newGridY] = std::move(grid[gridX][gridY]);
             grid[gridX][gridY] = nullptr;
         }
@@ -45,7 +38,7 @@ void Grid::moveEntity(const int gridX, const int gridY, const int newGridX, cons
 
 bool Grid::isOccupied(const int gridX, const int gridY) const {
     if (gridX < 0 || gridX >= width || gridY < 0 || gridY >= height) {
-        return true;
+        return false;
     }
     return grid[gridX][gridY] != nullptr;
 }
@@ -60,25 +53,21 @@ void Grid::update(const float dt) {
     // update the spawn timers
     flyTimer.update(dt);
 
-    // move all entities
     for (int i = 0; i < width; ++i) {
         for (int j = 0; j < height; ++j) {
             if (grid[i][j] != nullptr) {
+                if (!grid[i][j]->isAlive()) {
+                    removeEntity(i, j);
+                    continue;
+                }
                 grid[i][j]->move(dt);
-            }
-        }
-    }
-    // if a entity has no more lives, remove it from the grid
-    for (int i = 0; i < width; ++i) {
-        for (int j = 0; j < height; ++j) {
-            if (grid[i][j] != nullptr && !grid[i][j]->isAlive()) {
-                removeEntity(i, j);
             }
         }
     }
 
     if (flyTimer.shouldSpawn()) {
         spawnFly();
+        flyTimer.reset();
     }
 }
 
@@ -132,8 +121,7 @@ void Grid::spawnFly() {
     do {
         x = generateRandomNumber(0, width - 1);
     } while (isOccupied(x, 0));
-    placeEntity(x, 0, std::make_unique<FlyEntity>());
-    flyTimer.reset();
+    placeEntity(x, 0, std::make_unique<FlyEntity>(this));
 }
 
 void Grid::debugPrint() const {

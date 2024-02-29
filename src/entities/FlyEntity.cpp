@@ -1,11 +1,10 @@
 #include "FlyEntity.h"
 
 #include "MushroomEntity.h"
-#include "../TextureManager.h"
 #include "../Grid.h"
 #include "../UtilityFunctions.h"
 
-FlyEntity::FlyEntity(): Entity("assets/fly.png") {
+FlyEntity::FlyEntity(Grid *grid): Entity("assets/fly.png"), grid(grid) {
 }
 
 void FlyEntity::move(const float dt) {
@@ -14,19 +13,21 @@ void FlyEntity::move(const float dt) {
     if (moveDt > speed) {
         moveDt = 0;
 
-
-        updateGridPosition(gridX, gridY+1);
-        //update();
+        updateGridPosition(gridX, gridY + 1);
 
         if (getGridY() == GRID_ROWS - 1) {
             lives = 0;
         }
         if (generateRandomNumber(0, 100) < 20) {
-            printf("Mushroom\n");
-            //Grid::getInstance().placeEntity(0, 0, std::make_unique<MushroomEntity>());
+            grid->placeEntity(gridX, gridY - 2, std::make_unique<MushroomEntity>());
         }
     }
 }
 
 void FlyEntity::handleCollision(Entity *other) {
+}
+
+void FlyEntity::updateGridPosition(const int newGridX, const int newGridY) {
+    grid->moveEntity(gridX, gridY, newGridX, newGridY);
+    setGridPosition(newGridX, newGridY);
 }

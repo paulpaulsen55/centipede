@@ -19,6 +19,8 @@ public:
 
     virtual void handleCollision(Entity *other) = 0;
 
+    virtual void updateGridPosition(int newGridX, int newGridY) = 0;
+
     void update();
 
     bool isAlive() const;
@@ -29,8 +31,6 @@ public:
 
     int getGridY() const;
 
-    void updateGridPosition(int newGridX, int newGridY);
-
     void setGridPosition(int newGridX, int newGridY);
 
 protected:
@@ -39,7 +39,7 @@ protected:
     int gridX = 0;
     int gridY = 0;
 
-    float speed = 0.4f;
+    float speed = 0.6f;
     int lives = 1;
     float moveDt = 0.0f;
     Sprite sprite;

@@ -4,7 +4,6 @@
 #include "../Constants.h"
 #include "SFML/Graphics/RenderTarget.hpp"
 #include "../TextureManager.h"
-#include "../Grid.h"
 
 using namespace sf;
 
@@ -36,15 +35,6 @@ int Entity::getGridX() const {
 
 int Entity::getGridY() const {
     return gridY;
-}
-
-void Entity::updateGridPosition(const int newGridX, const int newGridY) {
-    Grid::getInstance().moveEntity(gridX, gridY, newGridX, newGridY);
-    gridX = newGridX;
-    gridY = newGridY;
-    x = gridX * GRID_WIDTH / (GRID_COLS - 1) + 1;
-    y = gridY * GRID_HEIGHT / (GRID_ROWS - 1) + 1;
-    update();
 }
 
 void Entity::setGridPosition(const int newGridX, const int newGridY) {
