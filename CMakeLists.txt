@@ -42,9 +42,11 @@ add_executable(Centipede src/main.cpp
         src/entities/MushroomEntity.cpp
         src/entities/MushroomEntity.h
         src/Constants.h
-        src/entities/WormEntity.cpp
-        src/entities/WormEntity.h
+        src/entities/worm/WormEntity.cpp
+        src/entities/worm/WormEntity.h
         src/UtilityFunctions.h
+        src/entities/worm/WormSegment.cpp
+        src/entities/worm/WormSegment.h
 )
 file(COPY src/assets DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 target_link_libraries(Centipede PRIVATE sfml-graphics)

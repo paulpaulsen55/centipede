@@ -6,7 +6,7 @@
 
 class FlyEntity final : public Entity {
 public:
-    FlyEntity(Grid *grid);
+    explicit FlyEntity(Grid *grid);
 
     void move(float dt) override;
 

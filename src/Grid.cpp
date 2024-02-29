@@ -6,10 +6,11 @@
 #include "UtilityFunctions.h"
 #include "entities/FlyEntity.h"
 #include "entities/MushroomEntity.h"
+#include "entities/worm/WormEntity.h"
 #include "SFML/Graphics/RectangleShape.hpp"
 #include "SFML/Graphics/RenderTarget.hpp"
 
-Grid::Grid() {
+Grid::Grid(): worm(this) {
     for (int i = 0; i < width; ++i) {
         std::vector<std::unique_ptr<Entity> > row;
         for (int j = 0; j < height; ++j) {
@@ -30,6 +31,7 @@ void Grid::placeEntity(const int gridX, const int gridY, std::unique_ptr<Entity>
 void Grid::moveEntity(const int gridX, const int gridY, const int newGridX, const int newGridY) {
     if (newGridX >= 0 && newGridX < width && newGridY >= 0 && newGridY < height) {
         if (grid[gridX][gridY] != nullptr) {
+            debugPrint();
             grid[newGridX][newGridY] = std::move(grid[gridX][gridY]);
             grid[gridX][gridY] = nullptr;
         }
@@ -65,8 +67,10 @@ void Grid::update(const float dt) {
         }
     }
 
+    //worm.move(dt);
+
     if (flyTimer.shouldSpawn()) {
-        spawnFly();
+        //spawnFly();
         flyTimer.reset();
     }
 }
@@ -109,7 +113,7 @@ void Grid::draw(RenderTarget &target, RenderStates states) const {
 
 void Grid::generateMushrooms() {
     for (int i = 0; i < width; ++i) {
-        for (int j = 0; j < height - 3; ++j) {
+        for (int j = 1; j < height - 3; ++j) {
             if (generateRandomNumber(0, 100) <= MUSHROOM_SPAWNCHANCE)
                 placeEntity(i, j, std::make_unique<MushroomEntity>());
         }

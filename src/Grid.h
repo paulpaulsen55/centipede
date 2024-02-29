@@ -6,7 +6,7 @@
 #include "TextureManager.h"
 #include "entities/Entity.h"
 #include "entities/SpawnTimer.h"
-
+#include "entities/worm/WormEntity.h"
 
 class Grid final : public Drawable {
 public:
@@ -30,6 +30,8 @@ private:
     std::vector<std::vector<std::unique_ptr<Entity> > > grid;
 
     SpawnTimer flyTimer{5};
+
+    WormEntity worm;
 
     void draw(RenderTarget &target, RenderStates states) const override;
 

@@ -40,7 +40,7 @@ int Entity::getGridY() const {
 void Entity::setGridPosition(const int newGridX, const int newGridY) {
     gridX = newGridX;
     gridY = newGridY;
-    x = gridX * GRID_WIDTH / (GRID_COLS - 1) + 1;
-    y = gridY * GRID_HEIGHT / (GRID_ROWS - 1) + 1;
+    x = gridX * GRID_WIDTH / (GRID_COLS - 1) + 2;
+    y = gridY * GRID_HEIGHT / (GRID_ROWS - 1) + 2;
     update();
 }
