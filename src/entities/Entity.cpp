@@ -25,10 +25,6 @@ void Entity::damage() {
     --lives;
 }
 
-void Entity::draw(RenderTarget &target, RenderStates states) const {
-    target.draw(sprite);
-}
-
 int Entity::getGridX() const {
     return gridX;
 }
@@ -37,10 +33,18 @@ int Entity::getGridY() const {
     return gridY;
 }
 
+Vector2i Entity::getGridPosition() const {
+    return Vector2i(gridX, gridY);
+}
+
 void Entity::setGridPosition(const int newGridX, const int newGridY) {
     gridX = newGridX;
     gridY = newGridY;
     x = gridX * GRID_WIDTH / (GRID_COLS - 1) + 2;
     y = gridY * GRID_HEIGHT / (GRID_ROWS - 1) + 2;
     update();
+}
+
+void Entity::draw(RenderTarget &target, RenderStates states) const {
+    target.draw(sprite);
 }

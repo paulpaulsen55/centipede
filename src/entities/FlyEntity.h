@@ -11,8 +11,10 @@ public:
     void move(float dt) override;
 
     void handleCollision(Entity *other) override;
+
     void updateGridPosition(int newGridX, int newGridY) override;
 
+    Vector2i getNextGridPosition() const override;
 private:
     Grid *grid;
 };

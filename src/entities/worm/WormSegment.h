@@ -2,25 +2,40 @@
 #define WORMSEGMENT_H
 
 #include "../Entity.h"
-#include "../../Grid.h"
+
+class Grid;
+
+class WormEntity;
+
+enum class HDirection { LEFT = -1, RIGHT = 1 };
+
+
 
 
 class WormSegment : public Entity {
 public:
-    WormSegment(Grid *grid, const std::string &texture);
+    WormSegment(Grid *grid, WormEntity *wormEntity, const std::string &texture);
 
     void move(float dt) override {
     }
 
-    void updateGridPosition(int newGridX, int newGridY) override;
-
     void handleCollision(Entity *other) override {
     }
 
-    void damage() override;
+    void updateGridPosition(int newGridX, int newGridY) override;
+
+    Vector2i getNextGridPosition() const override;
+
+    void flipSprite();
+
+    HDirection getHDirection() const {
+        return hDirection;
+    }
+
+
 private:
     Grid *grid;
+    WormEntity *wormEntity;
+    HDirection hDirection = HDirection::RIGHT;
 };
-
-
 #endif //WORMSEGMENT_H

@@ -8,6 +8,8 @@
 #include "entities/SpawnTimer.h"
 #include "entities/worm/WormEntity.h"
 
+class WormEntity;
+
 class Grid final : public Drawable {
 public:
     Grid();

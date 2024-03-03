@@ -19,15 +19,20 @@ void FlyEntity::move(const float dt) {
             lives = 0;
         }
         if (generateRandomNumber(0, 100) < 20) {
-            grid->placeEntity(gridX, gridY - 2, std::make_unique<MushroomEntity>());
+            grid->placeEntity(gridX, gridY - 1, std::make_unique<MushroomEntity>());
         }
     }
 }
 
 void FlyEntity::handleCollision(Entity *other) {
+    printf("FlyEntity::handleCollision\n");
 }
 
 void FlyEntity::updateGridPosition(const int newGridX, const int newGridY) {
     grid->moveEntity(gridX, gridY, newGridX, newGridY);
     setGridPosition(newGridX, newGridY);
+}
+
+Vector2i FlyEntity::getNextGridPosition() const {
+    return Vector2i(gridX, gridY + 1);
 }

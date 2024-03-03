@@ -1,7 +1,5 @@
 #include "Grid.h"
 
-#include <random>
-
 #include "Constants.h"
 #include "UtilityFunctions.h"
 #include "entities/FlyEntity.h"
@@ -19,6 +17,8 @@ Grid::Grid(): worm(this) {
         grid.push_back(std::move(row));
     }
     generateMushrooms();
+    worm.initializeSegments();
+    placeEntity(10, 0, std::make_unique<MushroomEntity>());
 }
 
 void Grid::placeEntity(const int gridX, const int gridY, std::unique_ptr<Entity> e) {
@@ -31,8 +31,8 @@ void Grid::placeEntity(const int gridX, const int gridY, std::unique_ptr<Entity>
 void Grid::moveEntity(const int gridX, const int gridY, const int newGridX, const int newGridY) {
     if (newGridX >= 0 && newGridX < width && newGridY >= 0 && newGridY < height) {
         if (grid[gridX][gridY] != nullptr) {
-            debugPrint();
             grid[newGridX][newGridY] = std::move(grid[gridX][gridY]);
+            grid[newGridX][newGridY]->setGridPosition(newGridX, newGridY);
             grid[gridX][gridY] = nullptr;
         }
     }
@@ -40,7 +40,8 @@ void Grid::moveEntity(const int gridX, const int gridY, const int newGridX, cons
 
 bool Grid::isOccupied(const int gridX, const int gridY) const {
     if (gridX < 0 || gridX >= width || gridY < 0 || gridY >= height) {
-        return false;
+        printf("gridX: %d, gridY: %d\n", gridX, gridY);
+        return true;
     }
     return grid[gridX][gridY] != nullptr;
 }
@@ -62,12 +63,22 @@ void Grid::update(const float dt) {
                     removeEntity(i, j);
                     continue;
                 }
+                if (const Vector2i nextPos = grid[i][j]->getNextGridPosition(); isOccupied(nextPos.x, nextPos.y)) {
+                    const bool offScreen = nextPos.x <= 0 || nextPos.x >= width;
+                    if (const Vector2i h = worm.getHeadGridPosition(); h.x == i && h.y == j) {
+                        printf("Worm collision %d\n", offScreen);
+                        worm.handleCollision(offScreen ? nullptr : grid[nextPos.x][nextPos.y].get());
+                    } else {
+                        grid[i][j]->handleCollision(grid[nextPos.x][nextPos.y].get());
+                    }
+                    continue;
+                }
                 grid[i][j]->move(dt);
             }
         }
     }
 
-    //worm.move(dt);
+    worm.move(dt);
 
     if (flyTimer.shouldSpawn()) {
         //spawnFly();

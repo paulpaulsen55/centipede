@@ -21,6 +21,10 @@ public:
 
     virtual void updateGridPosition(int newGridX, int newGridY) = 0;
 
+    virtual Vector2i getNextGridPosition() const = 0;
+
+    Vector2i getGridPosition() const;
+
     void update();
 
     bool isAlive() const;
@@ -38,11 +42,11 @@ protected:
     float y = 0;
     int gridX = 0;
     int gridY = 0;
+    Sprite sprite;
 
     float speed = 0.6f;
     int lives = 1;
     float moveDt = 0.0f;
-    Sprite sprite;
 
 private:
     void draw(RenderTarget &target, RenderStates states) const override;

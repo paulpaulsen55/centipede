@@ -16,6 +16,10 @@ public:
     void updateGridPosition(int newGridX, int newGridY) override {
     };
 
+    Vector2i getNextGridPosition() const override {
+        return Vector2i(0, 0);
+    };
+
     void handleCollision(Entity *other) override;
 
     void damage() override;

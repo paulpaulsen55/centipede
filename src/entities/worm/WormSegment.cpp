@@ -1,13 +1,41 @@
 #include "WormSegment.h"
+#include "../../Grid.h"
 
-WormSegment::WormSegment(Grid *grid, const std::string &texture): Entity(texture), grid(grid) {
+
+WormSegment::WormSegment(Grid *grid, WormEntity *wormEntity, const std::string &texture): Entity(texture), grid(grid),
+    wormEntity(wormEntity) {
 }
 
-void WormSegment::updateGridPosition(int newGridX, int newGridY) {
+void WormSegment::updateGridPosition(const int newGridX, const int newGridY) {
+    if (gridX == newGridX && gridY == newGridY) {
+        return;
+    }
     grid->moveEntity(gridX, gridY, newGridX, newGridY);
     setGridPosition(newGridX, newGridY);
 }
 
-void WormSegment::damage() {
-    --lives;
+
+Vector2i WormSegment::getNextGridPosition() const {
+    int nextGridX = gridX;
+    if (hDirection == HDirection::LEFT) {
+        nextGridX--;
+    } else {
+        nextGridX++;
+    }
+
+    return Vector2i(nextGridX, gridY);
+}
+
+void WormSegment::flipSprite() {
+    //x = (gridX) * (GRID_WIDTH / (GRID_COLS - 1) + 1);
+    //update();
+
+    hDirection = static_cast<HDirection>(-static_cast<int>(hDirection));
+
+    if (hDirection == HDirection::RIGHT) {
+        sprite.setOrigin(0, 0);
+    } else {
+        sprite.setOrigin(sprite.getLocalBounds().width, 0);
+    }
+    sprite.setScale(sprite.getScale().x * -1, sprite.getScale().y);
 }
