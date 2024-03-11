@@ -11,12 +11,6 @@ class WormEntity : public Entity {
 public:
     explicit WormEntity(Grid *grid);
 
-    ~WormEntity() override {
-        for (const auto segment: segments) {
-            delete segment;
-        }
-    }
-
     void initializeSegments();
 
     void move(float dt) override;
@@ -34,11 +28,13 @@ public:
         return Vector2i(segments[0]->getGridX(), segments[0]->getGridY());
     }
 
+    void damage() override;
+
+    bool isAlive() const;
+
 
 private:
     Grid *grid;
-
-    HDirection hDirection = HDirection::RIGHT;
 
     std::vector<WormSegment *> segments;
 };

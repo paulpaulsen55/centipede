@@ -23,13 +23,10 @@ Vector2i WormSegment::getNextGridPosition() const {
         nextGridX++;
     }
 
-    return Vector2i(nextGridX, gridY);
+    return {nextGridX, gridY};
 }
 
 void WormSegment::flipSprite() {
-    //x = (gridX) * (GRID_WIDTH / (GRID_COLS - 1) + 1);
-    //update();
-
     hDirection = static_cast<HDirection>(-static_cast<int>(hDirection));
 
     if (hDirection == HDirection::RIGHT) {
@@ -39,3 +36,8 @@ void WormSegment::flipSprite() {
     }
     sprite.setScale(sprite.getScale().x * -1, sprite.getScale().y);
 }
+
+void WormSegment::setSprite(const std::string &texture) {
+    sprite.setTexture(TextureManager::getInstance().getTexture(texture));
+}
+

@@ -28,6 +28,8 @@ public:
 
     void flipSprite();
 
+    void setSprite(const std::string &texture);
+
     HDirection getHDirection() const {
         return hDirection;
     }

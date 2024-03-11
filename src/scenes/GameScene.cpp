@@ -1,4 +1,6 @@
 #include "GameScene.h"
+
+#include "GameWinScene.h"
 #include "MenuScene.h"
 #include "../Constants.h"
 #include "SFML/Window/Event.hpp"
@@ -25,13 +27,24 @@ void GameScene::handleInput(Event event, RenderWindow &window) {
 }
 
 void GameScene::update(const float dt) {
+    // check for winning condition
+    if (!grid.worm.isAlive()) {
+        printf("You win\n");
+        SceneManager::getInstance().changeScene(std::make_unique<GameWinScene>());
+        return;
+    }
+
     // check if a entity is hit by a projectile
     const auto projectiles = projectileController.getProjectiles();
     for (const auto &projectile: projectiles) {
         const int gridY = projectile.getPosition().top / (GRID_HEIGHT / GRID_ROWS) - 1;
         const int gridX = (GRID_COLS - 1) * (projectile.getPosition().left - 1) / x;
         if (grid.isOccupied(gridX, gridY)) {
-            grid.damageEntity(gridX, gridY);
+            if (grid.isOccupiedByWorm(gridX, gridY)) {
+                grid.worm.damage();
+            } else {
+                grid.damageEntity(gridX, gridY);
+            }
             projectileController.removeProjectile(projectile);
         }
     }

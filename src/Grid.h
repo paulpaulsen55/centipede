@@ -12,6 +12,8 @@ class WormEntity;
 
 class Grid final : public Drawable {
 public:
+    WormEntity worm;
+
     Grid();
 
     void update(float dt);
@@ -26,14 +28,14 @@ public:
 
     bool isOccupied(int gridX, int gridY) const;
 
+    bool isOccupiedByWorm(int gridX, int gridY) const;
+
 private:
     int width = GRID_COLS - 1;
     int height = GRID_ROWS - 1;
     std::vector<std::vector<std::unique_ptr<Entity> > > grid;
 
     SpawnTimer flyTimer{5};
-
-    WormEntity worm;
 
     void draw(RenderTarget &target, RenderStates states) const override;
 

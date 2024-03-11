@@ -24,10 +24,10 @@ constexpr int GRID_WIDTH = 800;
 constexpr int GRID_HEIGHT = 600;
 constexpr int GRID_COLS = 32;
 constexpr int GRID_ROWS = 24;
-constexpr int MUSHROOM_SPAWNCHANCE = 8;
+constexpr int MUSHROOM_SPAWNCHANCE = 4;
 
 // Entity constants
-constexpr int WORM_LENGTH = 6;
+constexpr int WORM_LENGTH = 10;
 
 
 #endif //CONSTANTS_H

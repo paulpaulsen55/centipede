@@ -18,7 +18,7 @@ Grid::Grid(): worm(this) {
     }
     generateMushrooms();
     worm.initializeSegments();
-    placeEntity(10, 0, std::make_unique<MushroomEntity>());
+    placeEntity(15, 0, std::make_unique<MushroomEntity>());
 }
 
 void Grid::placeEntity(const int gridX, const int gridY, std::unique_ptr<Entity> e) {
@@ -44,6 +44,13 @@ bool Grid::isOccupied(const int gridX, const int gridY) const {
         return true;
     }
     return grid[gridX][gridY] != nullptr;
+}
+
+bool Grid::isOccupiedByWorm(const int gridX, const int gridY) const {
+    if (gridX < 0 || gridX >= width || gridY < 0 || gridY >= height || grid[gridX][gridY] == nullptr) {
+        return false;
+    }
+    return dynamic_cast<WormSegment *>(grid[gridX][gridY].get()) != nullptr;
 }
 
 void Grid::removeEntity(const int x, const int y) {

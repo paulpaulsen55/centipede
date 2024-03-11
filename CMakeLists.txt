@@ -47,6 +47,8 @@ add_executable(Centipede src/main.cpp
         src/UtilityFunctions.h
         src/entities/worm/WormSegment.cpp
         src/entities/worm/WormSegment.h
+        src/scenes/GameWinScene.cpp
+        src/scenes/GameWinScene.h
 )
 file(COPY src/assets DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 target_link_libraries(Centipede PRIVATE sfml-graphics)

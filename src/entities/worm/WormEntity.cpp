@@ -20,9 +20,9 @@ void WormEntity::initializeSegments() {
             texture = "assets/wormback.png";
         }
         auto segment = new WormSegment(grid, this, texture);
-        segment->setGridPosition(6 - 1 - i, 0);
+        segment->setGridPosition(WORM_LENGTH - 1 - i, 0);
         segments.push_back(segment);
-        grid->placeEntity(6 - 1 - i, 0, std::unique_ptr<WormSegment>(segment));
+        grid->placeEntity(WORM_LENGTH - 1 - i, 0, std::unique_ptr<WormSegment>(segment));
     }
 }
 
@@ -57,4 +57,20 @@ void WormEntity::handleCollision(Entity *other) {
     } else if (dynamic_cast<FlyEntity *>(other) != nullptr) {
         printf("Fly collision\n");
     }
+}
+
+void WormEntity::damage() {
+    if (segments.size() <= 1) {
+        return;
+    }
+    const int oldX = segments[segments.size() - 1]->getGridX();
+    const int oldY = segments[segments.size() - 1]->getGridY();
+    grid->removeEntity(oldX, oldY);
+    segments.pop_back();
+    segments.back()->setSprite("assets/wormback.png");
+    grid->placeEntity(oldX, oldY, std::make_unique<MushroomEntity>());
+}
+
+bool WormEntity::isAlive() const {
+    return segments.size() > 1;
 }
