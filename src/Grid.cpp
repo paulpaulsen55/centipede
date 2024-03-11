@@ -39,7 +39,7 @@ void Grid::moveEntity(const int gridX, const int gridY, const int newGridX, cons
 }
 
 bool Grid::isOccupied(const int gridX, const int gridY) const {
-    if (gridX < 0 || gridX >= width || gridY < 0 || gridY >= height) {
+    if (gridX < 0 || gridX > width || gridY < 0 || gridY > height) {
         printf("gridX: %d, gridY: %d\n", gridX, gridY);
         return true;
     }
@@ -88,7 +88,7 @@ void Grid::update(const float dt) {
     worm.move(dt);
 
     if (flyTimer.shouldSpawn()) {
-        //spawnFly();
+        spawnFly();
         flyTimer.reset();
     }
 }

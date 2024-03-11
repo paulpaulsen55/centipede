@@ -15,7 +15,7 @@ void FlyEntity::move(const float dt) {
 
         updateGridPosition(gridX, gridY + 1);
 
-        if (getGridY() == GRID_ROWS - 1) {
+        if (getGridY() == GRID_ROWS - 2) {
             lives = 0;
         }
         if (generateRandomNumber(0, 100) < 20) {
@@ -25,7 +25,9 @@ void FlyEntity::move(const float dt) {
 }
 
 void FlyEntity::handleCollision(Entity *other) {
-    printf("FlyEntity::handleCollision\n");
+    if (dynamic_cast<MushroomEntity *>(other) != nullptr) {
+        updateGridPosition(gridX, gridY + 1);
+    }
 }
 
 void FlyEntity::updateGridPosition(const int newGridX, const int newGridY) {
@@ -34,5 +36,5 @@ void FlyEntity::updateGridPosition(const int newGridX, const int newGridY) {
 }
 
 Vector2i FlyEntity::getNextGridPosition() const {
-    return Vector2i(gridX, gridY + 1);
+    return {gridX, gridY + 1};
 }

@@ -37,6 +37,7 @@ void WormEntity::move(const float dt) {
         const Vector2i nextPos = segments[0]->getNextGridPosition();
         segments[0]->updateGridPosition(nextPos.x, nextPos.y);
 
+        // make all the segments follow the head
         for (int i = 1; i < segments.size(); i++) {
             const Vector2i temp = segments[i]->getGridPosition();
 
@@ -51,9 +52,9 @@ void WormEntity::move(const float dt) {
 
 void WormEntity::handleCollision(Entity *other) {
     if (other == nullptr || dynamic_cast<MushroomEntity *>(other) != nullptr) {
+        printf("Mushroom collision\n");
         segments[0]->flipSprite();
         segments[0]->updateGridPosition(segments[0]->getGridX(), segments[0]->getGridY() + 1);
-        printf("WormSegment collision\n");
     } else if (dynamic_cast<FlyEntity *>(other) != nullptr) {
         printf("Fly collision\n");
     }
