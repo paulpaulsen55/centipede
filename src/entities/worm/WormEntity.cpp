@@ -8,6 +8,7 @@
 
 
 WormEntity::WormEntity(Grid *grid): Entity("assets/wormhead.png"), grid(grid) {
+    speed = 0.1f;
 }
 
 void WormEntity::initializeSegments() {
@@ -27,7 +28,7 @@ void WormEntity::initializeSegments() {
 }
 
 void WormEntity::move(const float dt) {
-    this->moveDt += dt;
+    moveDt += dt;
 
     if (moveDt > speed) {
         moveDt = 0;

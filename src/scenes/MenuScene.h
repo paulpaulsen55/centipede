@@ -2,6 +2,7 @@
 #define MENUSCENE_H
 #include "Scene.h"
 #include "SFML/Graphics/RectangleShape.hpp"
+#include "SFML/Graphics/Sprite.hpp"
 #include "SFML/Graphics/Text.hpp"
 
 using namespace sf;
@@ -21,7 +22,7 @@ public:
     void draw(RenderTarget &target, RenderStates states) const override;
 
 private:
-    Text title;
+    Sprite background;
 
     RectangleShape startButton;
     Text startText;

@@ -16,10 +16,6 @@ FloatRect Player::getPosition() const {
     return sprite.getGlobalBounds();
 }
 
-void Player::damage() {
-    --lives;
-}
-
 void Player::setX(const float x) {
     position.x = x;
 }
@@ -30,7 +26,6 @@ void Player::setY(const float y) {
 
 FloatRect Player::getShape() const {
     return sprite.getLocalBounds();
-
 }
 
 void Player::moveLeft() {

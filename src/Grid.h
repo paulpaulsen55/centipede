@@ -31,8 +31,8 @@ public:
     bool isOccupiedByWorm(int gridX, int gridY) const;
 
 private:
-    int width = GRID_COLS - 1;
-    int height = GRID_ROWS - 1;
+    int width = GRID_COLS ;
+    int height = GRID_ROWS ;
     std::vector<std::vector<std::unique_ptr<Entity> > > grid;
 
     SpawnTimer flyTimer{5};

@@ -10,6 +10,7 @@ using namespace sf;
 // UI constants
 const std::string FONT = "assets/baloo2.ttf";
 const auto blue700 = Color(3, 105, 161);
+const auto slate600 = Color(71, 85, 105);
 const auto slate800 = Color(30, 41, 59);
 
 // Player constants

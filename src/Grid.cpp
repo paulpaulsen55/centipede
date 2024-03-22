@@ -18,18 +18,22 @@ Grid::Grid(): worm(this) {
     }
     generateMushrooms();
     worm.initializeSegments();
-    placeEntity(15, 0, std::make_unique<MushroomEntity>());
+    placeEntity(28, 1, std::make_unique<MushroomEntity>());
+    placeEntity(30, 1, std::make_unique<MushroomEntity>());
 }
 
 void Grid::placeEntity(const int gridX, const int gridY, std::unique_ptr<Entity> e) {
-    if (gridX >= 0 && gridX < width && gridY >= 0 && gridY < height && grid[gridX][gridY] == nullptr) {
+    if (gridX >= 0 && gridX <= width && gridY >= 0 && gridY < height && grid[gridX][gridY] == nullptr) {
         grid[gridX][gridY] = std::move(e);
         grid[gridX][gridY]->setGridPosition(gridX, gridY);
     }
 }
 
 void Grid::moveEntity(const int gridX, const int gridY, const int newGridX, const int newGridY) {
-    if (newGridX >= 0 && newGridX < width && newGridY >= 0 && newGridY < height) {
+    if (newGridX > 29) {
+        printf("newGridX: %d\n", newGridX);
+    }
+    if (newGridX >= 0 && newGridX <= width && newGridY >= 0 && newGridY <= height) {
         if (grid[gridX][gridY] != nullptr) {
             grid[newGridX][newGridY] = std::move(grid[gridX][gridY]);
             grid[newGridX][newGridY]->setGridPosition(newGridX, newGridY);
@@ -39,8 +43,7 @@ void Grid::moveEntity(const int gridX, const int gridY, const int newGridX, cons
 }
 
 bool Grid::isOccupied(const int gridX, const int gridY) const {
-    if (gridX < 0 || gridX > width || gridY < 0 || gridY > height) {
-        printf("gridX: %d, gridY: %d\n", gridX, gridY);
+    if (gridX < 0 || gridX >= width || gridY < 0 || gridY >= height) {
         return true;
     }
     return grid[gridX][gridY] != nullptr;
@@ -70,17 +73,19 @@ void Grid::update(const float dt) {
                     removeEntity(i, j);
                     continue;
                 }
+                //printf("%d\n",worm.getHeadGridPosition().x);
+                //printf("%d", isOccupied(-1,2));
                 if (const Vector2i nextPos = grid[i][j]->getNextGridPosition(); isOccupied(nextPos.x, nextPos.y)) {
-                    const bool offScreen = nextPos.x <= 0 || nextPos.x >= width;
+                    const bool offScreen = nextPos.x < 0 || nextPos.x >= width;
                     if (const Vector2i h = worm.getHeadGridPosition(); h.x == i && h.y == j) {
                         printf("Worm collision %d\n", offScreen);
                         worm.handleCollision(offScreen ? nullptr : grid[nextPos.x][nextPos.y].get());
                     } else {
-                        grid[i][j]->handleCollision(grid[nextPos.x][nextPos.y].get());
+                        //grid[i][j]->handleCollision(grid[nextPos.x][nextPos.y].get());
                     }
-                    continue;
+                } else {
+                    grid[i][j]->move(dt);
                 }
-                grid[i][j]->move(dt);
             }
         }
     }

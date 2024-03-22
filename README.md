@@ -1,2 +1,22 @@
-# Centipede
-Centipede is a game that was originally developed by Atari in 1980. The game was designed by Ed Logg and Dona Bailey. The game was a commercial success and was ported to many different platforms. The game was also followed by a sequel, Millipede, in 1982. The game was also included in the Atari 2600 and 5200 consoles.  
+# Wormipede
+Wormipede is a game inspiered by the classic game Centipede from 1981.
+
+## How to play
+- Move the player with the arrow keys
+- Shoot with the space key
+- Stop the minibeasts from reaching the bottom of the screen
+
+## Prerequisites
+- CMake
+
+## Build
+_TODO: Test build_
+```bash
+mkdir build
+cd build
+cmake ..
+make
+```
+
+## Development
+_TODO: Add development instructions_

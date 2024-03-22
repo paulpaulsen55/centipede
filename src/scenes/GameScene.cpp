@@ -6,6 +6,27 @@
 #include "SFML/Window/Event.hpp"
 
 GameScene::GameScene(): player(x / 2, y - 120) {
+    TextureManager::getInstance().loadTexture("assets/gamebg.png");
+    background.setTexture(TextureManager::getInstance().getTexture("assets/gamebg.png"));
+    background.setPosition(0, 600);
+
+    TextureManager::getInstance().loadTexture("assets/heart.png");
+    Sprite heart;
+    heart.setTexture(TextureManager::getInstance().getTexture("assets/heart.png"));
+    float heartWidth = heart.getGlobalBounds().width;
+
+    for (int i = 0; i < lives; i++) {
+        heart.setPosition(10 + i * (heartWidth + 10), 622);
+        hearts.push_back(heart);
+    }
+
+    font.loadFromFile(FONT);
+    score.setFont(font);
+    score.setCharacterSize(64);
+    score.setFillColor(slate800);
+    score.setPosition(x - 200, 608);
+    score.setStyle(Text::Bold);
+    score.setString("0");
 }
 
 void GameScene::handleInput(Event event, RenderWindow &window) {
@@ -29,9 +50,12 @@ void GameScene::handleInput(Event event, RenderWindow &window) {
 void GameScene::update(const float dt) {
     // check for winning condition
     if (!grid.worm.isAlive()) {
-        printf("You win\n");
         SceneManager::getInstance().changeScene(std::make_unique<GameWinScene>());
         return;
+    }
+    // check for losing condition
+    if (lives == 0) {
+        SceneManager::getInstance().changeScene(std::make_unique<MenuScene>());
     }
 
     // check if a entity is hit by a projectile
@@ -42,16 +66,27 @@ void GameScene::update(const float dt) {
         if (grid.isOccupied(gridX, gridY)) {
             if (grid.isOccupiedByWorm(gridX, gridY)) {
                 grid.worm.damage();
+                scoreValue += 200;
             } else {
                 grid.damageEntity(gridX, gridY);
+                scoreValue += 75;
             }
             projectileController.removeProjectile(projectile);
+            score.setString(std::to_string(scoreValue));
         }
     }
 
     this->shootingDt += dt;
 
-    // player movement collision with window bounds
+    // if a entity reaches the bottom of the screen, the player loses a life
+    for (int i = 0; i < GRID_COLS; i++) {
+        /*if (grid.isOccupied(i, GRID_ROWS - 1)) {
+            lives--;
+            //hearts.pop_back();
+        }*/
+    }
+
+    // player movement collision with borders
     if (player.getPosition().left < 0) {
         player.setX(0);
     }
@@ -79,6 +114,13 @@ void GameScene::update(const float dt) {
 }
 
 void GameScene::draw(RenderTarget &target, const RenderStates states) const {
+    target.draw(background);
+    target.draw(score);
+
+    for (const auto &heart: hearts) {
+        target.draw(heart);
+    }
+
     target.draw(grid);
     target.draw(player);
     target.draw(projectileController);

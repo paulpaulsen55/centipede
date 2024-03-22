@@ -1,11 +1,14 @@
 #ifndef GAMESCENE_H
 #define GAMESCENE_H
+#include <array>
+
 #include "SceneManager.h"
 #include "../Grid.h"
 #include "SFML/Graphics/RenderTarget.hpp"
 #include "SFML/Graphics/RenderWindow.hpp"
 #include "../Player.h"
 #include "../ProjectileController.h"
+#include "SFML/Graphics/Text.hpp"
 
 using namespace sf;
 
@@ -24,10 +27,17 @@ public:
     void draw(RenderTarget &target, RenderStates states) const override;
 
 private:
+    int lives = 3;
+    int scoreValue = 0;
     Player player;
     ProjectileController projectileController;
     float shootingDt{};
     Grid grid;
+
+    Sprite background;
+    std::vector<Sprite> hearts;
+    Font font;
+    Text score;
 };
 
 

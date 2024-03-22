@@ -40,8 +40,8 @@ Vector2i Entity::getGridPosition() const {
 void Entity::setGridPosition(const int newGridX, const int newGridY) {
     gridX = newGridX;
     gridY = newGridY;
-    x = gridX * GRID_WIDTH / (GRID_COLS - 1) + 2;
-    y = gridY * GRID_HEIGHT / (GRID_ROWS - 1) + 2;
+    x = gridX * GRID_WIDTH / GRID_COLS + 2;
+    y = gridY * GRID_HEIGHT / GRID_ROWS + 2;
     update();
 }
 
