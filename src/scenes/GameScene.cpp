@@ -1,5 +1,6 @@
 #include "GameScene.h"
 
+#include "GameOverScene.h"
 #include "GameWinScene.h"
 #include "MenuScene.h"
 #include "../Constants.h"
@@ -50,12 +51,13 @@ void GameScene::handleInput(Event event, RenderWindow &window) {
 void GameScene::update(const float dt) {
     // check for winning condition
     if (!grid.worm.isAlive()) {
-        SceneManager::getInstance().changeScene(std::make_unique<GameWinScene>());
+        SceneManager::getInstance().changeScene(std::make_unique<GameWinScene>(scoreValue));
         return;
     }
     // check for losing condition
     if (lives == 0) {
-        SceneManager::getInstance().changeScene(std::make_unique<MenuScene>());
+        SceneManager::getInstance().changeScene(std::make_unique<GameOverScene>());
+        return;
     }
 
     // check if a entity is hit by a projectile
@@ -80,10 +82,10 @@ void GameScene::update(const float dt) {
 
     // if a entity reaches the bottom of the screen, the player loses a life
     for (int i = 0; i < GRID_COLS; i++) {
-        /*if (grid.isOccupied(i, GRID_ROWS - 1)) {
+        if (grid.isOccupied(i, GRID_ROWS - 1)) {
             lives--;
-            //hearts.pop_back();
-        }*/
+            hearts.pop_back();
+        }
     }
 
     // player movement collision with borders

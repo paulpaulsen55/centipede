@@ -6,9 +6,9 @@
 #include "SFML/Graphics/Text.hpp"
 
 
-class GameWinScene : public Scene{
+class GameWinScene final : public Scene{
 public:
-    GameWinScene();
+    explicit GameWinScene(int score);
 
     void handleInput(Event event, RenderWindow &window) override;
 
@@ -23,6 +23,8 @@ private:
     Text menuText;
 
     Font font;
+
+    int score;
 };
 
 

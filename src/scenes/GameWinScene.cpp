@@ -7,7 +7,7 @@
 #include "SFML/Window/Mouse.hpp"
 
 
-GameWinScene::GameWinScene() {
+GameWinScene::GameWinScene(int score): score(score) {
     font.loadFromFile(FONT);
 
     winText.setFont(font);

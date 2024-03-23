@@ -18,7 +18,7 @@ constexpr float PLAYER_SPEED = 1.5f;
 
 // Projectile constants
 constexpr float PROJECTILE_SPEED = 3.0f;
-constexpr float PROJECTILE_COOLDOWN = 1.0f;
+constexpr float PROJECTILE_COOLDOWN = 0.7f;
 
 // Grid constants
 constexpr int GRID_WIDTH = 800;

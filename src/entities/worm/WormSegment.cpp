@@ -16,14 +16,7 @@ void WormSegment::updateGridPosition(const int newGridX, const int newGridY) {
 
 
 Vector2i WormSegment::getNextGridPosition() const {
-    int nextGridX = gridX;
-    if (hDirection == HDirection::LEFT) {
-        nextGridX--;
-    } else {
-        nextGridX++;
-    }
-
-    return {nextGridX, gridY};
+    return {gridX + static_cast<int>(hDirection), gridY};
 }
 
 void WormSegment::flipSprite() {

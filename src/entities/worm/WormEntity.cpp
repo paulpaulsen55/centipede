@@ -8,7 +8,7 @@
 
 
 WormEntity::WormEntity(Grid *grid): Entity("assets/wormhead.png"), grid(grid) {
-    speed = 0.1f;
+    speed = 0.2f;
 }
 
 void WormEntity::initializeSegments() {
@@ -51,13 +51,11 @@ void WormEntity::move(const float dt) {
     }
 }
 
+
 void WormEntity::handleCollision(Entity *other) {
-    if (other == nullptr || dynamic_cast<MushroomEntity *>(other) != nullptr) {
-        printf("Mushroom collision\n");
+    if (dynamic_cast<MushroomEntity *>(other) != nullptr || other == nullptr) {
         segments[0]->flipSprite();
         segments[0]->updateGridPosition(segments[0]->getGridX(), segments[0]->getGridY() + 1);
-    } else if (dynamic_cast<FlyEntity *>(other) != nullptr) {
-        printf("Fly collision\n");
     }
 }
 

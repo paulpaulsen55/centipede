@@ -18,8 +18,6 @@ Grid::Grid(): worm(this) {
     }
     generateMushrooms();
     worm.initializeSegments();
-    placeEntity(28, 1, std::make_unique<MushroomEntity>());
-    placeEntity(30, 1, std::make_unique<MushroomEntity>());
 }
 
 void Grid::placeEntity(const int gridX, const int gridY, std::unique_ptr<Entity> e) {
@@ -30,9 +28,6 @@ void Grid::placeEntity(const int gridX, const int gridY, std::unique_ptr<Entity>
 }
 
 void Grid::moveEntity(const int gridX, const int gridY, const int newGridX, const int newGridY) {
-    if (newGridX > 29) {
-        printf("newGridX: %d\n", newGridX);
-    }
     if (newGridX >= 0 && newGridX <= width && newGridY >= 0 && newGridY <= height) {
         if (grid[gridX][gridY] != nullptr) {
             grid[newGridX][newGridY] = std::move(grid[gridX][gridY]);
@@ -73,15 +68,13 @@ void Grid::update(const float dt) {
                     removeEntity(i, j);
                     continue;
                 }
-                //printf("%d\n",worm.getHeadGridPosition().x);
-                //printf("%d", isOccupied(-1,2));
+
                 if (const Vector2i nextPos = grid[i][j]->getNextGridPosition(); isOccupied(nextPos.x, nextPos.y)) {
                     const bool offScreen = nextPos.x < 0 || nextPos.x >= width;
                     if (const Vector2i h = worm.getHeadGridPosition(); h.x == i && h.y == j) {
-                        printf("Worm collision %d\n", offScreen);
                         worm.handleCollision(offScreen ? nullptr : grid[nextPos.x][nextPos.y].get());
                     } else {
-                        //grid[i][j]->handleCollision(grid[nextPos.x][nextPos.y].get());
+                        grid[i][j]->handleCollision(offScreen ? nullptr : grid[nextPos.x][nextPos.y].get());
                     }
                 } else {
                     grid[i][j]->move(dt);
@@ -111,7 +104,7 @@ void Grid::draw(RenderTarget &target, RenderStates states) const {
     float cellHeight = 600 / static_cast<float>(height);
 
     // Draw grid lines
-    for (int i = 0; i <= width; ++i) {
+    /*for (int i = 0; i <= width; ++i) {
         RectangleShape line(Vector2f(1, target.getSize().y));
         line.setPosition(i * cellWidth, 0);
         line.setFillColor(Color::Black);
@@ -123,7 +116,7 @@ void Grid::draw(RenderTarget &target, RenderStates states) const {
         line.setPosition(0, i * cellHeight);
         line.setFillColor(Color::Black);
         target.draw(line, states);
-    }
+    }*/
 
     for (int i = 0; i < width; ++i) {
         for (int j = 0; j < height; ++j) {
@@ -135,7 +128,7 @@ void Grid::draw(RenderTarget &target, RenderStates states) const {
 }
 
 void Grid::generateMushrooms() {
-    for (int i = 0; i < width; ++i) {
+    for (int i = 2; i < width - 2; ++i) {
         for (int j = 1; j < height - 3; ++j) {
             if (generateRandomNumber(0, 100) <= MUSHROOM_SPAWNCHANCE)
                 placeEntity(i, j, std::make_unique<MushroomEntity>());
