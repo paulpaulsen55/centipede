@@ -27,8 +27,6 @@ private:
 
     void processEvent() const;
 
-    void reset();
-
     void update(Time dt) const;
 
     void render() const;

@@ -3,6 +3,7 @@
 #include "Scene.h"
 #include "SFML/Graphics/Font.hpp"
 #include "SFML/Graphics/RectangleShape.hpp"
+#include "SFML/Graphics/Sprite.hpp"
 #include "SFML/Graphics/Text.hpp"
 
 
@@ -17,14 +18,17 @@ public:
     void draw(RenderTarget &target, RenderStates states) const override;
 
 private:
-    Text winText;
+    Sprite background;
+    Texture texture;
+
+    Text scoreText;
+    int score;
 
     RectangleShape menuButton;
     Text menuText;
 
     Font font;
 
-    int score;
 };
 
 

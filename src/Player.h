@@ -1,7 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
+#include "Constants.h"
 #include "SFML/Graphics/Rect.hpp"
-#include "SFML/Graphics/RectangleShape.hpp"
 #include "SFML/Graphics/Sprite.hpp"
 #include "SFML/System/Vector2.hpp"
 
@@ -33,7 +33,7 @@ public:
 private:
     Vector2f position;
     Sprite sprite;
-    float playerSpeed;
+    float playerSpeed = PLAYER_SPEED;
 
     void draw(RenderTarget &target, RenderStates states) const override;
 };

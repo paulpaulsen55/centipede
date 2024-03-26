@@ -1,10 +1,9 @@
 #include "Player.h"
 
-#include "Constants.h"
 #include "TextureManager.h"
 #include "SFML/Graphics/RenderTarget.hpp"
 
-Player::Player(const float startX, const float startY): playerSpeed(PLAYER_SPEED) {
+Player::Player(const float startX, const float startY) {
     position.x = startX;
     position.y = startY;
 

@@ -46,6 +46,3 @@ void Game::run() {
         this->render();
     }
 }
-
-void Game::reset() {
-}

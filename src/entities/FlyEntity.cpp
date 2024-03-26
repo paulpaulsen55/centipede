@@ -4,7 +4,7 @@
 #include "../Grid.h"
 #include "../UtilityFunctions.h"
 
-FlyEntity::FlyEntity(Grid *grid): Entity("assets/fly.png"), grid(grid) {
+FlyEntity::FlyEntity(Grid *grid): Entity("assets/entities/fly.png"), grid(grid) {
 }
 
 void FlyEntity::move(const float dt) {
@@ -15,7 +15,7 @@ void FlyEntity::move(const float dt) {
 
         updateGridPosition(gridX, gridY + 1);
 
-        if (getGridY() == GRID_ROWS - 2) {
+        if (getGridY() == GRID_ROWS - 1) {
             lives = 0;
         }
         if (generateRandomNumber(0, 100) < 20) {

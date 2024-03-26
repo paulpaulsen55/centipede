@@ -7,18 +7,18 @@
 #include "../../Grid.h"
 
 
-WormEntity::WormEntity(Grid *grid): Entity("assets/wormhead.png"), grid(grid) {
+WormEntity::WormEntity(Grid *grid): Entity("assets/entities/wormhead.png"), grid(grid) {
     speed = 0.2f;
 }
 
 void WormEntity::initializeSegments() {
     segments.reserve(WORM_LENGTH);
     for (int i = 0; i < WORM_LENGTH; ++i) {
-        std::string texture = "assets/wormbody.png";
+        std::string texture = "assets/entities/wormbody.png";
         if (i == 0) {
-            texture = "assets/wormhead.png";
+            texture = "assets/entities/wormhead.png";
         } else if (i == WORM_LENGTH - 1) {
-            texture = "assets/wormback.png";
+            texture = "assets/entities/wormback.png";
         }
         auto segment = new WormSegment(grid, this, texture);
         segment->setGridPosition(WORM_LENGTH - 1 - i, 0);
@@ -67,7 +67,7 @@ void WormEntity::damage() {
     const int oldY = segments[segments.size() - 1]->getGridY();
     grid->removeEntity(oldX, oldY);
     segments.pop_back();
-    segments.back()->setSprite("assets/wormback.png");
+    segments.back()->setSprite("assets/entities/wormback.png");
     grid->placeEntity(oldX, oldY, std::make_unique<MushroomEntity>());
 }
 

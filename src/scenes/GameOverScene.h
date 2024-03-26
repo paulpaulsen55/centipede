@@ -2,6 +2,7 @@
 #define GAMEOVERSCENE_H
 #include "Scene.h"
 #include "SFML/Graphics/RectangleShape.hpp"
+#include "SFML/Graphics/Sprite.hpp"
 #include "SFML/Graphics/Text.hpp"
 
 using namespace sf;
@@ -21,10 +22,14 @@ public:
     void draw(RenderTarget &target, RenderStates states) const override;
 
 private:
-    Text gameOverText;
+    Sprite background;
+    Texture texture;
 
     RectangleShape restartButton;
     Text restartText;
+
+    RectangleShape menuButton;
+    Text menuText;
 
     Font font;
 };

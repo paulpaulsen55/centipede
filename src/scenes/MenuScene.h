@@ -23,6 +23,7 @@ public:
 
 private:
     Sprite background;
+    Texture texture;
 
     RectangleShape startButton;
     Text startText;
