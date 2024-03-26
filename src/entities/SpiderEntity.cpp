@@ -1,5 +1,6 @@
 #include "SpiderEntity.h"
 
+#define _USE_MATH_DEFINES
 #include <cmath>
 
 #include "MushroomEntity.h"
