@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(Centipede LANGUAGES CXX)
+project(Wormipede LANGUAGES CXX)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
@@ -12,7 +12,7 @@ FetchContent_Declare(SFML
 FetchContent_MakeAvailable(SFML)
 
 
-add_executable(Centipede src/main.cpp
+add_executable(Wormipede src/main.cpp
         src/Player.cpp
         src/Player.h
         src/Projectile.cpp
@@ -49,17 +49,19 @@ add_executable(Centipede src/main.cpp
         src/entities/worm/WormSegment.h
         src/scenes/GameWinScene.cpp
         src/scenes/GameWinScene.h
+        src/entities/SpiderEntity.cpp
+        src/entities/SpiderEntity.h
 )
 file(COPY src/assets DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
-target_link_libraries(Centipede PRIVATE sfml-graphics)
-target_compile_features(Centipede PRIVATE cxx_std_17)
+target_link_libraries(Wormipede PRIVATE sfml-graphics)
+target_compile_features(Wormipede PRIVATE cxx_std_17)
 
 if(WIN32)
     add_custom_command(
-        TARGET Centipede
+        TARGET Wormipede
         COMMENT "Copy OpenAL DLL"
-        PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${SFML_SOURCE_DIR}/extlibs/bin/$<IF:$<EQUAL:${CMAKE_SIZEOF_VOID_P},8>,x64,x86>/openal32.dll $<TARGET_FILE_DIR:Centipede>
+        PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${SFML_SOURCE_DIR}/extlibs/bin/$<IF:$<EQUAL:${CMAKE_SIZEOF_VOID_P},8>,x64,x86>/openal32.dll $<TARGET_FILE_DIR:Wormipede>
         VERBATIM)
 endif()
 
-install(TARGETS Centipede)
+install(TARGETS Wormipede)

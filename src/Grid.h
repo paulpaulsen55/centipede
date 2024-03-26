@@ -36,12 +36,15 @@ private:
     std::vector<std::vector<std::unique_ptr<Entity> > > grid;
 
     SpawnTimer flyTimer{5};
+    SpawnTimer spideTimer{8};
 
     void draw(RenderTarget &target, RenderStates states) const override;
 
     void generateMushrooms();
 
     void spawnFly();
+
+    void spawnSpider();
 
     void debugPrint() const;
 };

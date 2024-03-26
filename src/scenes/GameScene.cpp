@@ -9,7 +9,7 @@
 GameScene::GameScene(): player(x / 2 - 11, y - 120) {
     TextureManager::getInstance().loadTexture("assets/scenes/gamebg.png");
     background.setTexture(TextureManager::getInstance().getTexture("assets/scenes/gamebg.png"));
-    background.setPosition(0, 600);
+    background.setPosition(0, 595);
 
     TextureManager::getInstance().loadTexture("assets/heart.png");
     Sprite heart;
@@ -25,9 +25,9 @@ GameScene::GameScene(): player(x / 2 - 11, y - 120) {
     score.setFont(font);
     score.setCharacterSize(64);
     score.setFillColor(slate800);
-    score.setPosition(x - 200, 632);
     score.setStyle(Text::Bold);
     score.setString("0");
+    score.setPosition(x - score.getGlobalBounds().width - 20, 632);
 }
 
 void GameScene::handleInput(Event event, RenderWindow &window) {
@@ -75,6 +75,7 @@ void GameScene::update(const float dt) {
             }
             projectileController.removeProjectile(projectile);
             score.setString(std::to_string(scoreValue));
+            score.setPosition(x - score.getGlobalBounds().width - 10, 632);
         }
     }
 

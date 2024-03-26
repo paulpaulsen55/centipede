@@ -4,6 +4,7 @@
 #include "UtilityFunctions.h"
 #include "entities/FlyEntity.h"
 #include "entities/MushroomEntity.h"
+#include "entities/SpiderEntity.h"
 #include "entities/worm/WormEntity.h"
 #include "SFML/Graphics/RectangleShape.hpp"
 #include "SFML/Graphics/RenderTarget.hpp"
@@ -60,6 +61,7 @@ void Grid::removeEntity(const int x, const int y) {
 void Grid::update(const float dt) {
     // update the spawn timers
     flyTimer.update(dt);
+    spideTimer.update(dt);
 
     for (int i = 0; i < width; ++i) {
         for (int j = 0; j < height; ++j) {
@@ -89,6 +91,10 @@ void Grid::update(const float dt) {
         spawnFly();
         flyTimer.reset();
     }
+    if (spideTimer.shouldSpawn()) {
+        spawnSpider();
+        spideTimer.reset();
+    }
 }
 
 void Grid::damageEntity(const int gridX, const int gridY) const {
@@ -100,11 +106,10 @@ void Grid::damageEntity(const int gridX, const int gridY) const {
 }
 
 void Grid::draw(RenderTarget &target, RenderStates states) const {
-    float cellWidth = 800 / static_cast<float>(width);
-    float cellHeight = 600 / static_cast<float>(height);
-
     // Draw grid lines
-    /*for (int i = 0; i <= width; ++i) {
+    /*float cellWidth = 800 / static_cast<float>(width);
+    float cellHeight = 600 / static_cast<float>(height);
+    for (int i = 0; i <= width; ++i) {
         RectangleShape line(Vector2f(1, target.getSize().y));
         line.setPosition(i * cellWidth, 0);
         line.setFillColor(Color::Black);
@@ -142,6 +147,14 @@ void Grid::spawnFly() {
         x = generateRandomNumber(0, width - 1);
     } while (isOccupied(x, 0));
     placeEntity(x, 0, std::make_unique<FlyEntity>(this));
+}
+
+void Grid::spawnSpider() {
+    int x;
+    do {
+        x = generateRandomNumber(3, width - 4);
+    } while (isOccupied(x, 0));
+    placeEntity(x, 0, std::make_unique<SpiderEntity>(x, this));
 }
 
 void Grid::debugPrint() const {

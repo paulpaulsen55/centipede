@@ -22,7 +22,7 @@ GameWinScene::GameWinScene(const int score): score(score) {
     menuText.setPosition(x / 2 - (menuText.getGlobalBounds().width / 2), 422);
 
     scoreText.setFont(font);
-    scoreText.setString(std::to_string(score));
+    scoreText.setString("Punkte: " + std::to_string(score));
     scoreText.setCharacterSize(64);
     scoreText.setFillColor(Color::Black);
     scoreText.setPosition(x / 2 - (scoreText.getGlobalBounds().width / 2), 160);
