@@ -41,8 +41,8 @@ void WormEntity::move(const float dt) {
         // make all the segments follow the head
         for (int i = 1; i < segments.size(); i++) {
             const Vector2i temp = segments[i]->getGridPosition();
-
-            if (temp.y != prevPos.y && prevPos.y == segments[i-1]->getGridY()) {
+            const Vector2i lastPos = segments[i-1]->getGridPosition();
+            if (temp.y != prevPos.y && prevPos.y == lastPos.y) {
                 segments[i]->flipSprite();
             }
             segments[i]->updateGridPosition(prevPos.x, prevPos.y);
@@ -55,7 +55,8 @@ void WormEntity::move(const float dt) {
 void WormEntity::handleCollision(Entity *other) {
     if (dynamic_cast<MushroomEntity *>(other) != nullptr || other == nullptr) {
         segments[0]->flipSprite();
-        segments[0]->updateGridPosition(segments[0]->getGridX(), segments[0]->getGridY() + 1);
+        const Vector2i pos = segments[0]->getGridPosition();
+        segments[0]->updateGridPosition(pos.x, pos.y + 1);
     }
 }
 
@@ -63,12 +64,11 @@ void WormEntity::damage() {
     if (segments.size() <= 1) {
         return;
     }
-    const int oldX = segments[segments.size() - 1]->getGridX();
-    const int oldY = segments[segments.size() - 1]->getGridY();
-    grid->removeEntity(oldX, oldY);
+    const Vector2i oldPos = segments[segments.size() - 1]->getGridPosition();
+    grid->removeEntity(oldPos.x, oldPos.y);
     segments.pop_back();
     segments.back()->setSprite("assets/entities/wormback.png");
-    grid->placeEntity(oldX, oldY, std::make_unique<MushroomEntity>());
+    grid->placeEntity(oldPos.y, oldPos.y, std::make_unique<MushroomEntity>());
 }
 
 bool WormEntity::isAlive() const {

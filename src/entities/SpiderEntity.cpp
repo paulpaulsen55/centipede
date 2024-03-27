@@ -29,7 +29,7 @@ void SpiderEntity::move(const float dt) {
             updateGridPosition(startingGridX + std::ceil(offset), gridY + 1);
         }
 
-        if (getGridY() == GRID_ROWS - 1) {
+        if (gridY == GRID_ROWS - 1) {
             lives = 0;
         }
     }

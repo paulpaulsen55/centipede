@@ -25,14 +25,6 @@ void Entity::damage() {
     --lives;
 }
 
-int Entity::getGridX() const {
-    return gridX;
-}
-
-int Entity::getGridY() const {
-    return gridY;
-}
-
 Vector2i Entity::getGridPosition() const {
     return Vector2i(gridX, gridY);
 }

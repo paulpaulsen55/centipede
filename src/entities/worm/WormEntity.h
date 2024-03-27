@@ -25,7 +25,7 @@ public:
     }
 
     Vector2i getHeadGridPosition() const {
-        return Vector2i(segments[0]->getGridX(), segments[0]->getGridY());
+        return segments[0]->getGridPosition();
     }
 
     void damage() override;

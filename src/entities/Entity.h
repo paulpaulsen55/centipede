@@ -31,10 +31,6 @@ public:
 
     virtual void damage();
 
-    int getGridX() const;
-
-    int getGridY() const;
-
     void setGridPosition(int newGridX, int newGridY);
 
 protected:

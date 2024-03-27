@@ -15,6 +15,7 @@ public:
     void updateGridPosition(int newGridX, int newGridY) override;
 
     Vector2i getNextGridPosition() const override;
+
 private:
     Grid *grid;
 };

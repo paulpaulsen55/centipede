@@ -15,7 +15,7 @@ void FlyEntity::move(const float dt) {
 
         updateGridPosition(gridX, gridY + 1);
 
-        if (getGridY() == GRID_ROWS - 1) {
+        if (gridY == GRID_ROWS - 1) {
             lives = 0;
         }
         if (generateRandomNumber(0, 100) < 20) {
