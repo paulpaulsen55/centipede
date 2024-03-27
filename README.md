@@ -32,7 +32,7 @@ make
 
 The game is written in C++ using the SFML2 library for graphics and input handling. The game is structured using a
 scene-based architecture, where each scene represents a different screen in the game, such as the main menu, gameplay
-and game-over screens. These are managed using a `SceneManager` class. The game loop is controlled by the `Game` class,
+and game-over screens. These are managed using the `SceneManager` class. The game loop is controlled by the `Game` class,
 which updates and renders the current scene. The gameplay logic is contained in the `GameplayScene` class, which handles
 player movement, entity movement, bullet firing and collision detection. The player character is represented by
 the `Player` class. All of the enemy entities are represented by a class of their own, which inherits from the `Entity`
@@ -46,4 +46,4 @@ The game is built using the CMake build system, which allows for easy compilatio
 
 
 ## Known Issues
-- The worm sometimes goes down two spaces, which 
+- The worm sometimes goes down two spaces, which causes the tail to orientate incorrectly
