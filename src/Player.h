@@ -7,7 +7,10 @@
 
 using namespace sf;
 
-
+/**
+ * The `Player` class represents the player in the game.
+ * It provides methods for moving the player and updating its position.
+ */
 class Player final : public Drawable {
 public:
     Player(float startX, float startY);

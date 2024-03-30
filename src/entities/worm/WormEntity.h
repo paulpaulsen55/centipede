@@ -6,8 +6,12 @@
 #include "WormSegment.h"
 #include "../Entity.h"
 
-
-class WormEntity : public Entity {
+/*
+ * The `WormEntity` class represents an entity that moves horizontal until it hits something on the grid.
+ * It is responsible for moving around the grid and handling collisions with other entities.
+ * NOTE: The worm entity is made up of multiple segments that move together.
+ */
+class WormEntity final : public Entity {
 public:
     explicit WormEntity(Grid *grid);
 
@@ -30,8 +34,7 @@ public:
 
     void damage() override;
 
-    bool isAlive() const;
-
+    bool isAlive() const override;
 
 private:
     Grid *grid;

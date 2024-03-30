@@ -8,7 +8,11 @@
 
 using namespace sf;
 
-
+/**
+ * The `Game` class is the main class (entry point) of the game.
+ * It provides methods for running the game loop and handling events.
+ * The main window and the scene manager are also included.
+ */
 class Game {
 public:
     Game();

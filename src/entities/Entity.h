@@ -8,7 +8,7 @@
 using namespace sf;
 
 /**
- * The Entity class is an abstract class that represents an entity on the grid in the game.
+ * The `Entity` class is an abstract class that represents an entity on the grid in the game.
  * It is responsible for handling the position and drawing of the entity.
  */
 class Entity : public Drawable {
@@ -27,7 +27,7 @@ public:
 
     void update();
 
-    bool isAlive() const;
+    virtual bool isAlive() const;
 
     virtual void damage();
 

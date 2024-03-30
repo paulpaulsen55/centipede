@@ -10,9 +10,11 @@ class WormEntity;
 enum class HDirection { LEFT = -1, RIGHT = 1 };
 
 
-
-
-class WormSegment : public Entity {
+/**
+ * The `WormSegment` class represents a segment of the worm entity.
+ * It is responsible for moving around the grid and handling collisions with other entities.
+ */
+class WormSegment final : public Entity {
 public:
     WormSegment(Grid *grid, WormEntity *wormEntity, const std::string &texture);
 
@@ -33,7 +35,6 @@ public:
     HDirection getHDirection() const {
         return hDirection;
     }
-
 
 private:
     Grid *grid;

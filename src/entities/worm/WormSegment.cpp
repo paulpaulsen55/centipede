@@ -33,4 +33,3 @@ void WormSegment::flipSprite() {
 void WormSegment::setSprite(const std::string &texture) {
     sprite.setTexture(TextureManager::getInstance().getTexture(texture));
 }
-

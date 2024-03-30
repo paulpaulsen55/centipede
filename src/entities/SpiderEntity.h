@@ -5,6 +5,10 @@
 
 class Grid;
 
+/**
+ * The `SpiderEntity` class represents an entity that spins down the grid in a sinusoidal pattern.
+ * It is responsible for moving around the grid and handling collisions with other entities.
+ */
 class SpiderEntity final : public Entity {
 public:
     SpiderEntity(int startingGridX, Grid *grid);
@@ -16,12 +20,12 @@ public:
     void updateGridPosition(int newGridX, int newGridY) override;
 
     Vector2i getNextGridPosition() const override;
+
 private:
     Grid *grid;
 
     int startingGridX;
 };
-
 
 
 #endif //SPIDERENTITY_H

@@ -8,7 +8,7 @@
 using namespace sf;
 
 /**
- * The GameOverScene class is responsible for handling the game over screen of the game.
+ * The `GameOverScene` class is responsible for handling the game over screen of the game.
  * It is responsible for handling input, updating and drawing the game over screen.
  */
 class GameOverScene final : public Scene {

@@ -6,7 +6,10 @@
 #include "SFML/Graphics/Sprite.hpp"
 #include "SFML/Graphics/Text.hpp"
 
-
+/**
+ * The `GameWinScene` class represents the scene that is displayed when the player wins the game.
+ * It displays the player's score and provides a button to return to the main menu.
+ */
 class GameWinScene final : public Scene{
 public:
     explicit GameWinScene(int score);

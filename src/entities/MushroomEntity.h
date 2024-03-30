@@ -3,7 +3,10 @@
 #include "Entity.h"
 #include "SFML/Graphics/Text.hpp"
 
-
+/**
+ * The `MushroomEntity` class represents a non moving entity that is placed on the grid.
+ * It has 3 lives and can be destroyed by the player's projectile.
+ */
 class MushroomEntity final : public Entity {
 public:
     MushroomEntity();
@@ -17,7 +20,7 @@ public:
     };
 
     Vector2i getNextGridPosition() const override {
-        return Vector2i(0, 0);
+        return {0, 0};
     };
 
     void handleCollision(Entity *other) override;

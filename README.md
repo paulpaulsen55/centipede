@@ -15,7 +15,7 @@ flower and destroying it. Use your magic to stop them!
 
 ## Prerequisites
 
-- CMake
+- CMake 3.11 or later
 
 ## Build
 
@@ -42,8 +42,9 @@ class and managed by the `ProjectileController` class. Because of the dynamic en
 class is used to load and store textures for the entities. 
 The game is built using the CMake build system, which allows for easy compilation and linking of the game code and dependencies.
 
-### Class Hierarchy
-
+### Object Diagram
+In this UML object diagram the basic structure of the game is shown:
+![Object Diagram](object-diagram.jpg)
 
 ## Known Issues
 - The worm sometimes goes down two spaces, which causes the tail to orientate incorrectly

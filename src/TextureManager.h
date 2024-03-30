@@ -8,7 +8,7 @@
 using namespace sf;
 
 /**
- * The TextureManager class is responsible for managing textures of Sprites.
+ * The `TextureManager` class is responsible for managing textures of Sprites.
  * It provides methods for loading, retrieving textures and ensures that textures dont get unloaded.
  * This allows for a centralized way of managing all textures used in the application.
  */

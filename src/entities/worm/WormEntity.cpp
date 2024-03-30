@@ -2,7 +2,6 @@
 
 #include <memory>
 
-#include "../FlyEntity.h"
 #include "../MushroomEntity.h"
 #include "../../Grid.h"
 
@@ -41,7 +40,7 @@ void WormEntity::move(const float dt) {
         // make all the segments follow the head
         for (int i = 1; i < segments.size(); i++) {
             const Vector2i temp = segments[i]->getGridPosition();
-            const Vector2i lastPos = segments[i-1]->getGridPosition();
+            const Vector2i lastPos = segments[i - 1]->getGridPosition();
             if (temp.y != prevPos.y && prevPos.y == lastPos.y) {
                 segments[i]->flipSprite();
             }

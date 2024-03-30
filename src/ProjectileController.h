@@ -5,7 +5,7 @@
 
 
 /**
- * This class is responsible for managing the projectiles in the game.
+ * The `ProjectileController` class is responsible for managing the projectiles in the game.
  * It provides methods for creating new projectiles and removes them when they are out of view.
  */
 class ProjectileController final : public Drawable {

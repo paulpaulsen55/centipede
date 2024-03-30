@@ -10,6 +10,10 @@
 
 class WormEntity;
 
+/**
+ * The `Grid` class represents the grid where entities can be placed and moved.
+ * It provides methods for updating the grid, placing entities on the grid and moving entities on the grid.
+ */
 class Grid final : public Drawable {
 public:
     WormEntity worm;
@@ -31,8 +35,8 @@ public:
     bool isOccupiedByWorm(int gridX, int gridY) const;
 
 private:
-    int width = GRID_COLS ;
-    int height = GRID_ROWS ;
+    int width = GRID_COLS;
+    int height = GRID_ROWS;
     std::vector<std::vector<std::unique_ptr<Entity> > > grid;
 
     SpawnTimer flyTimer{5};

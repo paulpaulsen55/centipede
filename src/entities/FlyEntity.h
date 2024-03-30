@@ -3,7 +3,10 @@
 #include "Entity.h"
 #include "../Grid.h"
 
-
+/**
+ * The `FlyEntity` class represents an entity that flies down the grid.
+ * It is responsible for moving around the grid and handling collisions with other entities.
+ */
 class FlyEntity final : public Entity {
 public:
     explicit FlyEntity(Grid *grid);

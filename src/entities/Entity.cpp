@@ -26,14 +26,14 @@ void Entity::damage() {
 }
 
 Vector2i Entity::getGridPosition() const {
-    return Vector2i(gridX, gridY);
+    return {gridX, gridY};
 }
 
 void Entity::setGridPosition(const int newGridX, const int newGridY) {
     gridX = newGridX;
     gridY = newGridY;
-    x = gridX * GRID_WIDTH / GRID_COLS + 2;
-    y = gridY * GRID_HEIGHT / GRID_ROWS + 2;
+    x = static_cast<float>(gridX) * GRID_WIDTH / GRID_COLS + 2;
+    y = static_cast<float>(gridY) * GRID_HEIGHT / GRID_ROWS + 2;
     update();
 }
 

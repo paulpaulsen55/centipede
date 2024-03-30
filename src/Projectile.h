@@ -6,7 +6,7 @@
 using namespace sf;
 
 /**
- * The Projectile class represents one projectile that the player can shoot.
+ * The `Projectile` class represents one projectile that the player can shoot.
  * It provides methods for updating the projectile and ensuring that it moves in the correct direction.
  */
 class Projectile {
@@ -25,7 +25,7 @@ public:
 
 private:
     RectangleShape projectileShape;
-    float projectileSpeed;
+    float projectileSpeed = PROJECTILE_SPEED;
 };
 
 

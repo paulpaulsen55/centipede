@@ -8,7 +8,7 @@ using namespace sf;
 class SceneManager;
 
 /**
- * The Scene class is an abstract class that represents a scene in the game.
+ * The `Scene` class is an abstract class that represents a scene in the game.
  * It is responsible for handling input, updating and drawing the scene.
  */
 class Scene : public Drawable {

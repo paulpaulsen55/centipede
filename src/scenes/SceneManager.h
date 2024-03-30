@@ -7,10 +7,10 @@
 #include "../TextureManager.h"
 
 /**
- * The SceneManager class is responsible for managing the scenes in the game.
+ * The `SceneManager` class is responsible for managing the scenes in the game.
  * It provides methods for pushing, popping and changing scenes.
  * This allows for different scenes in the game, such as the main menu, the game itself and the game over screen.
- * NOTE: This class is a singleton to be able to access the same instance from different parts of the game.
+ * NOTE: At this point only one scene can be active at a time. Maybe support multiple scenes in the future e.g. Upgrade Menu ;).
  */
 class SceneManager {
 public:

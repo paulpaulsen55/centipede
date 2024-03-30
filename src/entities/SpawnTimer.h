@@ -2,7 +2,7 @@
 #define SPAWNTIMER_H
 
 /**
- * The SpawnTimer class is responsible for handling the spawning of enemies.
+ * The `SpawnTimer` class is responsible for handling the spawning of enemies.
  * It is responsible for keeping track of the time and determining when to spawn an enemy.
  */
 class SpawnTimer {

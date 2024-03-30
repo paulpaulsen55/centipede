@@ -1,10 +1,9 @@
 #include "SpiderEntity.h"
 
-#define _USE_MATH_DEFINES
 #include <cmath>
 
 #ifdef _WIN32
-    #include <corecrt_math_defines.h>
+#include <corecrt_math_defines.h>
 #endif
 
 #include "MushroomEntity.h"
@@ -14,7 +13,7 @@
 SpiderEntity::SpiderEntity(const int startingGridX, Grid *grid): Entity("assets/entities/spider.png"),
                                                                  grid(grid),
                                                                  startingGridX(startingGridX) {
-    speed = generateRandomNumber(3, 15) * 0.1f;
+    speed = static_cast<float>(generateRandomNumber(3, 15)) * 0.1f;
 }
 
 void SpiderEntity::move(const float dt) {
@@ -23,10 +22,10 @@ void SpiderEntity::move(const float dt) {
     if (moveDt > speed) {
         moveDt = 0;
 
-        if (const float offset = 2 * std::sin(M_PI_4 * gridY); offset > 0) {
-            updateGridPosition(startingGridX + std::floor(offset), gridY + 1);
+        if (const float offset = 2 * static_cast<float>(std::sin(M_PI_4 * gridY)); offset > 0) {
+            updateGridPosition(startingGridX + static_cast<int>(std::floor(offset)), gridY + 1);
         } else {
-            updateGridPosition(startingGridX + std::ceil(offset), gridY + 1);
+            updateGridPosition(startingGridX + static_cast<int>(std::ceil(offset)), gridY + 1);
         }
 
         if (gridY == GRID_ROWS - 1) {
@@ -47,5 +46,5 @@ void SpiderEntity::updateGridPosition(const int newGridX, const int newGridY) {
 }
 
 Vector2i SpiderEntity::getNextGridPosition() const {
-    return {gridX, gridY + 1};
+    return {gridX, gridY + 1}; // inaccuracy: the spider moves in a sinusoidal pattern
 }
