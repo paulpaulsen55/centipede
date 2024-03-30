@@ -2,7 +2,7 @@
 
 #include <cmath>
 
-#ifdef _WIN32
+#ifdef _MSC_VER
 #include <corecrt_math_defines.h>
 #endif
 
