@@ -6,6 +6,11 @@ using namespace sf;
 
 Game::Game() {
     window = new RenderWindow({800u, 800u}, "Wormipede", Style::Titlebar | Style::Close);
+
+    Image icon;
+    icon.loadFromFile("assets/icon.png");
+    window->setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+
     window->setFramerateLimit(144);
 
     sceneManager = &SceneManager::getInstance();
