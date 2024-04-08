@@ -58,7 +58,7 @@ void MenuScene::handleInput(const Event event, RenderWindow &window) {
 
     if (event.type == Event::MouseButtonReleased) {
         if (event.mouseButton.button == Mouse::Left) {
-            
+
             if (startButton.getGlobalBounds().contains(mousePosition.x, mousePosition.y)) {
                 SceneManager::getInstance().changeScene(std::make_unique<GameScene>());
             }

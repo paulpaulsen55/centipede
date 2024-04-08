@@ -4,7 +4,6 @@
 #include "GameScene.h"
 #include "MenuScene.h"
 #include "SceneManager.h"
-#include "../Constants.h"
 #include "SFML/Window/Event.hpp"
 #include "SFML/Window/Mouse.hpp"
 

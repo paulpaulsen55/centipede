@@ -1,5 +1,6 @@
 #ifndef GAME_H
 #define GAME_H
+
 #include "Player.h"
 #include "ProjectileController.h"
 #include "scenes/SceneManager.h"
@@ -35,4 +36,5 @@ private:
 
     void render() const;
 };
+
 #endif //GAME_H

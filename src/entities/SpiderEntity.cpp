@@ -10,9 +10,9 @@
 #include "../Grid.h"
 #include "../UtilityFunctions.h"
 
-SpiderEntity::SpiderEntity(const int startingGridX, Grid *grid): Entity("assets/entities/spider.png"),
-                                                                 grid(grid),
-                                                                 startingGridX(startingGridX) {
+SpiderEntity::SpiderEntity(const int startingGridX, Grid *grid) : Entity("assets/entities/spider.png"),
+                                                                  grid(grid),
+                                                                  startingGridX(startingGridX) {
     speed = static_cast<float>(generateRandomNumber(3, 15)) * 0.1f;
 }
 

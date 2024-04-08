@@ -1,5 +1,6 @@
 #ifndef GRID_H
 #define GRID_H
+
 #include <memory>
 
 #include "Constants.h"

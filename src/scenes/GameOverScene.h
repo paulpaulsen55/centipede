@@ -1,5 +1,6 @@
 #ifndef GAMEOVERSCENE_H
 #define GAMEOVERSCENE_H
+
 #include "Scene.h"
 #include "SFML/Graphics/RectangleShape.hpp"
 #include "SFML/Graphics/Sprite.hpp"

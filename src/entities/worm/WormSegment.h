@@ -7,7 +7,9 @@ class Grid;
 
 class WormEntity;
 
-enum class HDirection { LEFT = -1, RIGHT = 1 };
+enum class HDirection {
+    LEFT = -1, RIGHT = 1
+};
 
 
 /**
@@ -41,4 +43,5 @@ private:
     WormEntity *wormEntity;
     HDirection hDirection = HDirection::RIGHT;
 };
+
 #endif //WORMSEGMENT_H

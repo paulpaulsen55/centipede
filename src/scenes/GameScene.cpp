@@ -6,7 +6,7 @@
 #include "../Constants.h"
 #include "SFML/Window/Event.hpp"
 
-GameScene::GameScene(): player(x / 2 - 11, y - 120) {
+GameScene::GameScene() : player(x / 2 - 11, y - 120) {
     TextureManager::getInstance().loadTexture("assets/scenes/gamebg.png");
     background.setTexture(TextureManager::getInstance().getTexture("assets/scenes/gamebg.png"));
     background.setPosition(0, 595);

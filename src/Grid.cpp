@@ -9,7 +9,7 @@
 #include "SFML/Graphics/RectangleShape.hpp"
 #include "SFML/Graphics/RenderTarget.hpp"
 
-Grid::Grid(): worm(this) {
+Grid::Grid() : worm(this) {
     for (int i = 0; i < width; ++i) {
         std::vector<std::unique_ptr<Entity> > row;
         for (int j = 0; j < height; ++j) {

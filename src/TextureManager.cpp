@@ -25,7 +25,7 @@ Texture &TextureManager::getTexture(const std::string &path) {
     const auto texture = this->textures.find(path);
     if (texture == this->textures.end()) {
         throw std::runtime_error(
-            "TextureManager::getTexture - Texture " + path + " not found. Maybe you forgot to load it?");
+                "TextureManager::getTexture - Texture " + path + " not found. Maybe you forgot to load it?");
     }
 
     return texture->second;

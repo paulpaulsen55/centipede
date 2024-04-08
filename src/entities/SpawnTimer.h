@@ -7,7 +7,7 @@
  */
 class SpawnTimer {
 public:
-    explicit SpawnTimer(const float interval): interval(interval), time(0) {
+    explicit SpawnTimer(const float interval) : interval(interval), time(0) {
     };
 
     void update(const float dt) {

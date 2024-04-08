@@ -1,5 +1,6 @@
 #ifndef SCENEMANAGER_H
 #define SCENEMANAGER_H
+
 #include <memory>
 #include <stack>
 

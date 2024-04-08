@@ -2,7 +2,7 @@
 
 #include "../TextureManager.h"
 
-MushroomEntity::MushroomEntity(): Entity("assets/entities/mushroom3.png") {
+MushroomEntity::MushroomEntity() : Entity("assets/entities/mushroom3.png") {
     this->lives = 3;
     // also load other texture variants
     TextureManager::getInstance().loadTexture("assets/entities/mushroom2.png");

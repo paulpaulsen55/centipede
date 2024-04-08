@@ -6,7 +6,7 @@
 #include "../../Grid.h"
 
 
-WormEntity::WormEntity(Grid *grid): Entity("assets/entities/wormhead.png"), grid(grid) {
+WormEntity::WormEntity(Grid *grid) : Entity("assets/entities/wormhead.png"), grid(grid) {
     speed = 0.2f;
 }
 

@@ -1,5 +1,6 @@
 #ifndef GAMEWINSCENE_H
 #define GAMEWINSCENE_H
+
 #include "Scene.h"
 #include "SFML/Graphics/Font.hpp"
 #include "SFML/Graphics/RectangleShape.hpp"
@@ -10,7 +11,7 @@
  * The `GameWinScene` class represents the scene that is displayed when the player wins the game.
  * It displays the player's score and provides a button to return to the main menu.
  */
-class GameWinScene final : public Scene{
+class GameWinScene final : public Scene {
 public:
     explicit GameWinScene(int score);
 
@@ -33,7 +34,6 @@ private:
     Font font;
 
 };
-
 
 
 #endif //GAMEWINSCENE_H

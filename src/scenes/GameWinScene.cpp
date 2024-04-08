@@ -8,7 +8,7 @@
 #include "SFML/Window/Mouse.hpp"
 
 
-GameWinScene::GameWinScene(const int score): score(score) {
+GameWinScene::GameWinScene(const int score) : score(score) {
     font.loadFromFile(FONT);
 
     menuButton.setSize(Vector2f(285, 75));

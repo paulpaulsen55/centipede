@@ -4,7 +4,7 @@
 #include "../Grid.h"
 #include "../UtilityFunctions.h"
 
-FlyEntity::FlyEntity(Grid *grid): Entity("assets/entities/fly.png"), grid(grid) {
+FlyEntity::FlyEntity(Grid *grid) : Entity("assets/entities/fly.png"), grid(grid) {
 }
 
 void FlyEntity::move(const float dt) {

@@ -1,5 +1,6 @@
 #ifndef FLYENTITY_H
 #define FLYENTITY_H
+
 #include "Entity.h"
 #include "../Grid.h"
 

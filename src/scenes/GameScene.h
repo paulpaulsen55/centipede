@@ -1,5 +1,6 @@
 #ifndef GAMESCENE_H
 #define GAMESCENE_H
+
 #include <array>
 
 #include "SceneManager.h"

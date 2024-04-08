@@ -2,8 +2,8 @@
 #include "../../Grid.h"
 
 
-WormSegment::WormSegment(Grid *grid, WormEntity *wormEntity, const std::string &texture): Entity(texture), grid(grid),
-    wormEntity(wormEntity) {
+WormSegment::WormSegment(Grid *grid, WormEntity *wormEntity, const std::string &texture) : Entity(texture), grid(grid),
+                                                                                           wormEntity(wormEntity) {
 }
 
 void WormSegment::updateGridPosition(const int newGridX, const int newGridY) {

@@ -1,5 +1,6 @@
 #ifndef MENUSCENE_H
 #define MENUSCENE_H
+
 #include "Scene.h"
 #include "SFML/Graphics/RectangleShape.hpp"
 #include "SFML/Graphics/Sprite.hpp"

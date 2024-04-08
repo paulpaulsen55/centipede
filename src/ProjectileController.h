@@ -1,5 +1,6 @@
 #ifndef PROJECTILECONTROLLER_H
 #define PROJECTILECONTROLLER_H
+
 #include <list>
 #include "Projectile.h"
 

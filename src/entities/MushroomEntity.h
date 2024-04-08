@@ -1,5 +1,6 @@
 #ifndef MUSHROOMENTITY_H
 #define MUSHROOMENTITY_H
+
 #include "Entity.h"
 #include "SFML/Graphics/Text.hpp"
 

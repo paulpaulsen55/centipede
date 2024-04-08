@@ -1,10 +1,12 @@
 #ifndef SCENE_H
 #define SCENE_H
+
 #include "../TextureManager.h"
 #include "SFML/Graphics/Drawable.hpp"
 #include "SFML/Graphics/RenderWindow.hpp"
 
 using namespace sf;
+
 class SceneManager;
 
 /**

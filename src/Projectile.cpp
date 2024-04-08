@@ -2,7 +2,7 @@
 
 #include "Constants.h"
 
-Projectile::Projectile(const float startX, const float startY): position(startX, startY) {
+Projectile::Projectile(const float startX, const float startY) : position(startX, startY) {
     projectileShape.setSize(Vector2f(6, 10));
     projectileShape.setPosition(position);
     projectileShape.setFillColor(blue700);

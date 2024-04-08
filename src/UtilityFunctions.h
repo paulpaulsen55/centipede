@@ -1,5 +1,6 @@
 #ifndef UTILITYFUNCTIONS_H
 #define UTILITYFUNCTIONS_H
+
 #include <random>
 
 
