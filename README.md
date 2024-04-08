@@ -8,7 +8,7 @@
 ## What is wormipede
 
 The project was developed as part of the 'Programmieren in C++' module at the Berlin School of Economics and Law (HWR
-Berlin).
+Berlin).\
 Wormipede is a game inspired by the 1981 classic Centipede. You are a wizard in search of the magical hibiscus flower.
 You have heard of its powers, when brewed into a potion, to vanquish all the evil insects from your garden. After hours
 of searching through the dark forest, you finally find the flower. But when you return home and enter your garden, the
@@ -31,6 +31,7 @@ flower and destroying it. Use your magic to stop them!
 ### Linux
 
 ```bash
+sudo apt update 
 sudo apt-get install libx11-dev libgl1-mesa-dev libopenal-dev libvorbis-dev libflac-dev libudev-dev libxrandr-dev libxcursor-dev libfreetype6-dev build-essential 
 mkdir build
 cd build
@@ -38,7 +39,8 @@ cmake ..
 make
 ```
 
-The game can be run by executing the `Wormipede` executable in the `build/bin` directory.
+The game can be run by executing the `Wormipede` executable in the `build/bin` directory. \
+Note that the game has been tested and compiled on Ubuntu 20.04 (WSL).
 
 ### Windows
 
@@ -67,7 +69,7 @@ the `Player` class. All of the enemy entities are represented by a class of thei
 class. All entities are placed on a grid represented by the `Grid` class, which handles collision detection and entity
 movement. The player can also fire projectiles to destroy enemy entities, which are represented by the `Projectile`
 class and managed by the `ProjectileController` class. Because of the dynamic entity creation, the `TextureManager`
-class is used to load and store textures for the entities.
+class is used to load and store textures for the entities.\
 The game is built using the CMake build system, which allows for easy compilation and linking of the game code and
 dependencies.
 
