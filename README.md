@@ -5,7 +5,7 @@
   <img src="https://badgen.net/github/release/paulpaulsen55/wormipede" />
 </p>
 
-## What is wormipede
+## What is Wormipede?
 
 The project was developed as part of the 'Programmieren in C++' module at the Berlin School of Economics and Law (HWR
 Berlin).
