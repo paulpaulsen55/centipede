@@ -63,8 +63,7 @@ void MenuScene::handleInput(const Event event, RenderWindow &window) {
                 SceneManager::getInstance().changeScene(std::make_unique<GameScene>());
             }
             if (exitButton.getGlobalBounds().contains(mousePosition.x, mousePosition.y)) {
-                SceneManager::getInstance().changeScene(std::make_unique<GameWinScene>(15000));
-                //window.close();
+                window.close();
             }
         }
     }
