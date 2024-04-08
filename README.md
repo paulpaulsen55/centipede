@@ -1,5 +1,10 @@
 ![Banner Image](/banner.png)
 
+<p align="center">
+  <img src="https://github.com/paulpaulsen55/wormipede/actions/workflows/ci.yml/badge.svg" />
+  <img src="https://badgen.net/github/release/paulpaulsen55/wormipede" />
+</p>
+
 ## What is wormipede
 
 The project was developed as part of the 'Programmieren in C++' module at the Berlin School of Economics and Law (HWR
