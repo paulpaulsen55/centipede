@@ -6,3 +6,5 @@ cmake-build-release
 .idea
 .vs
 .vscode
+build64
+

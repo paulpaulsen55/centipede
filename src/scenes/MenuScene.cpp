@@ -2,9 +2,7 @@
 
 #include <memory>
 #include "GameScene.h"
-#include "GameWinScene.h"
 #include "SceneManager.h"
-#include "../Constants.h"
 #include "SFML/Window/Event.hpp"
 #include "SFML/Window/Mouse.hpp"
 
@@ -61,6 +59,7 @@ void MenuScene::handleInput(const Event event, RenderWindow &window) {
 
             if (startButton.getGlobalBounds().contains(mousePosition.x, mousePosition.y)) {
                 SceneManager::getInstance().changeScene(std::make_unique<GameScene>());
+                return;
             }
             if (exitButton.getGlobalBounds().contains(mousePosition.x, mousePosition.y)) {
                 window.close();

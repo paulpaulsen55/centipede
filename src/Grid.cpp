@@ -6,7 +6,6 @@
 #include "entities/MushroomEntity.h"
 #include "entities/SpiderEntity.h"
 #include "entities/worm/WormEntity.h"
-#include "SFML/Graphics/RectangleShape.hpp"
 #include "SFML/Graphics/RenderTarget.hpp"
 
 Grid::Grid() : worm(this) {
