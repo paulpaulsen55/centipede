@@ -48,7 +48,7 @@ Make sure to have Visual Studio (e.g. 2022 Community) installed with the C++ dev
 commands in the command prompt:
 
 ```bash
-cmake -G "Visual Studio 17 2022" -A x64 -S \path_to_source\ -B "build64" #64-bit build
+cmake -G "Visual Studio 17 2022" -A x64 -S . -B "build64" #64-bit build
 cmake --build build64 --config Release
 cd build64/bin7
 mv .\assets\ .\Release\
