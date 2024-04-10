@@ -16,7 +16,7 @@ ground beneath you begins to tremble. The worm is awakening! You must stop the w
 flower and destroying it. Use your magic to stop them!
 
 ## How to play
-
+Extract the `windows_x64.zip` file and run the `Wormipede.exe` executable.\
 - Navigate the menus by clicking the buttons with the mouse
 - Move the player with the arrow keys
 - Shoot with the space key
