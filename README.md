@@ -36,7 +36,6 @@ sudo apt-get install libx11-dev libgl1-mesa-dev libopenal-dev libvorbis-dev libf
 cmake -S . -B build/ -D CMAKE_BUILD_TYPE=Release
 cmake --build build/
 ```
-
 The game can be run by executing the `Wormipede` executable in the `build/bin` directory. \
 Note that the game has been tested and compiled on Ubuntu 20.04 (WSL).
 
@@ -51,7 +50,6 @@ cmake --build build64 --config Release
 cd build64/bin7
 mv .\assets\ .\Release\
 ```
-
 The game can be run by executing the `Wormipede.exe` executable in the `build64/bin/Release` directory.
 
 ## Development
