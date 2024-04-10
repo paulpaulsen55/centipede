@@ -32,11 +32,9 @@ flower and destroying it. Use your magic to stop them!
 
 ```bash
 sudo apt update 
-sudo apt-get install libx11-dev libgl1-mesa-dev libopenal-dev libvorbis-dev libflac-dev libudev-dev libxrandr-dev libxcursor-dev libfreetype6-dev build-essential 
-mkdir build
-cd build
-cmake ..
-make
+sudo apt-get install libx11-dev libgl1-mesa-dev libopenal-dev libvorbis-dev libflac-dev libudev-dev libxrandr-dev libxcursor-dev libfreetype6-dev build-essential cmake
+cmake -S . -B build/ -D CMAKE_BUILD_TYPE=Release
+cmake --build build/
 ```
 
 The game can be run by executing the `Wormipede` executable in the `build/bin` directory. \
